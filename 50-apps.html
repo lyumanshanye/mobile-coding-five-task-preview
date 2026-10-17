@@ -1,0 +1,3631 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RecreationBench · 50 项目审查</title><style>
+*{box-sizing:border-box}body{margin:0;background:#f7f8fa;color:#202b30;font:14px/1.65 system-ui;letter-spacing:0}header,main{padding:24px;max-width:1600px;margin:auto}h1{font-size:25px;margin:0}p{color:#52636c}input,select{font:inherit;padding:8px;border:1px solid #a8b8bf;background:white;border-radius:4px;margin:8px 12px 8px 0;max-width:100%}input{width:320px}.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;background:white;min-width:900px}th,td{text-align:left;padding:10px;border-bottom:1px solid #dae0e3;vertical-align:top}th{background:#e9f1f0}th:nth-child(n+3):nth-child(-n+8),td:nth-child(n+3):nth-child(-n+8){width:36px;text-align:center}td:first-child{width:260px;overflow-wrap:anywhere}summary{cursor:pointer;color:#006b65}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit}h4{margin-bottom:4px}.note{color:#8b5d00}button{font:inherit} @media(max-width:600px){header,main{padding:16px}h1{font-size:22px}}</style>
+<header><h1>RecreationBench · Android 50 项目审查</h1><p>已校验 50 / 50 · 待审 0 · 拒绝报告 0</p><p class="note">静态测试源码审查，不代表原版运行通过或模型实测难度。? 表示证据不足，不计零分。当前未作跨项目最终排名。</p><label>搜索项目 <input id="q" type="search"></label><label>状态 <select id="status"><option value="ALL">全部</option><option value="COMPLETED">已审查</option><option value="PENDING">待审查</option></select></label><span id="visible" role="status"></span><p>C 状态耦合 · H 交互链 · A 时序异步 · L 生命周期 · G 输入手势 · X 跨边界</p></header><main><div class="scroll"><table><thead><tr><th>项目</th><th>状态</th><th>C</th><th>H</th><th>A</th><th>L</th><th>G</th><th>X</th><th>结论与依据</th></tr></thead><tbody><tr data-status="COMPLETED"><td>acclorite-book-story<br><a target="_blank" rel="noopener" href="https://github.com/Acclorite/book-story">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/Acclorite/book-story/tree/b0ab7d320aed903b56be6eff47b0049b8a7e48bf">数据集固定版本</a></td><td>已审查</td><td>2</td><td>2</td><td>?</td><td>3</td><td>2</td><td>2</td><td><p>Library→Book Info→Reader正文→退出→History；重启后检查历史书名，两个预置书名仍存在。</p><details><summary>D2保守预估。hard标签不等于复杂阅读器全功能被测；可从阅读历史身份与恢复链扩展。</summary><h4>主操作链</h4><pre>Library→Book Info→Reader正文→退出→History；重启后检查历史书名，两个预置书名仍存在。</pre><h4>实际覆盖</h4><pre>Library→Book Info→Reader正文→退出→History；重启后检查历史书名，两个预置书名仍存在。</pre><h4>可扩展范围</h4><pre>书籍导入、排版与阅读位置恢复有潜力，但本轮只证测试源码范围。</pre><h4>证据缺口</h4><pre>[
+  &quot;历史测试未保证此前无同名历史，不能证明本次新建或去重。&quot;,
+  &quot;两本书为已导入夹具，创建走already路径；未证明任意书籍解析。&quot;,
+  &quot;未核验阅读页码/选中文本/滚动位置恢复；book_fixture依赖未在此轮执行。&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;读者进入影响History同一书实体，属于两个视图联动，未证多级计算。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;链是线性导航；移动对话框仅打开取消，未形成真实迁移分支。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;未测试请求乱序、取消或竞态，不能按读书应用名称推断。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;force-stop后历史条目及两本书名仍在；不等于阅读位置恢复。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;长按进入选择模式而普通点按进入详情，存在时长语义。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;跨Library/Reader/History，但此链未验证系统导入结果回传。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>alialbaali-noto<br><a target="_blank" rel="noopener" href="https://github.com/alialbaali/Noto">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/alialbaali/Noto/tree/a1863c169f12d6852edc1c03d080a050647d3964">数据集固定版本</a></td><td>已审查</td><td>2</td><td>3</td><td>?</td><td>3</td><td>2</td><td>2</td><td><p>General中新建笔记→长按→Move to→Dest→原目录消失且目标出现；另有正文编辑重启恢复和复制。</p><details><summary>D2保守预估；适合以目录迁移+正文身份+重启构成待验证的新链。</summary><h4>主操作链</h4><pre>General中新建笔记→长按→Move to→Dest→原目录消失且目标出现；另有正文编辑重启恢复和复制。</pre><h4>实际覆盖</h4><pre>General中新建笔记→长按→Move to→Dest→原目录消失且目标出现；另有正文编辑重启恢复和复制。</pre><h4>可扩展范围</h4><pre>富文本、历史与笔记组织可扩展；不把未测试的编辑器能力计分。</pre><h4>证据缺口</h4><pre>[
+  &quot;移动断言仅标题，未验证笔记ID、正文或重复同名项目。&quot;,
+  &quot;移动与重启不是同一现成测试，不能直接将最高项相加给D3。&quot;,
+  &quot;复制只判同名两行，内容完整性和撤销历史未被此组证明。&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;移动维持同一笔记在两目录的归属互斥；未检查多级派生。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;源目录→选择器→目标→返回源与目标双向回查有回退链。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;未验证异步冲突、延迟保存或并发编辑。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;正文标记force-stop后重新打开仍保留，L3限已保存笔记。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;长按多选后第二条加入，阈值由工具决定但无复杂复合手势。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;跨目录、编辑器、选择器均为App内页面。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>andreynovikov-trekarta<br><a target="_blank" rel="noopener" href="https://github.com/andreynovikov/trekarta">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/andreynovikov/trekarta/tree/5a305d56fa6330cb435de7d871c6eac440597c64">数据集固定版本</a><br><strong>当前五题来源</strong></td><td>已审查</td><td>3</td><td>3</td><td>?</td><td>3</td><td>2</td><td>3</td><td><p>{
+  &quot;id&quot;: &quot;T1&quot;,
+  &quot;title&quot;: &quot;SAF导入地点源后跨进程恢复&quot;,
+  &quot;initial_state&quot;: &quot;clear_data后的空地点库，已推送固定GPX/KML fixture，首次下载对话框选择SKIP&quot;,
+  &quot;actions&quot;: [
+    &quot;打开more&quot;,
+    &quot;选择Import&quot;,
+    &quot;在SAF点选places_sample.gpx（不可见则kml）&quot;,
+    &quot;若导入确认按钮存在则确认&quot;,
+    &quot;终止并重启App&quot;,
+    &quot;跳过启动下载对话框&quot;,
+    &quot;打开Places&quot;
+  ],
+  &quot;business_action_count&quot;: 5,
+  &quot;count_note&quot;: &quot;more/Import/文件选择/确认/Places为5个业务动作；杀进程、重启、启动SKIP属于环境/生命周期探针。确认按钮缺失时脚本仍继续，此时4动作，不保证导入确认协议完整。&quot;,
+  &quot;expected&quot;: &quot;重启后存在精确数据源名Sample Places或Sample KML Places&quot;,
+  &quot;branches&quot;: [
+    &quot;GPX不可见时退选KML&quot;,
+    &quot;导入确认按钮可缺失&quot;
+  ],
+  &quot;invariants&quot;: [
+    &quot;已导入数据源在进程重建后仍可见&quot;
+  ],
+  &quot;scope_limit&quot;: &quot;只验证数据源行，未验证文件内每个点、顺序、坐标、重复导入或原子性。不是完整GPX导入正确性证明。&quot;,
+  &quot;evidence_indices&quot;: [
+    6,
+    7
+  ],
+  &quot;chain_scores&quot;: {
+    &quot;C&quot;: 2,
+    &quot;H&quot;: 2,
+    &quot;A&quot;: null,
+    &quot;L&quot;: 3,
+    &quot;G&quot;: 1,
+    &quot;X&quot;: 3
+  }
+}</p><details><summary>可作为复杂交互候选来源；最扎实的是地点编辑、坐标回读、持久化。导入/进程恢复同链L3+X3支持D3静态预估，但不能据此宣称完整地图/轨迹功能是高难且跑通。状态维度上界不是一条超级任务，新增并发/撤销/多指要求必须标为新合成契约。</summary><h4>主操作链</h4><pre>{
+  &quot;id&quot;: &quot;T1&quot;,
+  &quot;title&quot;: &quot;SAF导入地点源后跨进程恢复&quot;,
+  &quot;initial_state&quot;: &quot;clear_data后的空地点库，已推送固定GPX/KML fixture，首次下载对话框选择SKIP&quot;,
+  &quot;actions&quot;: [
+    &quot;打开more&quot;,
+    &quot;选择Import&quot;,
+    &quot;在SAF点选places_sample.gpx（不可见则kml）&quot;,
+    &quot;若导入确认按钮存在则确认&quot;,
+    &quot;终止并重启App&quot;,
+    &quot;跳过启动下载对话框&quot;,
+    &quot;打开Places&quot;
+  ],
+  &quot;business_action_count&quot;: 5,
+  &quot;count_note&quot;: &quot;more/Import/文件选择/确认/Places为5个业务动作；杀进程、重启、启动SKIP属于环境/生命周期探针。确认按钮缺失时脚本仍继续，此时4动作，不保证导入确认协议完整。&quot;,
+  &quot;expected&quot;: &quot;重启后存在精确数据源名Sample Places或Sample KML Places&quot;,
+  &quot;branches&quot;: [
+    &quot;GPX不可见时退选KML&quot;,
+    &quot;导入确认按钮可缺失&quot;
+  ],
+  &quot;invariants&quot;: [
+    &quot;已导入数据源在进程重建后仍可见&quot;
+  ],
+  &quot;scope_limit&quot;: &quot;只验证数据源行，未验证文件内每个点、顺序、坐标、重复导入或原子性。不是完整GPX导入正确性证明。&quot;,
+  &quot;evidence_indices&quot;: [
+    6,
+    7
+  ],
+  &quot;chain_scores&quot;: {
+    &quot;C&quot;: 2,
+    &quot;H&quot;: 2,
+    &quot;A&quot;: null,
+    &quot;L&quot;: 3,
+    &quot;G&quot;: 1,
+    &quot;X&quot;: 3
+  }
+}</pre><h4>实际覆盖</h4><pre>{
+  &quot;manifest_total&quot;: 124,
+  &quot;manifest_interpretation&quot;: &quot;124是manifest登记断言数，不等于124条独立端到端业务链；baseline passed为上游元数据，非本地跑分。&quot;,
+  &quot;vlm_assertions&quot;: 27,
+  &quot;vlm_calibrated&quot;: 0,
+  &quot;interaction_test_functions&quot;: 22,
+  &quot;covered&quot;: [
+    &quot;地点CRUD及多记录身份保持&quot;,
+    &quot;重命名/描述回读、地图标签视觉联动&quot;,
+    &quot;已提交地点与导入源行跨进程保留&quot;,
+    &quot;经纬度输入数值回读（容差5e-6），正负/零/短小数与不同输入输出&quot;,
+    &quot;无效/空坐标的不同处理分支&quot;,
+    &quot;普通点击与900ms长按不同语义&quot;,
+    &quot;轨迹录制开始与暂停控件转换&quot;,
+    &quot;设置单位和界面导航&quot;
+  ],
+  &quot;precision_notes&quot;: [
+    &quot;interaction test_coord_place_has_info只断言坐标字符串非空；computation _coord_case才数值比较，不能漏掉也不能把二者混淆。&quot;,
+    &quot;录制start只检Current track、pause/stop和图标颜色；pause只检resume出现与pause消失。未验证GPS样本、暂停期间不采样、恢复续录或导出轨迹。&quot;,
+    &quot;导入候选GPX/KML可互相回退，不保证一次运行两个格式均覆盖。&quot;,
+    &quot;delete等待UNDO窗口，不执行undo，因此不能声称撤销已测。&quot;
+  ]
+}</pre><h4>可扩展范围</h4><pre>{
+  &quot;status&quot;: &quot;POTENTIAL_NOT_REPOSITORY_SOURCE_AUDIT&quot;,
+  &quot;items&quot;: [
+    &quot;地图缩放/旋转和地理坐标命中&quot;,
+    &quot;真实定位注入、轨迹录制暂停续录和导出&quot;,
+    &quot;GPX/KML全内容、重复导入/取消与崩溃恢复&quot;
+  ],
+  &quot;basis&quot;: &quot;功能入口、测试注释和断言体现业务表面；本次未检出上游完整仓库源码/APK，不能视为这些能力已实现且稳定。&quot;,
+  &quot;not_counted_in_scores&quot;: [
+    &quot;多指地图变换&quot;,
+    &quot;离线地图下载恢复&quot;,
+    &quot;轨迹数据正确性&quot;,
+    &quot;路线规划算法&quot;,
+    &quot;导入事务/并发/幂等&quot;
+  ]
+}</pre><h4>证据缺口</h4><pre>[
+  &quot;未执行本地APK或设备测试，empirical_runs为0&quot;,
+  &quot;未读取完整上游仓库源码、LICENSE；instance license=null需另外核实&quot;,
+  &quot;未下载manifest所指截图/录屏与VLM raw判据；27条verdict均未校准&quot;,
+  &quot;本地目录缺少测试公共android_testgen_kit和fixture内容，现有文件不足直接完整运行&quot;,
+  &quot;结构/文本模块仅见manifest条目，未逐行读取其源码&quot;,
+  &quot;无GPX/KML内容完整性、坏文件/取消/重复与中断恢复断言&quot;,
+  &quot;无地图多指轨迹测量、无GPS采样/暂停/导出数值核验&quot;,
+  &quot;辅助函数存在重试和固定比例屏幕点击，需审查误判及首次失败保留政策&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;多条地点保持身份/总数不变量，编辑其中一条不得修改其他两条；同一地点名称传播至列表、详情、地图标签。支持C3，不存在已验证撤销/回滚与多实体约束组合，不能C4。&quot;,
+    &quot;evidence_indices&quot;: [
+      1,
+      2,
+      17
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;地点列表/详情/编辑与返回路径需要上下文恢复；导航三跳回退有专门断言。测试辅助轮询、重试不计业务分支，未证实复杂补偿链H4。&quot;,
+    &quot;evidence_indices&quot;: [
+      13,
+      17
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;材料有settle/poll与异步绑定说明，但没有在途取消、响应顺序或导入事务时间边界的可核验断言。无法用测试等待推导异步业务等级，记UNKNOWN。&quot;,
+    &quot;evidence_indices&quot;: [
+      6,
+      17
+    ]
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;force-stop后重启核对重命名地点、多个地点和导入源行；属于已提交用户状态恢复。未覆盖导入/轨迹录制在途中断及幂等恢复，不到L4。&quot;,
+    &quot;evidence_indices&quot;: [
+      3,
+      7
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;长按900ms创建地点，普通tap只开面板且不得创建；长按地图菜单也存在。仅一种阈值类输入语义，没有多指/嵌套仲裁和量化轨迹，G2。&quot;,
+    &quot;evidence_indices&quot;: [
+      4,
+      5
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;more→Import→Android SAF选择GPX/KML→导入确认→Places数据源行，并在重启后核验。系统选择器往返满足X3；无权限拒绝/取消/中断回传断言，不到X4。&quot;,
+    &quot;evidence_indices&quot;: [
+      6,
+      7,
+      8
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>anilbeesetti-nextplayer<br><a target="_blank" rel="noopener" href="https://github.com/anilbeesetti/nextplayer">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/anilbeesetti/nextplayer/tree/0c471064198f2655efa6138bf46ea8cabd56e8a0">数据集固定版本</a></td><td>已审查</td><td>2</td><td>2</td><td>?</td><td>3</td><td>2</td><td>2</td><td><p>Videos→Grid+Z-A→提交→三视频逆序→进程重启保持；播放Beta四秒返回以VLM看缩略图进度。</p><details><summary>D2保守预估；现有覆盖不足以将完整播放器工程复杂度算作题目难度。</summary><h4>主操作链</h4><pre>Videos→Grid+Z-A→提交→三视频逆序→进程重启保持；播放Beta四秒返回以VLM看缩略图进度。</pre><h4>实际覆盖</h4><pre>Videos→Grid+Z-A→提交→三视频逆序→进程重启保持；播放Beta四秒返回以VLM看缩略图进度。</pre><h4>可扩展范围</h4><pre>实际媒体播放与生命周期适合复杂题，但需额外精确媒体oracle。</pre><h4>证据缺口</h4><pre>[
+  &quot;进度条由VLM有无判断，不能证明准确播放时长或帧内容。&quot;,
+  &quot;网络URL测试仅输入框回读，不证明网络解码。&quot;,
+  &quot;未验证音频焦点、后台播放、字幕或seek精度。&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;布局和排序影响相同媒体集合，进度影响列表；仍为局部同实体联动。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;提交组合偏好→重启回读是线性链，无恢复失败分支。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;固定等待4秒不是乱序/并发测试，异步能力未知。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;模式、三条排序、Grid显示跨force-stop保持；不包括播放位置恢复。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;长按选择、多选计数；没有量化seek或缩放路径。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;播放器与列表跨屏；未检验外部播放器/画中画协议。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>anysoftkeyboard-anysoftkeyboard<br><a target="_blank" rel="noopener" href="https://github.com/AnySoftKeyboard/AnySoftKeyboard">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/AnySoftKeyboard/AnySoftKeyboard/tree/56bb1f0f28481b377d40dd3c174bc384b959f871">数据集固定版本</a></td><td>已审查</td><td>2</td><td>2</td><td>?</td><td>3</td><td>1</td><td>2</td><td><p>表情类别中关闭一项保留相邻项→重启；主题单选与设置页恢复。</p><details><summary>D2；完整输入法仓库潜力很高，但当前冻结任务的可证行为主要是设置。</summary><h4>主操作链</h4><pre>表情类别中关闭一项保留相邻项→重启；主题单选与设置页恢复。</pre><h4>实际覆盖</h4><pre>表情类别中关闭一项保留相邻项→重启；主题单选与设置页恢复。</pre><h4>可扩展范围</h4><pre>跨应用IME与组合输入潜力尚未通过当前测试证明。</pre><h4>证据缺口</h4><pre>[
+  &quot;computation里swipe名称主要对应手势配置，不应据名称给G3。&quot;,
+  &quot;无真实编辑器选区、候选词、组合输入协议证据。&quot;,
+  &quot;不应把卡片selected属性当启用状态，源码用enabled_image子节点。&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;多选卡片独立不互相破坏，主题互斥单选；非多级状态图。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;设置→选择→重启回读是线性链。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;没有候选词并发或输入事件时序验证。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;选择卡片/主题在force-stop后保留。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;这组interaction是设置卡片点击，不是滑动输入手势实现。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;多个设置页面，未验证真实跨App IME。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>beemdevelopment-aegis<br><a target="_blank" rel="noopener" href="https://github.com/beemdevelopment/Aegis">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/beemdevelopment/Aegis/tree/59d5c640d6a2d0d16f243dbdd735758eed65bc63">数据集固定版本</a></td><td>已审查</td><td>2</td><td>3</td><td>?</td><td>3</td><td>2</td><td>3</td><td><p>创建三凭据→长按收藏第三项→置顶并保持集合→编辑发行者后重启；创建取消不留幽灵项。</p><details><summary>D2保守预估。身份与取消链可用，不能因安全产品类别自动升难。</summary><h4>主操作链</h4><pre>创建三凭据→长按收藏第三项→置顶并保持集合→编辑发行者后重启；创建取消不留幽灵项。</pre><h4>实际覆盖</h4><pre>创建三凭据→长按收藏第三项→置顶并保持集合→编辑发行者后重启；创建取消不留幽灵项。；代码复制到系统剪贴板后粘贴回读。</pre><h4>可扩展范围</h4><pre>OTP计算和加密导入潜力需独立安全与计算证据。</pre><h4>证据缺口</h4><pre>[
+  &quot;当前引证不验证OTP密钥算法、时钟窗口或加密数据安全。&quot;,
+  &quot;取消测试验证计数与标记缺失，但未覆盖取消途中进程死亡。&quot;,
+  &quot;收藏重排序与重启测试分离，不能直接给D3。&quot;,
+  &quot;stable_in_period两次dump未固定时钟相位，跨TOTP窗口边界可能误报；同secret同值不等于RFC标准算法正确。&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;收藏改变排序且集合不变，编辑保持邻项，是同集合约束。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;保存与Discard分支均有后果检查，存在取消回退。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;未测试TOTP边界时序或并发写入。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;发行者新值存在旧值消失，跨进程确认保存。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;长按进入操作栏后编辑/收藏，未测连续精细触控。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;Copy把显示代码写入系统剪贴板，再用KEYCODE_PASTE回填搜索框，比较复制前后代码集合；确有系统边界往返。&quot;,
+    &quot;evidence_indices&quot;: [
+      5
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>blastrock-kakugo<br><a target="_blank" rel="noopener" href="https://github.com/blastrock/kakugo">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/blastrock/kakugo/tree/c00becb046949fc53aac98eae8f3c461bc30038d">数据集固定版本</a></td><td>已审查</td><td>3</td><td>3</td><td>?</td><td>3</td><td>2</td><td>2</td><td><p>两次答对一次答错→分数2/3→NEXT不增加分母并再启Show Answers；历史显示回答对象，选择项重启保留。</p><details><summary>D3候选：答案→计分→门控在同链耦合；需固定题库并增强题目身份断言。</summary><h4>主操作链</h4><pre>两次答对一次答错→分数2/3→NEXT不增加分母并再启Show Answers；历史显示回答对象，选择项重启保留。</pre><h4>实际覆盖</h4><pre>两次答对一次答错→分数2/3→NEXT不增加分母并再启Show Answers；历史显示回答对象，选择项重启保留。</pre><h4>可扩展范围</h4><pre>多题型学习与笔画输入潜力存在；后者尚未验证。</pre><h4>证据缺口</h4><pre>[
+  &quot;NEXT允许Show Answers重新出现代替不同题目字符，不能证明题库真正推进。&quot;,
+  &quot;绘图笔画明确未可靠验证，不得作为手写识别高难证据。&quot;,
+  &quot;分数测试通过已知映射挑答案，必须保留题库和确定性初态。&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;答案正误同时影响分子分母、NEXT门控和历史/上一项，是多级反馈。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;答对直接推进、答错NEXT、Dont know形成不同路径。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;未验证延迟事件或快速连续提交去重。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;项目启用状态跨force-stop保留；不证明在途答题会话恢复。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;长按single-button对应maybe答案，与普通选择语义不同。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;选择屏→测验→历史sheet是App内联动。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>brodeurlv-fastnfitness<br><a target="_blank" rel="noopener" href="https://github.com/brodeurlv/fastnfitness">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/brodeurlv/fastnfitness/tree/27935ec232f1a46577e9099511bab634c1aaf719">数据集固定版本</a></td><td>已审查</td><td>2</td><td>3</td><td>1</td><td>3</td><td>1</td><td>2</td><td><p>创建A/B/C训练记录→编辑中间B→保持C/B新/A顺序；取消编辑不改变旧值，记录同时出现在History。</p><details><summary>D2保守预估；可作事务式编辑与历史一致性题，不应当作全套健身引擎难度。</summary><h4>主操作链</h4><pre>创建A/B/C训练记录→编辑中间B→保持C/B新/A顺序；取消编辑不改变旧值，记录同时出现在History。</pre><h4>实际覆盖</h4><pre>创建A/B/C训练记录→编辑中间B→保持C/B新/A顺序；取消编辑不改变旧值，记录同时出现在History。</pre><h4>可扩展范围</h4><pre>训练计划和统计潜力需要进一步仓库/运行证据。</pre><h4>证据缺口</h4><pre>[
+  &quot;历史筛选只断言当前可见卡片，未检查全量数据。&quot;,
+  &quot;倒计时仅t1&lt;t0而非精确差值；运动传感器、训练中断恢复未证明。&quot;,
+  &quot;编辑中间条与重启分开测试，组合长链需重放。&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;记录字段与两列表一致，未涉及多级统计派生。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;编辑提交与取消分支，加上历史回查，是有回退的数据链。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;states模块等待3秒断言倒计时t1&lt;t0，只证明基础时序更新，不验证精确流逝、竞态或中断。&quot;,
+    &quot;evidence_indices&quot;: [
+      4
+    ]
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;创建的组数和重复次数跨kill仍在，持久化有具体数值。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;普通点击/输入，无精细轨迹。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;Free Workout、编辑器和History跨屏但同模块。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>chrisboyle-sgtpuzzles<br><a target="_blank" rel="noopener" href="https://github.com/chrisboyle/sgtpuzzles">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/chrisboyle/sgtpuzzles/tree/d1e10eb57dd80af4999e698a9ab31f546e9a0b9d">数据集固定版本</a></td><td>已审查</td><td>2</td><td>3</td><td>?</td><td>3</td><td>2</td><td>2</td><td><p>Net Show solution→Undo→Redo核对状态文本；Keen格子写3再Backspace；收藏分类重启保持。</p><details><summary>D2保守预估；撤销机制值得出题，但现有棋盘断言不足支持更高难度。</summary><h4>主操作链</h4><pre>Net Show solution→Undo→Redo核对状态文本；Keen格子写3再Backspace；收藏分类重启保持。</pre><h4>实际覆盖</h4><pre>Net Show solution→Undo→Redo核对状态文本；Keen格子写3再Backspace；收藏分类重启保持。</pre><h4>可扩展范围</h4><pre>多种谜题规则重建可能很难，但冻结测试仅覆盖少量游戏且断言较弱。</pre><h4>证据缺口</h4><pre>[
+  &quot;test_net_tile_tap_rotate仅问网格非空有线段，未比对旋转前后方向。&quot;,
+  &quot;game_resume提前读solved但最终ok不检查恢复后的解或格局。&quot;,
+  &quot;Keen写入/清空依赖VLM，规则合法性未由独立模型验证。&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;undo/redo影响状态文本，棋盘内容缺少同一精确oracle，保守C2。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;求解、撤销、重做形成可逆循环。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;未覆盖定时/异步协同。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;收藏分类跨重启可靠；game_resume只验证标题Net，不验证棋盘。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;根据棋盘边界点格与输入键，未量化轨迹/多指。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;选择器与多个游戏界面App内跳转。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>cyb3rko-flashdim<br><a target="_blank" rel="noopener" href="https://github.com/cyb3rko/flashdim">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/cyb3rko/flashdim/tree/d77be03215acd7e124dea34d5a11649dd2a467c7">数据集固定版本</a></td><td>已审查</td><td>3</td><td>3</td><td>?</td><td>3</td><td>2</td><td>1</td><td><p>按钮/滑条驱动同亮度→SOS禁用并隐藏相关控件→Off恢复；空Morse输入拒绝；偏好滑块值提交重启。</p><details><summary>D3候选（C/H同链），体现页面少也可有耦合；不需要硬凑仓库规模。</summary><h4>主操作链</h4><pre>按钮/滑条驱动同亮度→SOS禁用并隐藏相关控件→Off恢复；空Morse输入拒绝；偏好滑块值提交重启。</pre><h4>实际覆盖</h4><pre>按钮/滑条驱动同亮度→SOS禁用并隐藏相关控件→Off恢复；空Morse输入拒绝；偏好滑块值提交重启。</pre><h4>可扩展范围</h4><pre>硬件控制与定时闪烁潜力需可测设备能力支撑。</pre><h4>证据缺口</h4><pre>[
+  &quot;硬件torch实际发光、SOS时间窗、频率均未验证。&quot;,
+  &quot;slider定位有容器y&gt;1000启发式，跨设备泛化需修订。&quot;,
+  &quot;easy上游标签不代表状态链没有价值，但硬件缺失不能冒充已测。&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;SOS同时控制亮度文字、按钮可见性、seek/sos可用性，多级派生态。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;进入/退出模式和输入错误留在对话框形成分支与回退。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;没有测闪光时序或硬件异步反馈，A未知。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;精确偏好值2在提交后重启保持；不是活动SOS恢复。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;滑轨比例0.2映射数值2；没有多指或冲突仲裁。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;核心链在单屏及对话框，设置页不提高核心跨边界分数。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>dijia1124-plusplusbattery<br><a target="_blank" rel="noopener" href="https://github.com/dijia1124/plusplusbattery">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/dijia1124/plusplusbattery/tree/a0053f88aceb75570756ee31b2b5adadd4d0fe90">数据集固定版本</a></td><td>已审查</td><td>2</td><td>3</td><td>?</td><td>3</td><td>1</td><td>2</td><td><p>校准Divide10^2→电流变化→Reset还原；温度/双电源/校准三项各自保持；跟随系统开关控制手动深色可用性。</p><details><summary>D2保守预估；计算回转可测但多项独立设置不足证明高复杂度。</summary><h4>主操作链</h4><pre>校准Divide10^2→电流变化→Reset还原；温度/双电源/校准三项各自保持；跟随系统开关控制手动深色可用性。</pre><h4>实际覆盖</h4><pre>校准Divide10^2→电流变化→Reset还原；温度/双电源/校准三项各自保持；跟随系统开关控制手动深色可用性。</pre><h4>可扩展范围</h4><pre>实时电池监测潜力需输入注入与后台采样证据。</pre><h4>证据缺口</h4><pre>[
+  &quot;三项状态独立保持不能作为复杂多实体传播。&quot;,
+  &quot;固定CUR_DEFAULT数值依赖模拟设备夹具，需冻结电池输入。&quot;,
+  &quot;实时监控后台采样、耗电和通知未被此链验证。&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;校准影响显示值、跟随系统影响开关；三卡测试明确是独立状态共存，不是C4。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;校准后重进重置与开关依赖回转存在循环。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;固定传感器显示不证明实时异步采样正确。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;校准倍率跨进程恢复，L3限偏好。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;主要单击与radio选择。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;主页面与设置/校准页间状态传递。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>dimowner-audiorecorder<br><a target="_blank" rel="noopener" href="https://github.com/Dimowner/AudioRecorder">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/Dimowner/AudioRecorder/tree/81dddfbb8a31868a5eae0fd1e9c5acb8744b8507">数据集固定版本</a></td><td>已审查</td><td>2</td><td>3</td><td>?</td><td>3</td><td>1</td><td>2</td><td><p>录制→停止保存→主页改名→Records名称一致→说明在Information回读→重启→收藏过滤仍找到同条。</p><details><summary>D2保守预估。具备升级媒体任务基础，但初筛C3/X3过高，应下调到实证范围。</summary><h4>主操作链</h4><pre>录制→停止保存→主页改名→Records名称一致→说明在Information回读→重启→收藏过滤仍找到同条。</pre><h4>实际覆盖</h4><pre>录制→停止保存→主页改名→Records名称一致→说明在Information回读→重启→收藏过滤仍找到同条。</pre><h4>可扩展范围</h4><pre>后台录制、音频焦点和真实文件可形成高难链，当前需补证。</pre><h4>证据缺口</h4><pre>[
+  &quot;row_tap_starts_playback只检查Stop控件出现，不证明实际音频。&quot;,
+  &quot;录音示例可为静音麦克风，需注入已知音频并解码校验。&quot;,
+  &quot;导入/Share菜单存在不证明权限与结果回传。&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;名称和说明跨视图回写，同一记录共享状态；未证复杂多实体约束。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;录制/保存、编辑、详情返回、过滤组成有回退链。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;播放等待和录音时间推进不等于并发/取消正确性。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;名字/说明/收藏在进程结束后回读，具体标记有证据。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;普通点按/文本输入，当前无量化seek。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;主页/Records/Information跨屏；Share菜单存在不能算跨App完成。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>dozingcat-vector-pinball<br><a target="_blank" rel="noopener" href="https://github.com/dozingcat/Vector-Pinball">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/dozingcat/Vector-Pinball/tree/977529b52494ad800c5283173d231f8f58d24a9a">数据集固定版本</a></td><td>已审查</td><td>2</td><td>3</td><td>?</td><td>3</td><td>1</td><td>2</td><td><p>普通游戏结束产生排序高分；无限球模式结束不得入榜；多局后高分列表降序，重启有分数行。</p><details><summary>D2保守预估；实时游戏实现潜力高，当前评测不足证明该复杂度被考查。</summary><h4>主操作链</h4><pre>普通游戏结束产生排序高分；无限球模式结束不得入榜；多局后高分列表降序，重启有分数行。</pre><h4>实际覆盖</h4><pre>普通游戏结束产生排序高分；无限球模式结束不得入榜；多局后高分列表降序，重启有分数行。</pre><h4>可扩展范围</h4><pre>实时物理和多指连续控制是潜力，需确定性物理与事件轨迹oracle。</pre><h4>证据缺口</h4><pre>[
+  &quot;重启测试未比较杀进程前后精确高分数值。&quot;,
+  &quot;多局高分仅&gt;=2且降序，不逐局对照成绩或检查独立身份。&quot;,
+  &quot;发球VLM只查某帧有球，不证明物理轨迹和碰撞规则。&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;模式影响入榜，多个分数排序；未检查物理对象与积分精确因果。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;普通/无限模式分支、游戏结束再开形成循环。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;固定sleep与VLM单帧不支持物理时序精度或并发输入评分。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;kill后存在数字行及Last Score，但不比较原值，L3仅列表存在层面。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;点击发球和暂停，没有双指并行拨片的轨迹断言。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;游戏画布与菜单/高分对话框。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>dsandler-markers<br><a target="_blank" rel="noopener" href="https://github.com/dsandler/markers">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/dsandler/markers/tree/f93a42e664d506715db18b8de1e08a6ad3b41aa3">数据集固定版本</a></td><td>已审查</td><td>3</td><td>3</td><td>?</td><td>3</td><td>2</td><td>1</td><td><p>空白画布画上/下两笔，第一次撤销仅留下上笔，再撤销为空；另一个独立测试画X后退后台恢复。 补充范围：工具宽度、类型、颜色三选择组合跨force-stop恢复；绘图本身仍仅warm restart。</p><details><summary>适合作为小界面但有历史栈复杂度的绘图题；多指缩放和导出一致性需额外取证。；六维仅静态已审范围预估，不把仓库潜力计入。</summary><h4>主操作链</h4><pre>空白画布画上/下两笔，第一次撤销仅留下上笔，再撤销为空；另一个独立测试画X后退后台恢复。 补充范围：工具宽度、类型、颜色三选择组合跨force-stop恢复；绘图本身仍仅warm restart。</pre><h4>实际覆盖</h4><pre>空白画布画上/下两笔，第一次撤销仅留下上笔，再撤销为空；另一个独立测试画X后退后台恢复。 补充范围：工具宽度、类型、颜色三选择组合跨force-stop恢复；绘图本身仍仅warm restart。</pre><h4>可扩展范围</h4><pre>适合作为小界面但有历史栈复杂度的绘图题；多指缩放和导出一致性需额外取证。</pre><h4>证据缺口</h4><pre>[
+  &quot;VLM判断有无笔画和大致位置，不是像素或路径几何精确校验&quot;,
+  &quot;绘图持久化不能与另一个工具偏好进程重建测试混为一谈&quot;,
+  &quot;本轮仅静态读取上游测试，未本地Android运行或模型试跑&quot;,
+  &quot;仅已下载模块：test_android_computation.py, test_android_interaction.py, test_android_navigation.py, test_android_states.py&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;画布与多层撤销栈联动，连续两次操作必须保序，不能以开关替代历史。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;同一链含绘制和连续撤销回退，终态由历史顺序决定。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;未测异步绘制或保存竞争。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;工具选择组合有force-stop恢复；画布仅后台恢复，两者需分别限定。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;连续轨迹绘制与笔宽长按存在，但未量化轨迹容差或多指。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;核心已审链局限单画布及同屏工具。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>enricocid-music-player-go<br><a target="_blank" rel="noopener" href="https://github.com/enricocid/Music-Player-GO">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/enricocid/Music-Player-GO/tree/947709e4c798a103b9fcc5962172f2e85d349196">数据集固定版本</a></td><td>已审查</td><td>2</td><td>2</td><td>?</td><td>3</td><td>2</td><td>2</td><td><p>列表选歌→正在播放页读取当前曲名→喜欢→返回收藏表验证该曲；独立收藏测试在force-stop后验证曲目身份。 补充范围：播放暂停额外测试仅VLM识别暂停图标，不证明音频输出。</p><details><summary>播放器业务潜力高于当前收藏/队列范围，需真实媒体和生命周期评测后再升级。；六维仅静态已审范围预估，不把仓库潜力计入。</summary><h4>主操作链</h4><pre>列表选歌→正在播放页读取当前曲名→喜欢→返回收藏表验证该曲；独立收藏测试在force-stop后验证曲目身份。 补充范围：播放暂停额外测试仅VLM识别暂停图标，不证明音频输出。</pre><h4>实际覆盖</h4><pre>列表选歌→正在播放页读取当前曲名→喜欢→返回收藏表验证该曲；独立收藏测试在force-stop后验证曲目身份。 补充范围：播放暂停额外测试仅VLM识别暂停图标，不证明音频输出。</pre><h4>可扩展范围</h4><pre>播放器业务潜力高于当前收藏/队列范围，需真实媒体和生命周期评测后再升级。</pre><h4>证据缺口</h4><pre>[
+  &quot;nowplaying测试接受实际显示曲名，未确保就是最初点选曲目&quot;,
+  &quot;没有真实音频解码、耳机/通知控制或播放进度恢复证据&quot;,
+  &quot;本轮仅静态读取上游测试，未本地Android运行或模型试跑&quot;,
+  &quot;仅已下载模块：test_android_computation.py, test_android_interaction.py, test_android_navigation.py, test_android_states.py&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;当前曲目和收藏表通过同一名称关联，但尚无队列多向状态不变量。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;选歌、喜欢、回读是有依赖线性链；没有复杂重试分支。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;没有音频焦点、播放竞态或请求乱序断言。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;收藏曲目跨force-stop恢复由单测试覆盖。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;长按列表调收藏/入队菜单，未见手势仲裁。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;歌曲页、播放页与收藏sheet跨视图身份传递。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>etar-group-etar-calendar<br><a target="_blank" rel="noopener" href="https://github.com/etar-group/etar-calendar">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/etar-group/etar-calendar/tree/2b8e143063b1ae2691d753ae2e10e205c325089f">数据集固定版本</a></td><td>已审查</td><td>2</td><td>2</td><td>?</td><td>3</td><td>2</td><td>4</td><td><p>通过App创建事件→清除App数据并撤销权限→重新启动并授予权限→直接查系统CalendarProvider事件仍存在。 补充范围：起始时间设15:00后结束时间自动16:00，精确保持60分钟；独立于Provider重授权链。</p><details><summary>本片最值得深化的跨边界候选；可补重复事件与时区，但不能假设现有测试已覆盖。；六维仅静态已审范围预估，不把仓库潜力计入。</summary><h4>主操作链</h4><pre>通过App创建事件→清除App数据并撤销权限→重新启动并授予权限→直接查系统CalendarProvider事件仍存在。 补充范围：起始时间设15:00后结束时间自动16:00，精确保持60分钟；独立于Provider重授权链。</pre><h4>实际覆盖</h4><pre>通过App创建事件→清除App数据并撤销权限→重新启动并授予权限→直接查系统CalendarProvider事件仍存在。 补充范围：起始时间设15:00后结束时间自动16:00，精确保持60分钟；独立于Provider重授权链。</pre><h4>可扩展范围</h4><pre>本片最值得深化的跨边界候选；可补重复事件与时区，但不能假设现有测试已覆盖。</pre><h4>证据缺口</h4><pre>[
+  &quot;sequence_pick_date硬编码2026年8月20日及UTC，需冻结模拟时钟/时区&quot;,
+  &quot;持久化最终只查Provider，不证明重授权后Agenda实际可见&quot;,
+  &quot;clear_data不是普通force-stop，需要在公开契约讲明系统数据生命周期&quot;,
+  &quot;本轮仅静态读取上游测试，未本地Android运行或模型试跑&quot;,
+  &quot;仅已下载模块：test_android_computation.py, test_android_interaction.py, test_android_navigation.py, test_android_states.py&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;编辑日期控件与系统事件dtstart保持身份/日期一致，未见多实体重复规则。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;创建、清数据、重授权回读是线性依赖链；没有复杂冲突重试。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;未测同步、通知投递时序和编辑竞争。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;App数据被清后系统Provider事件继续存在，比仅内存持久化有真实边界。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;月份单元格需要DOWN/hold/UP长按，但阈值分支未覆盖。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;同一链跨App与CalendarProvider且包含权限撤销/重授权，满足跨进程权限恢复。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>firebirdberlin-nightdream<br><a target="_blank" rel="noopener" href="https://github.com/firebirdberlin/nightdream">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/firebirdberlin/nightdream/tree/be54bc7d0913b86a2966d94150a50ffd6afc0428">数据集固定版本</a></td><td>已审查</td><td>2</td><td>2</td><td>?</td><td>3</td><td>2</td><td>2</td><td><p>创建三闹钟→长按中间项改时间→首尾保持、旧中间消失、总数仍3；另链新闹钟反映主时钟下方提示。 补充范围：重复开关关闭后7个星期按钮消失；只证明控件依赖而非真正重复调度。</p><details><summary>需要真实调度与最近闹钟计算才有显著高难度，目前主体仍是CRUD与恢复。；六维仅静态已审范围预估，不把仓库潜力计入。</summary><h4>主操作链</h4><pre>创建三闹钟→长按中间项改时间→首尾保持、旧中间消失、总数仍3；另链新闹钟反映主时钟下方提示。 补充范围：重复开关关闭后7个星期按钮消失；只证明控件依赖而非真正重复调度。</pre><h4>实际覆盖</h4><pre>创建三闹钟→长按中间项改时间→首尾保持、旧中间消失、总数仍3；另链新闹钟反映主时钟下方提示。 补充范围：重复开关关闭后7个星期按钮消失；只证明控件依赖而非真正重复调度。</pre><h4>可扩展范围</h4><pre>需要真实调度与最近闹钟计算才有显著高难度，目前主体仍是CRUD与恢复。</pre><h4>证据缺口</h4><pre>[
+  &quot;主屏测试只检查包含一个时间，不校验多个闹钟的最近触发排序&quot;,
+  &quot;未验证重复星期、夏令时、权限和真实响铃&quot;,
+  &quot;本轮仅静态读取上游测试，未本地Android运行或模型试跑&quot;,
+  &quot;仅已下载模块：test_android_computation.py, test_android_interaction.py, test_android_navigation.py, test_android_states.py&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;编辑多记录与主屏下次闹钟提示有关联，未验证重复周期/最早闹钟派生重算。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;编辑回读为线性链，未覆盖调度冲突补偿。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;未等待实际响铃、系统闹钟投递或并发更新。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;编辑闹钟后重启有独立持久化测试。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;长按闹钟进入时间编辑，单一精细输入。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;闹钟列表与主时钟跨页镜像。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>florisboard-florisboard<br><a target="_blank" rel="noopener" href="https://github.com/florisboard/florisboard">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/florisboard/florisboard/tree/2a44855c7fcce943a2d3b2092fe45808037ad258">数据集固定版本</a></td><td>已审查</td><td>2</td><td>3</td><td>?</td><td>3</td><td>2</td><td>2</td><td><p>预览键盘alpha→符号→输入5→返回alpha→输入q，精确断言5q；另链保存Utility选项后重启保留摘要。</p><details><summary>键盘引擎潜力很高，但上游当前范围更偏预览输入与设置，不足以宣布最复杂。；六维仅静态已审范围预估，不把仓库潜力计入。</summary><h4>主操作链</h4><pre>预览键盘alpha→符号→输入5→返回alpha→输入q，精确断言5q；另链保存Utility选项后重启保留摘要。</pre><h4>实际覆盖</h4><pre>预览键盘alpha→符号→输入5→返回alpha→输入q，精确断言5q；另链保存Utility选项后重启保留摘要。</pre><h4>可扩展范围</h4><pre>键盘引擎潜力很高，但上游当前范围更偏预览输入与设置，不足以宣布最复杂。</pre><h4>证据缺口</h4><pre>[
+  &quot;键盘坐标key_row1/kxy依赖布局，需改成受约束可移植定位&quot;,
+  &quot;没有实际外部编辑器InputConnection、selection/composing text、剪贴板权限协议验证&quot;,
+  &quot;高维H与L位于不同链，不能直接相加宣称D3同链耦合&quot;,
+  &quot;本轮仅静态读取上游测试，未本地Android运行或模型试跑&quot;,
+  &quot;仅已下载模块：test_android_computation.py, test_android_interaction.py, test_android_navigation.py, test_android_states.py&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;输入模式决定相同键位输出，数字行开关影响hinted控件enabled，但尚非多实体复杂约束。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;alpha/symbols来回循环并保留原文本，退格链有明确中间值。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;未测IME输入并发、候选延迟与撤销。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;已提交设置值跨force-stop保留；不等于composition在途恢复。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;键位点击、字体slider和长按信号，但没有滑行输入/多指/冲突实测。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;所审输入仅App内部预览，不能冒充跨其他App的系统IME工作流。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>flxapps-detoxdroid<br><a target="_blank" rel="noopener" href="https://github.com/flxapps/detoxdroid">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/flxapps/detoxdroid/tree/7b52d6c0748f951020fd5d7abddad63ebd3911d2">数据集固定版本</a></td><td>已审查</td><td>2</td><td>2</td><td>?</td><td>3</td><td>1</td><td>2</td><td><p>在灰度功能创建Every day和Sat/Sun规则→删除周末项仅保留Every day；另链例外选择计数同步详情摘要。 补充范围：上游未启用OS无障碍服务，运行标志仅内存；Running在进程死亡后应变Stopped，不能要求恢复Running。</p><details><summary>如果加入时段重叠、跨日边界与实际系统服务生效验证可提升，当前仅配置题。；六维仅静态已审范围预估，不把仓库潜力计入。</summary><h4>主操作链</h4><pre>在灰度功能创建Every day和Sat/Sun规则→删除周末项仅保留Every day；另链例外选择计数同步详情摘要。 补充范围：上游未启用OS无障碍服务，运行标志仅内存；Running在进程死亡后应变Stopped，不能要求恢复Running。</pre><h4>实际覆盖</h4><pre>在灰度功能创建Every day和Sat/Sun规则→删除周末项仅保留Every day；另链例外选择计数同步详情摘要。 补充范围：上游未启用OS无障碍服务，运行标志仅内存；Running在进程死亡后应变Stopped，不能要求恢复Running。</pre><h4>可扩展范围</h4><pre>如果加入时段重叠、跨日边界与实际系统服务生效验证可提升，当前仅配置题。</pre><h4>证据缺口</h4><pre>[
+  &quot;测试能证明配置保存，不能证明生效时段真的抑制滚动或显示灰度&quot;,
+  &quot;相同默认规则可能合并，公开契约须说明去重身份&quot;,
+  &quot;本轮仅静态读取上游测试，未本地Android运行或模型试跑&quot;,
+  &quot;仅已下载模块：test_android_computation.py, test_android_interaction.py, test_android_navigation.py, test_android_states.py&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;规则按feature隔离、例外计数传播详情，明确双视图联动但无跨规则重叠计算。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;创建删除与读回是线性操作；不同功能隔离不是复杂分支。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;未测定时触发、系统无障碍服务异步与失败恢复。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;规则force-stop后恢复有独立测试。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;实际复杂度主要普通点击，长按无独特后果不能加分。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;配置列表与功能详情跨页同步；未证明真实禁用/灰度跨App执行。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>goodtime-productivity-goodtime<br><a target="_blank" rel="noopener" href="https://github.com/goodtime-productivity/Goodtime">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/goodtime-productivity/Goodtime/tree/0932089b5f3a838a1b2b2bfa1c1c57c59efbbd76">数据集固定版本</a></td><td>已审查</td><td>2</td><td>3</td><td>1</td><td>3</td><td>2</td><td>2</td><td><p>点击启动→确认Focus状态→下拖重置，Focus消失且回25:00；独立链手工添加42分钟会话后重启，累计Total不变。 补充范围：idle→running→paused→running；暂停3秒值不变，恢复3秒值变化。源码只判不相等，不保证下降方向。</p><details><summary>适合真实时钟+生命周期中断题，现有统计弱断言需要加固。；六维仅静态已审范围预估，不把仓库潜力计入。</summary><h4>主操作链</h4><pre>点击启动→确认Focus状态→下拖重置，Focus消失且回25:00；独立链手工添加42分钟会话后重启，累计Total不变。 补充范围：idle→running→paused→running；暂停3秒值不变，恢复3秒值变化。源码只判不相等，不保证下降方向。</pre><h4>实际覆盖</h4><pre>点击启动→确认Focus状态→下拖重置，Focus消失且回25:00；独立链手工添加42分钟会话后重启，累计Total不变。 补充范围：idle→running→paused→running；暂停3秒值不变，恢复3秒值变化。源码只判不相等，不保证下降方向。</pre><h4>可扩展范围</h4><pre>适合真实时钟+生命周期中断题，现有统计弱断言需要加固。</pre><h4>证据缺口</h4><pre>[
+  &quot;输入42但断言只检查非零且重启不变，不校验应为42分钟&quot;,
+  &quot;Today受05:00日界影响，上游改测Total，须公开日界规则&quot;,
+  &quot;输入定位使用x&gt;800与固定260px拖动，跨设备适配需修正&quot;,
+  &quot;本轮仅静态读取上游测试，未本地Android运行或模型试跑&quot;,
+  &quot;仅已下载模块：test_android_computation.py, test_android_interaction.py, test_android_navigation.py, test_android_states.py&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;倒计时/Focus状态联动，session和统计Total联动；未覆盖计时完成后标签统计。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;同一测试idle→running→paused→running包含状态回退与恢复，时间值先冻结再变化。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;计时随时间推进，拖动增加分钟有50–68秒容差；无并发/竞态覆盖，记1。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;已存会话累计值在force-stop后保持非零且相等。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;基于当前timer中心上/下拖，方向带状态语义。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;计时主屏与统计添加会话跨页，但暂无后台系统服务协议。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>gymloga-gymloga-android<br><a target="_blank" rel="noopener" href="https://github.com/gymloga/gymloga-android">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/gymloga/gymloga-android/tree/e9fa46331f17868a8918ffd759e5d296f6766506">数据集固定版本</a></td><td>已审查</td><td>3</td><td>3</td><td>?</td><td>3</td><td>1</td><td>2</td><td><p>输入135x5x3→三组徽标→UNDO降为两组；另链保存session后编辑label并UPDATE，仍只有1 SESSION。 补充范围：两session 135x5x3和225x5后断言HEAVIEST225、e1RM262、2 sessions/4 sets，存在真实多级派生。</p><details><summary>在读取计算lane后升级为有训练语法、容量、PR多级派生的强候选；仍需串起编辑/撤销后聚合重算与重启。；六维仅静态已审范围预估，不把仓库潜力计入。</summary><h4>主操作链</h4><pre>输入135x5x3→三组徽标→UNDO降为两组；另链保存session后编辑label并UPDATE，仍只有1 SESSION。 补充范围：两session 135x5x3和225x5后断言HEAVIEST225、e1RM262、2 sessions/4 sets，存在真实多级派生。</pre><h4>实际覆盖</h4><pre>输入135x5x3→三组徽标→UNDO降为两组；另链保存session后编辑label并UPDATE，仍只有1 SESSION。 补充范围：两session 135x5x3和225x5后断言HEAVIEST225、e1RM262、2 sessions/4 sets，存在真实多级派生。</pre><h4>可扩展范围</h4><pre>在读取计算lane后升级为有训练语法、容量、PR多级派生的强候选；仍需串起编辑/撤销后聚合重算与重启。</pre><h4>证据缺口</h4><pre>[
+  &quot;持久化只检查Bench Press与1 SESSION，未核对三组135x5数值&quot;,
+  &quot;日期硬编码Wed, Aug 5；编辑字段按EditText序号定位&quot;,
+  &quot;同一事实规则+VLM两次出现，评分应去重&quot;,
+  &quot;本轮仅静态读取上游测试，未本地Android运行或模型试跑&quot;,
+  &quot;仅已下载模块：test_android_computation.py, test_android_interaction.py, test_android_navigation.py, test_android_states.py&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;输入语法→训练组→两session聚合→PR最大重量/e1RM/总组数为多级派生，计算lane给出精确预期。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;输入重复组后逐步撤销有回退语义；与跨进程恢复并非同一链。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;无同步、计时或异步冲突证据。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;保存session标题/计数跨进程保持；未证明全部组数重量恢复。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;普通文本输入与UNDO按钮，不因x语法自动算复杂手势。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;记录编辑、详情、历史跨页身份传递。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>hamza417-inure<br><a target="_blank" rel="noopener" href="https://github.com/Hamza417/Inure">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/Hamza417/Inure/tree/fdde733d5a367ae66c366726ae449dc7148fd631">数据集固定版本</a></td><td>已审查</td><td>2</td><td>2</td><td>?</td><td>3</td><td>2</td><td>2</td><td><p>首次Batch选一App，0→1与行状态同步→force-stop→按同名App回找，仍1 Selected；另链搜索chrome→清空→settings。</p><details><summary>管理器系统能力潜力高，但当前测试主要选择与筛选，不能按App权限数量判最高难。；六维仅静态已审范围预估，不把仓库潜力计入。</summary><h4>主操作链</h4><pre>首次Batch选一App，0→1与行状态同步→force-stop→按同名App回找，仍1 Selected；另链搜索chrome→清空→settings。</pre><h4>实际覆盖</h4><pre>首次Batch选一App，0→1与行状态同步→force-stop→按同名App回找，仍1 Selected；另链搜索chrome→清空→settings。</pre><h4>可扩展范围</h4><pre>管理器系统能力潜力高，但当前测试主要选择与筛选，不能按App权限数量判最高难。</pre><h4>证据缺口</h4><pre>[
+  &quot;按显示名认App可能同名混淆，正式契约需包身份&quot;,
+  &quot;搜索依赖设备安装Chrome/Settings等夹具，且固定数量不具设备通用性&quot;,
+  &quot;终端/权限/组件页面多不等于复杂操作已验证&quot;,
+  &quot;本轮仅静态读取上游测试，未本地Android运行或模型试跑&quot;,
+  &quot;仅已下载模块：test_android_computation.py, test_android_interaction.py, test_android_navigation.py, test_android_states.py&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;批量列表行状态与选中数一致，但没有真正批量安装/卸载补偿。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;选择重启回找及搜索清空重输为线性依赖链。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;没有查询乱序、安装广播或异步包扫描竞争。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;Batch选择身份和总数在同一重启链验证。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;长按App行上下文以及滚动回找，未见多指或复杂仲裁。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;Batch/搜索/详情跨页；所审测试未执行系统权限操作。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>imtiaz-official-smart-edge<br><a target="_blank" rel="noopener" href="https://github.com/imtiaz-official/smart-edge">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/imtiaz-official/smart-edge/tree/c54beef6ae1a77ab8499df6c6a2a55b629da143b">数据集固定版本</a></td><td>已审查</td><td>2</td><td>2</td><td>?</td><td>3</td><td>2</td><td>2</td><td><p>Tap Gestures→Single Tap Action→Home→摘要Tap: Home→重启→摘要保持；另链同时存三外观设置回读。 补充范围：真实拖动slider使位置dp数值增大，并用VLM检查thumb右移；不是只有手势名配置。</p><details><summary>真正边缘手势与系统overlay边界可复杂，但当前是设置持久化题，不推荐优先。；六维仅静态已审范围预估，不把仓库潜力计入。</summary><h4>主操作链</h4><pre>Tap Gestures→Single Tap Action→Home→摘要Tap: Home→重启→摘要保持；另链同时存三外观设置回读。 补充范围：真实拖动slider使位置dp数值增大，并用VLM检查thumb右移；不是只有手势名配置。</pre><h4>实际覆盖</h4><pre>Tap Gestures→Single Tap Action→Home→摘要Tap: Home→重启→摘要保持；另链同时存三外观设置回读。 补充范围：真实拖动slider使位置dp数值增大，并用VLM检查thumb右移；不是只有手势名配置。</pre><h4>可扩展范围</h4><pre>真正边缘手势与系统overlay边界可复杂，但当前是设置持久化题，不推荐优先。</pre><h4>证据缺口</h4><pre>[
+  &quot;模块明示App picker崩溃，无CRUD路径；必须记录环境/应用缺陷而非计难&quot;,
+  &quot;选Home后仅摘要保持，没有触发真实Home系统动作&quot;,
+  &quot;本轮仅静态读取上游测试，未本地Android运行或模型试跑&quot;,
+  &quot;仅已下载模块：test_android_computation.py, test_android_interaction.py, test_android_navigation.py, test_android_states.py&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;两级配置与组合摘要联动，三独立偏好同时持久化不能按多实体耦合高分。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;两层对话框是线性选择链，没有实际边缘手势执行分支。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;无overlay服务并发/权限失效时序证据。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;组合摘要和三个偏好各有进程重启回读。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;补充computation中实际slider拖动使dp数值增长，属于单种精细输入；仍无真实边缘手势控制。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;跨设置页和对话框，未证明跨应用手势控制。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>jannis-fitotrack<br><a target="_blank" rel="noopener" href="https://codeberg.org/jannis/FitoTrack">Codeberg 仓库</a> · <a target="_blank" rel="noopener" href="https://codeberg.org/jannis/FitoTrack/src/commit/529f286d2f6480889eb0fbbcc5a86047e8752bf6">数据集固定版本</a></td><td>已审查</td><td>2</td><td>2</td><td>?</td><td>3</td><td>2</td><td>2</td><td><p>创建43距离锻炼→更多/Edit Workout→改45→保存→force-stop→首页45存在且43不存在。 补充范围：补测energy consumption与total/10分钟在0.15容差内一致；为同页计算不变量，非传感器实测。</p><details><summary>用固定定位轨迹测试距离、速度与后台恢复可提升；当前是手动距离CRUD。；六维仅静态已审范围预估，不把仓库潜力计入。</summary><h4>主操作链</h4><pre>创建43距离锻炼→更多/Edit Workout→改45→保存→force-stop→首页45存在且43不存在。 补充范围：补测energy consumption与total/10分钟在0.15容差内一致；为同页计算不变量，非传感器实测。</pre><h4>实际覆盖</h4><pre>创建43距离锻炼→更多/Edit Workout→改45→保存→force-stop→首页45存在且43不存在。 补充范围：补测energy consumption与total/10分钟在0.15容差内一致；为同页计算不变量，非传感器实测。</pre><h4>可扩展范围</h4><pre>用固定定位轨迹测试距离、速度与后台恢复可提升；当前是手动距离CRUD。</pre><h4>证据缺口</h4><pre>[
+  &quot;test_multi_record_first_intact_after_edit即使B评论编辑未成功也可仅凭A存在通过，不能声称完整多记录编辑正确&quot;,
+  &quot;旧43不存在检查仅当前UI，滚动可见性会影响证据&quot;,
+  &quot;GPS/轨迹能力不在已审实际链中&quot;,
+  &quot;本轮仅静态读取上游测试，未本地Android运行或模型试跑&quot;,
+  &quot;仅已下载模块：test_android_computation.py, test_android_interaction.py, test_android_navigation.py, test_android_states.py&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;详情修改与首页卡片跨视图同步，未验证轨迹与速度/总量联动。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;编辑保存重启回读为线性链。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;未测定位采样、后台记录或导出异步。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;新距离跨进程恢复且旧值消失。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;上下文长按删除路径存在，未覆盖手势阈值。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;锻炼创建/详情/编辑/Home跨页，未证系统定位服务协议。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>kin69-easynotes<br><a target="_blank" rel="noopener" href="https://github.com/Kin69/EasyNotes">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/Kin69/EasyNotes/tree/b242f98aadd936b16d1b0fa222c718c36ea5318f">数据集固定版本</a></td><td>已审查</td><td>2</td><td>2</td><td>?</td><td>3</td><td>2</td><td>2</td><td><p>创建三条→改中间正文→验证另两条标题正文不变；另一链长按选中→确认删除只删目标；编辑后重启回读正文。 补充范围：Markdown预览明确检查去掉**标记且VLM判断bold加粗，已覆盖基础渲染。</p><details><summary>比简单静态笔记有状态链，但不是本批最高难；建议只保留有明确复杂编辑语义的扩展。；六维仅静态已审范围预估，不把仓库潜力计入。</summary><h4>主操作链</h4><pre>创建三条→改中间正文→验证另两条标题正文不变；另一链长按选中→确认删除只删目标；编辑后重启回读正文。 补充范围：Markdown预览明确检查去掉**标记且VLM判断bold加粗，已覆盖基础渲染。</pre><h4>实际覆盖</h4><pre>创建三条→改中间正文→验证另两条标题正文不变；另一链长按选中→确认删除只删目标；编辑后重启回读正文。 补充范围：Markdown预览明确检查去掉**标记且VLM判断bold加粗，已覆盖基础渲染。</pre><h4>可扩展范围</h4><pre>比简单静态笔记有状态链，但不是本批最高难；建议只保留有明确复杂编辑语义的扩展。</pre><h4>证据缺口</h4><pre>[
+  &quot;编辑与删除的返回行为会退到launcher，需公开导航契约而非让评测猜测&quot;,
+  &quot;标题首字母被大写且匹配忽略大小写，需固定文本规则&quot;,
+  &quot;已覆盖基础Markdown去标记和bold渲染，未证明嵌套语法/附件/同步复杂业务&quot;,
+  &quot;本轮仅静态读取上游测试，未本地Android运行或模型试跑&quot;,
+  &quot;仅已下载模块：test_android_computation.py, test_android_interaction.py, test_android_navigation.py, test_android_states.py&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;正文预览与编辑内容同步，多记录身份不混淆，但仍是双视图局部一致性。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;编辑保存、选择确认删除为线性链；取消/恢复分支未纳入同链。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;没有并发自动保存、导入冲突或异步回滚测试。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;追加正文后保存并force-stop验证精确文本。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;长按进入选择模式并维护数量，未见多指或拖动。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;Home/Preview/Edit跨屏，返回可能退出launcher需再启动。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>kylecorry31-trail-sense<br><a target="_blank" rel="noopener" href="https://github.com/kylecorry31/trail-sense">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/kylecorry31/trail-sense/tree/b967e1435b1442055c1c6f2bb55484783e748c6a">数据集固定版本</a></td><td>已审查</td><td>2</td><td>2</td><td>?</td><td>3</td><td>2</td><td>3</td><td><p>创建命名beacon→长按900ms→导航destination sheet同名且含距离单位；另链beacon保存后force-stop恢复。</p><details><summary>户外多工具潜力高，建议固定坐标/传感器轨迹把导航与恢复连起来，再评估D3。；六维仅静态已审范围预估，不把仓库潜力计入。</summary><h4>主操作链</h4><pre>创建命名beacon→长按900ms→导航destination sheet同名且含距离单位；另链beacon保存后force-stop恢复。</pre><h4>实际覆盖</h4><pre>创建命名beacon→长按900ms→导航destination sheet同名且含距离单位；另链beacon保存后force-stop恢复。</pre><h4>可扩展范围</h4><pre>户外多工具潜力高，建议固定坐标/传感器轨迹把导航与恢复连起来，再评估D3。</pre><h4>证据缺口</h4><pre>[
+  &quot;distance断言仅单位后缀，不验证实际距离/方位&quot;,
+  &quot;packing只创建空列表并检查100%标识，不能称完成物品勾选统计&quot;,
+  &quot;单位换算独立于导航，不能将二者拼成同链高难&quot;,
+  &quot;L3与X3不在同一完整已证链，D3资格仍待补轨迹&quot;,
+  &quot;本轮仅静态读取上游测试，未本地Android运行或模型试跑&quot;,
+  &quot;仅已下载模块：test_android_computation.py, test_android_interaction.py, test_android_navigation.py, test_android_states.py&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;beacon列表对象映射导航目标与距离显示，尚未验证坐标/方位数值一致。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;创建长按进入导航为线性链；恢复是独立测试。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;未测试传感器异步、定位竞态或后台采样。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;命名beacon跨进程恢复已覆盖，但未证明目标导航状态恢复。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;长按900ms有实际动作，未验证短按/边界时长差异。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;beacon管理→导航罗盘跨功能模块，但无跨进程/外部应用协议证据。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>lexica-lexica<br><a target="_blank" rel="noopener" href="https://github.com/lexica/lexica">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/lexica/lexica/tree/ed146e673ff1695f107295fefb7bc0d83fbe2c45">数据集固定版本</a></td><td>已审查</td><td>2</td><td>3</td><td>?</td><td>3</td><td>1</td><td>2</td><td><p>{
+  &quot;description&quot;: &quot;新游戏→Words保存→返回游戏→返回主页→终止重启→恢复&quot;,
+  &quot;initial_state&quot;: &quot;按所引用测试的clear_data/launch或既定fixture复位；不把相互独立测试默认为单次连续轨迹&quot;,
+  &quot;reset&quot;: &quot;独立执行测试要求的复位，正式题需冻结fixture与设备&quot;,
+  &quot;branches_and_boundaries&quot;: [
+    &quot;恢复只检查enabled和任意字母网格，注释允许字母与原盘不同&quot;,
+    &quot;timer保存首帧但最终VLM问题仅问是否低于3:00，不是真正双帧差分&quot;,
+    &quot;未测有效单词路径/邻接/重复用格/词典/得分&quot;
+  ],
+  &quot;action_count_status&quot;: &quot;NOT_MEASURED；未以步骤数抬高难度，辅助等待和重试不计业务动作&quot;
+}</p><details><summary>可用模式选择与保存恢复链做中等题；完整词语游戏必须补精确棋盘和路径规则。</summary><h4>主操作链</h4><pre>{
+  &quot;description&quot;: &quot;新游戏→Words保存→返回游戏→返回主页→终止重启→恢复&quot;,
+  &quot;initial_state&quot;: &quot;按所引用测试的clear_data/launch或既定fixture复位；不把相互独立测试默认为单次连续轨迹&quot;,
+  &quot;reset&quot;: &quot;独立执行测试要求的复位，正式题需冻结fixture与设备&quot;,
+  &quot;branches_and_boundaries&quot;: [
+    &quot;恢复只检查enabled和任意字母网格，注释允许字母与原盘不同&quot;,
+    &quot;timer保存首帧但最终VLM问题仅问是否低于3:00，不是真正双帧差分&quot;,
+    &quot;未测有效单词路径/邻接/重复用格/词典/得分&quot;
+  ],
+  &quot;action_count_status&quot;: &quot;NOT_MEASURED；未以步骤数抬高难度，辅助等待和重试不计业务动作&quot;
+}</pre><h4>实际覆盖</h4><pre>{
+  &quot;manifest_total&quot;: 95,
+  &quot;manifest_note&quot;: &quot;上游断言数而非独立端到端业务链数；上游passed不代表本机运行&quot;,
+  &quot;reviewed_test_functions&quot;: [
+    &quot;test_saved_game_survives_process_death&quot;,
+    &quot;test_restore_reopens_game_vlm&quot;,
+    &quot;test_letter_tap_glyph_vlm&quot;,
+    &quot;test_timer_counts_down_vlm&quot;,
+    &quot;test_mode_selection_status_updates&quot;
+  ],
+  &quot;vlm_totals&quot;: {
+    &quot;assertions&quot;: 35,
+    &quot;with_verdict&quot;: 32,
+    &quot;calibrated&quot;: 0,
+    &quot;usable&quot;: null,
+    &quot;scored_records&quot;: 32,
+    &quot;unbacked_records&quot;: 0
+  },
+  &quot;actual_assertion_limits&quot;: [
+    &quot;恢复只检查enabled和任意字母网格，注释允许字母与原盘不同&quot;,
+    &quot;timer保存首帧但最终VLM问题仅问是否低于3:00，不是真正双帧差分&quot;,
+    &quot;未测有效单词路径/邻接/重复用格/词典/得分&quot;
+  ]
+}</pre><h4>可扩展范围</h4><pre>{
+  &quot;status&quot;: &quot;NOT_VERIFIED_REPOSITORY_CAPABILITY&quot;,
+  &quot;items&quot;: [
+    &quot;字母连线规则、词典判定、精确棋盘/剩余时间恢复&quot;
+  ],
+  &quot;basis&quot;: &quot;项目业务表面和测试入口支持的后续探索方向，未将完整源码/未执行能力当实证&quot;
+}</pre><h4>证据缺口</h4><pre>[
+  &quot;本机未运行任何App/设备测试，未校准难度&quot;,
+  &quot;本次只按下载到的测试文件静态审查；其余manifest模块没有逐行全部源码证据&quot;,
+  &quot;未检查完整上游仓库源码与许可证；元数据commit不是实现验证&quot;,
+  &quot;未下载公共android_testgen_kit和全部fixture，依赖行为需要核验&quot;,
+  &quot;VLM calibrated=0；未取得完整截图、raw推理与本机复验证据&quot;,
+  &quot;恢复只检查enabled和任意字母网格，注释允许字母与原盘不同&quot;,
+  &quot;timer保存首帧但最终VLM问题仅问是否低于3:00，不是真正双帧差分&quot;,
+  &quot;未测有效单词路径/邻接/重复用格/词典/得分&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;设置模式更新主页/详情与棋盘尺寸，仅局部派生&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;Words保存→返回游戏→主页→恢复包含明确回退上下文&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;计时仅VLM判断低于3分钟，未精确验证时序边界&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;保存后force-stop仍使Restore启用，但完整游戏内容恢复未知&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;单格点击；内置模式长按无操作不代表连线轨迹能力&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;主页/模式/游戏/分数页面传递，未跨系统&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>lucasnlm-antimine-android<br><a target="_blank" rel="noopener" href="https://github.com/lucasnlm/antimine-android">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/lucasnlm/antimine-android/tree/86400370a7b7bd8e27ccc6520065c6b68d64b8f2">数据集固定版本</a></td><td>已审查</td><td>2</td><td>2</td><td>?</td><td>3</td><td>1</td><td>2</td><td><p>{
+  &quot;description&quot;: &quot;自定义雷数→开始游戏→首次揭示→历史→终止重启→历史回读&quot;,
+  &quot;initial_state&quot;: &quot;按所引用测试的clear_data/launch或既定fixture复位；不把相互独立测试默认为单次连续轨迹&quot;,
+  &quot;reset&quot;: &quot;独立执行测试要求的复位，正式题需冻结fixture与设备&quot;,
+  &quot;branches_and_boundaries&quot;: [
+    &quot;持久化absent_before只写进expect，未纳入ok_all，旧行可能蒙混&quot;,
+    &quot;旗标可能来自自动标雷，VLM只问至少一个旗标，无法归因于手动点格&quot;,
+    &quot;未验证扫雷邻居计数、泛洪边界、旗标撤销、胜负和精确存档&quot;
+  ],
+  &quot;action_count_status&quot;: &quot;NOT_MEASURED；未以步骤数抬高难度，辅助等待和重试不计业务动作&quot;
+}</p><details><summary>可用自定义游戏历史链，核心扫雷规则需独立确定性测试，不能借游戏名升级难度。</summary><h4>主操作链</h4><pre>{
+  &quot;description&quot;: &quot;自定义雷数→开始游戏→首次揭示→历史→终止重启→历史回读&quot;,
+  &quot;initial_state&quot;: &quot;按所引用测试的clear_data/launch或既定fixture复位；不把相互独立测试默认为单次连续轨迹&quot;,
+  &quot;reset&quot;: &quot;独立执行测试要求的复位，正式题需冻结fixture与设备&quot;,
+  &quot;branches_and_boundaries&quot;: [
+    &quot;持久化absent_before只写进expect，未纳入ok_all，旧行可能蒙混&quot;,
+    &quot;旗标可能来自自动标雷，VLM只问至少一个旗标，无法归因于手动点格&quot;,
+    &quot;未验证扫雷邻居计数、泛洪边界、旗标撤销、胜负和精确存档&quot;
+  ],
+  &quot;action_count_status&quot;: &quot;NOT_MEASURED；未以步骤数抬高难度，辅助等待和重试不计业务动作&quot;
+}</pre><h4>实际覆盖</h4><pre>{
+  &quot;manifest_total&quot;: 111,
+  &quot;manifest_note&quot;: &quot;上游断言数而非独立端到端业务链数；上游passed不代表本机运行&quot;,
+  &quot;reviewed_test_functions&quot;: [
+    &quot;test_custom_game_survives_process_death&quot;,
+    &quot;test_create_game_appears_in_history&quot;,
+    &quot;test_flag_placement_glyph_vlm&quot;,
+    &quot;test_multi_record_integrity&quot;
+  ],
+  &quot;vlm_totals&quot;: {
+    &quot;assertions&quot;: 35,
+    &quot;with_verdict&quot;: 35,
+    &quot;calibrated&quot;: 0,
+    &quot;usable&quot;: null,
+    &quot;scored_records&quot;: 35,
+    &quot;unbacked_records&quot;: 0
+  },
+  &quot;actual_assertion_limits&quot;: [
+    &quot;持久化absent_before只写进expect，未纳入ok_all，旧行可能蒙混&quot;,
+    &quot;旗标可能来自自动标雷，VLM只问至少一个旗标，无法归因于手动点格&quot;,
+    &quot;未验证扫雷邻居计数、泛洪边界、旗标撤销、胜负和精确存档&quot;
+  ]
+}</pre><h4>可扩展范围</h4><pre>{
+  &quot;status&quot;: &quot;NOT_VERIFIED_REPOSITORY_CAPABILITY&quot;,
+  &quot;items&quot;: [
+    &quot;确定性雷盘、泛洪与标旗状态机及完整恢复&quot;
+  ],
+  &quot;basis&quot;: &quot;项目业务表面和测试入口支持的后续探索方向，未将完整源码/未执行能力当实证&quot;
+}</pre><h4>证据缺口</h4><pre>[
+  &quot;本机未运行任何App/设备测试，未校准难度&quot;,
+  &quot;本次只按下载到的测试文件静态审查；其余manifest模块没有逐行全部源码证据&quot;,
+  &quot;未检查完整上游仓库源码与许可证；元数据commit不是实现验证&quot;,
+  &quot;未下载公共android_testgen_kit和全部fixture，依赖行为需要核验&quot;,
+  &quot;VLM calibrated=0；未取得完整截图、raw推理与本机复验证据&quot;,
+  &quot;持久化absent_before只写进expect，未纳入ok_all，旧行可能蒙混&quot;,
+  &quot;旗标可能来自自动标雷，VLM只问至少一个旗标，无法归因于手动点格&quot;,
+  &quot;未验证扫雷邻居计数、泛洪边界、旗标撤销、胜负和精确存档&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;自定义雷数→游戏计数与历史行关联&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;自定义设置→开始→历史为线性依赖&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;计时VLM非精确异步规则，未知&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;历史雷数行跨进程保留，不验证棋盘坐标&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;实际代码为点击候选格；历史长按仅要求不删除&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;游戏到历史视图，未跨系统&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>markusfisch-shadereditor<br><a target="_blank" rel="noopener" href="https://github.com/markusfisch/ShaderEditor">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/markusfisch/ShaderEditor/tree/75599ee01afdbeee070138e98d4b745ffcad20bd">数据集固定版本</a><br><strong>当前五题来源</strong></td><td>已审查</td><td>3</td><td>3</td><td>?</td><td>3</td><td>2</td><td>2</td><td><p>{
+  &quot;description&quot;: &quot;编辑源码→显式Save shader→终止重启→读回源码；另有撤销精确文本回退链&quot;,
+  &quot;initial_state&quot;: &quot;按所引用测试的clear_data/launch或既定fixture复位；不把相互独立测试默认为单次连续轨迹&quot;,
+  &quot;reset&quot;: &quot;独立执行测试要求的复位，正式题需冻结fixture与设备&quot;,
+  &quot;branches_and_boundaries&quot;: [
+    &quot;必须显式保存，不能把注释中的onPause行为当稳定自动保存契约&quot;,
+    &quot;预览VLM图案不足验证任意GLSL语义/编译错误定位/帧值&quot;,
+    &quot;源码保存与撤销独立测试，合成时需冻结同链&quot;
+  ],
+  &quot;action_count_status&quot;: &quot;NOT_MEASURED；未以步骤数抬高难度，辅助等待和重试不计业务动作&quot;
+}</p><details><summary>优先源编辑/多文档/撤销/显式保存题；不要直接宣称编译引擎高难已验证。</summary><h4>主操作链</h4><pre>{
+  &quot;description&quot;: &quot;编辑源码→显式Save shader→终止重启→读回源码；另有撤销精确文本回退链&quot;,
+  &quot;initial_state&quot;: &quot;按所引用测试的clear_data/launch或既定fixture复位；不把相互独立测试默认为单次连续轨迹&quot;,
+  &quot;reset&quot;: &quot;独立执行测试要求的复位，正式题需冻结fixture与设备&quot;,
+  &quot;branches_and_boundaries&quot;: [
+    &quot;必须显式保存，不能把注释中的onPause行为当稳定自动保存契约&quot;,
+    &quot;预览VLM图案不足验证任意GLSL语义/编译错误定位/帧值&quot;,
+    &quot;源码保存与撤销独立测试，合成时需冻结同链&quot;
+  ],
+  &quot;action_count_status&quot;: &quot;NOT_MEASURED；未以步骤数抬高难度，辅助等待和重试不计业务动作&quot;
+}</pre><h4>实际覆盖</h4><pre>{
+  &quot;manifest_total&quot;: 113,
+  &quot;manifest_note&quot;: &quot;上游断言数而非独立端到端业务链数；上游passed不代表本机运行&quot;,
+  &quot;reviewed_test_functions&quot;: [
+    &quot;test_edit_saved_survives_process_death&quot;,
+    &quot;test_undo_reverts_edit&quot;,
+    &quot;test_rename_cancel_noop&quot;,
+    &quot;test_multi_record_integrity&quot;,
+    &quot;test_rename_via_longpress&quot;,
+    &quot;test_switch_shader_reloads_source&quot;
+  ],
+  &quot;vlm_totals&quot;: {
+    &quot;assertions&quot;: 34,
+    &quot;with_verdict&quot;: 34,
+    &quot;calibrated&quot;: 0,
+    &quot;usable&quot;: null,
+    &quot;scored_records&quot;: 34,
+    &quot;unbacked_records&quot;: 0
+  },
+  &quot;actual_assertion_limits&quot;: [
+    &quot;必须显式保存，不能把注释中的onPause行为当稳定自动保存契约&quot;,
+    &quot;预览VLM图案不足验证任意GLSL语义/编译错误定位/帧值&quot;,
+    &quot;源码保存与撤销独立测试，合成时需冻结同链&quot;
+  ]
+}</pre><h4>可扩展范围</h4><pre>{
+  &quot;status&quot;: &quot;NOT_VERIFIED_REPOSITORY_CAPABILITY&quot;,
+  &quot;items&quot;: [
+    &quot;可取消编译、错误诊断与最后成功帧、uniform时间值真实渲染&quot;
+  ],
+  &quot;basis&quot;: &quot;项目业务表面和测试入口支持的后续探索方向，未将完整源码/未执行能力当实证&quot;
+}</pre><h4>证据缺口</h4><pre>[
+  &quot;本机未运行任何App/设备测试，未校准难度&quot;,
+  &quot;本次只按下载到的测试文件静态审查；其余manifest模块没有逐行全部源码证据&quot;,
+  &quot;未检查完整上游仓库源码与许可证；元数据commit不是实现验证&quot;,
+  &quot;未下载公共android_testgen_kit和全部fixture，依赖行为需要核验&quot;,
+  &quot;VLM calibrated=0；未取得完整截图、raw推理与本机复验证据&quot;,
+  &quot;必须显式保存，不能把注释中的onPause行为当稳定自动保存契约&quot;,
+  &quot;预览VLM图案不足验证任意GLSL语义/编译错误定位/帧值&quot;,
+  &quot;源码保存与撤销独立测试，合成时需冻结同链&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;多shader身份/source切换和编辑撤销内容完全相等&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;重命名确认/取消、编辑/菜单返回上下文&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;GPU预览存在不证明编译竞态、取消和乱序已测&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;显式保存后强停恢复源码marker；未证明在途编译恢复&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;长按重命名+键盘输入，未量化多指或嵌套仲裁&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;抽屉/编辑器/菜单内的跨屏身份&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>mhss1-mybrain<br><a target="_blank" rel="noopener" href="https://github.com/mhss1/MyBrain">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/mhss1/MyBrain/tree/a49727cbec0e686edb82f447b2984ecb674d3edf">数据集固定版本</a></td><td>已审查</td><td>3</td><td>2</td><td>?</td><td>3</td><td>2</td><td>2</td><td><p>{
+  &quot;description&quot;: &quot;三笔笔记→编辑中间标题→返回保存→列表检查邻居和标题&quot;,
+  &quot;initial_state&quot;: &quot;按所引用测试的clear_data/launch或既定fixture复位；不把相互独立测试默认为单次连续轨迹&quot;,
+  &quot;reset&quot;: &quot;独立执行测试要求的复位，正式题需冻结fixture与设备&quot;,
+  &quot;branches_and_boundaries&quot;: [
+    &quot;docstring说中间顺序，实际允许编辑项按修改时间重排，仅未编辑邻居排序不变&quot;,
+    &quot;old_gone依赖find_node_ci精确/子串语义，公共kit未下载需核实，n2是n2new前缀&quot;,
+    &quot;AI、日历、跨模块关联无此范围实证&quot;
+  ],
+  &quot;action_count_status&quot;: &quot;NOT_MEASURED；未以步骤数抬高难度，辅助等待和重试不计业务动作&quot;
+}</p><details><summary>作为笔记编辑持久化题合适；模块多不等于难度高，C3和L3应补同链复验。</summary><h4>主操作链</h4><pre>{
+  &quot;description&quot;: &quot;三笔笔记→编辑中间标题→返回保存→列表检查邻居和标题&quot;,
+  &quot;initial_state&quot;: &quot;按所引用测试的clear_data/launch或既定fixture复位；不把相互独立测试默认为单次连续轨迹&quot;,
+  &quot;reset&quot;: &quot;独立执行测试要求的复位，正式题需冻结fixture与设备&quot;,
+  &quot;branches_and_boundaries&quot;: [
+    &quot;docstring说中间顺序，实际允许编辑项按修改时间重排，仅未编辑邻居排序不变&quot;,
+    &quot;old_gone依赖find_node_ci精确/子串语义，公共kit未下载需核实，n2是n2new前缀&quot;,
+    &quot;AI、日历、跨模块关联无此范围实证&quot;
+  ],
+  &quot;action_count_status&quot;: &quot;NOT_MEASURED；未以步骤数抬高难度，辅助等待和重试不计业务动作&quot;
+}</pre><h4>实际覆盖</h4><pre>{
+  &quot;manifest_total&quot;: 116,
+  &quot;manifest_note&quot;: &quot;上游断言数而非独立端到端业务链数；上游passed不代表本机运行&quot;,
+  &quot;reviewed_test_functions&quot;: [
+    &quot;test_multi_record_edit_middle&quot;,
+    &quot;test_note_persists&quot;,
+    &quot;test_complete_task_hides&quot;,
+    &quot;test_longpress_note_opens_editor&quot;
+  ],
+  &quot;vlm_totals&quot;: {
+    &quot;assertions&quot;: 36,
+    &quot;with_verdict&quot;: 36,
+    &quot;calibrated&quot;: 0,
+    &quot;usable&quot;: null,
+    &quot;scored_records&quot;: 36,
+    &quot;unbacked_records&quot;: 0
+  },
+  &quot;actual_assertion_limits&quot;: [
+    &quot;docstring说中间顺序，实际允许编辑项按修改时间重排，仅未编辑邻居排序不变&quot;,
+    &quot;old_gone依赖find_node_ci精确/子串语义，公共kit未下载需核实，n2是n2new前缀&quot;,
+    &quot;AI、日历、跨模块关联无此范围实证&quot;
+  ]
+}</pre><h4>可扩展范围</h4><pre>{
+  &quot;status&quot;: &quot;NOT_VERIFIED_REPOSITORY_CAPABILITY&quot;,
+  &quot;items&quot;: [
+    &quot;笔记关联任务、离线编辑冲突或AI响应取消需要新契约&quot;
+  ],
+  &quot;basis&quot;: &quot;项目业务表面和测试入口支持的后续探索方向，未将完整源码/未执行能力当实证&quot;
+}</pre><h4>证据缺口</h4><pre>[
+  &quot;本机未运行任何App/设备测试，未校准难度&quot;,
+  &quot;本次只按下载到的测试文件静态审查；其余manifest模块没有逐行全部源码证据&quot;,
+  &quot;未检查完整上游仓库源码与许可证；元数据commit不是实现验证&quot;,
+  &quot;未下载公共android_testgen_kit和全部fixture，依赖行为需要核验&quot;,
+  &quot;VLM calibrated=0；未取得完整截图、raw推理与本机复验证据&quot;,
+  &quot;docstring说中间顺序，实际允许编辑项按修改时间重排，仅未编辑邻居排序不变&quot;,
+  &quot;old_gone依赖find_node_ci精确/子串语义，公共kit未下载需核实，n2是n2new前缀&quot;,
+  &quot;AI、日历、跨模块关联无此范围实证&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;三笔笔记改中间一条，旧名消失且未改两条相对顺序不变&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;编辑返回保存是线性链；未观察复杂分支&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;无可确认异步业务断言&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;笔记创建后强停恢复列表marker&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;长按笔记打开编辑器，未测复杂手势组合&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;Spaces→笔记/任务→编辑器跨屏身份&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>nitishgadangi-privacy-indicator-app<br><a target="_blank" rel="noopener" href="https://github.com/nitishgadangi/privacy-indicator-app">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/nitishgadangi/privacy-indicator-app/tree/8e0db14b9188e2df26d2859dad99b6584fafac9a">数据集固定版本</a><br><strong>当前五题来源</strong></td><td>已审查</td><td>3</td><td>3</td><td>?</td><td>3</td><td>2</td><td>4</td><td><p>{
+  &quot;description&quot;: &quot;GUI启用无障碍服务→关闭Camera预览→强停→GUI重新启用→回读关闭值及点消失&quot;,
+  &quot;initial_state&quot;: &quot;按所引用测试的clear_data/launch或既定fixture复位；不把相互独立测试默认为单次连续轨迹&quot;,
+  &quot;reset&quot;: &quot;独立执行测试要求的复位，正式题需冻结fixture与设备&quot;,
+  &quot;branches_and_boundaries&quot;: [
+    &quot;测到的是本App预览，不是另一App真正调用相机/麦克风后的全局指示&quot;,
+    &quot;尺寸实际只断言宽高各增加&gt;10px，并非精确65/100px&quot;,
+    &quot;系统流程依赖英文Privacy Indicators/Allow和固定y&lt;900及HomeActivity包信息&quot;
+  ],
+  &quot;action_count_status&quot;: &quot;NOT_MEASURED；未以步骤数抬高难度，辅助等待和重试不计业务动作&quot;
+}</p><details><summary>系统授权与中断恢复有高难潜力，D4只针对已见配置恢复链；真实隐私事件监听仍未验证。</summary><h4>主操作链</h4><pre>{
+  &quot;description&quot;: &quot;GUI启用无障碍服务→关闭Camera预览→强停→GUI重新启用→回读关闭值及点消失&quot;,
+  &quot;initial_state&quot;: &quot;按所引用测试的clear_data/launch或既定fixture复位；不把相互独立测试默认为单次连续轨迹&quot;,
+  &quot;reset&quot;: &quot;独立执行测试要求的复位，正式题需冻结fixture与设备&quot;,
+  &quot;branches_and_boundaries&quot;: [
+    &quot;测到的是本App预览，不是另一App真正调用相机/麦克风后的全局指示&quot;,
+    &quot;尺寸实际只断言宽高各增加&gt;10px，并非精确65/100px&quot;,
+    &quot;系统流程依赖英文Privacy Indicators/Allow和固定y&lt;900及HomeActivity包信息&quot;
+  ],
+  &quot;action_count_status&quot;: &quot;NOT_MEASURED；未以步骤数抬高难度，辅助等待和重试不计业务动作&quot;
+}</pre><h4>实际覆盖</h4><pre>{
+  &quot;manifest_total&quot;: 100,
+  &quot;manifest_note&quot;: &quot;上游断言数而非独立端到端业务链数；上游passed不代表本机运行&quot;,
+  &quot;reviewed_test_functions&quot;: [
+    &quot;test_camera_persists_process_death&quot;,
+    &quot;test_size_change_grows_preview&quot;,
+    &quot;test_three_switch_edit_integrity&quot;,
+    &quot;test_longpress_camera_consequence&quot;,
+    &quot;test_notification_persists_process_death&quot;
+  ],
+  &quot;vlm_totals&quot;: {
+    &quot;assertions&quot;: 36,
+    &quot;with_verdict&quot;: 36,
+    &quot;calibrated&quot;: 0,
+    &quot;usable&quot;: null,
+    &quot;scored_records&quot;: 36,
+    &quot;unbacked_records&quot;: 5,
+    &quot;unbacked_sample&quot;: [
+      &quot;nav_reach_system_settings_vlm&quot;,
+      &quot;nav_reach_customization_vlm&quot;,
+      &quot;nav_reach_logs_vlm&quot;,
+      &quot;nav_reach_color_dialog_vlm&quot;,
+      &quot;nav_reach_background_color_dialog_vlm&quot;
+    ]
+  },
+  &quot;actual_assertion_limits&quot;: [
+    &quot;测到的是本App预览，不是另一App真正调用相机/麦克风后的全局指示&quot;,
+    &quot;尺寸实际只断言宽高各增加&gt;10px，并非精确65/100px&quot;,
+    &quot;系统流程依赖英文Privacy Indicators/Allow和固定y&lt;900及HomeActivity包信息&quot;
+  ]
+}</pre><h4>可扩展范围</h4><pre>{
+  &quot;status&quot;: &quot;NOT_VERIFIED_REPOSITORY_CAPABILITY&quot;,
+  &quot;items&quot;: [
+    &quot;真实跨App相机/麦克风事件、后台提示生命周期和权限撤销&quot;
+  ],
+  &quot;basis&quot;: &quot;项目业务表面和测试入口支持的后续探索方向，未将完整源码/未执行能力当实证&quot;
+}</pre><h4>证据缺口</h4><pre>[
+  &quot;本机未运行任何App/设备测试，未校准难度&quot;,
+  &quot;本次只按下载到的测试文件静态审查；其余manifest模块没有逐行全部源码证据&quot;,
+  &quot;未检查完整上游仓库源码与许可证；元数据commit不是实现验证&quot;,
+  &quot;未下载公共android_testgen_kit和全部fixture，依赖行为需要核验&quot;,
+  &quot;VLM calibrated=0；未取得完整截图、raw推理与本机复验证据&quot;,
+  &quot;测到的是本App预览，不是另一App真正调用相机/麦克风后的全局指示&quot;,
+  &quot;尺寸实际只断言宽高各增加&gt;10px，并非精确65/100px&quot;,
+  &quot;系统流程依赖英文Privacy Indicators/Allow和固定y&lt;900及HomeActivity包信息&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;设置开关→预览点显隐及多开关独立性&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;强停服务后重新进入系统无障碍设置/Allow再返回正确App上下文&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;没有传感器事件与UI时序、队列乱序断言&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;强停后重新授权仍保留设置和预览点&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;长按开关产生真实切换，但无组合手势&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;系统无障碍授权/Allow→App，进程中断后再次服务启用并回读；具权限与中断恢复边界&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>nsh07-tomato<br><a target="_blank" rel="noopener" href="https://github.com/nsh07/Tomato">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/nsh07/Tomato/tree/629fcdb807c1148d1b801ac5964ee71e8914d5ed">数据集固定版本</a></td><td>已审查</td><td>3</td><td>3</td><td>?</td><td>3</td><td>2</td><td>2</td><td><p>{
+  &quot;description&quot;: &quot;启动倒计时→Restart→25:00→Undo→恢复低于25:00；并列模式七次skip链&quot;,
+  &quot;initial_state&quot;: &quot;按所引用测试的clear_data/launch或既定fixture复位；不把相互独立测试默认为单次连续轨迹&quot;,
+  &quot;reset&quot;: &quot;独立执行测试要求的复位，正式题需冻结fixture与设备&quot;,
+  &quot;branches_and_boundaries&quot;: [
+    &quot;undo仅要求低于25:00，不等于恢复精确pre-reset时间&quot;,
+    &quot;skip只精确断言第1、2、7项，其余中间模式未检查&quot;,
+    &quot;强停测试保存设置，未证明进行中session正确续时&quot;
+  ],
+  &quot;action_count_status&quot;: &quot;NOT_MEASURED；未以步骤数抬高难度，辅助等待和重试不计业务动作&quot;
+}</p><details><summary>较好的状态机题来源，先补精确undo时间和完整阶段序列，不把设置持久化当计时进程恢复。</summary><h4>主操作链</h4><pre>{
+  &quot;description&quot;: &quot;启动倒计时→Restart→25:00→Undo→恢复低于25:00；并列模式七次skip链&quot;,
+  &quot;initial_state&quot;: &quot;按所引用测试的clear_data/launch或既定fixture复位；不把相互独立测试默认为单次连续轨迹&quot;,
+  &quot;reset&quot;: &quot;独立执行测试要求的复位，正式题需冻结fixture与设备&quot;,
+  &quot;branches_and_boundaries&quot;: [
+    &quot;undo仅要求低于25:00，不等于恢复精确pre-reset时间&quot;,
+    &quot;skip只精确断言第1、2、7项，其余中间模式未检查&quot;,
+    &quot;强停测试保存设置，未证明进行中session正确续时&quot;
+  ],
+  &quot;action_count_status&quot;: &quot;NOT_MEASURED；未以步骤数抬高难度，辅助等待和重试不计业务动作&quot;
+}</pre><h4>实际覆盖</h4><pre>{
+  &quot;manifest_total&quot;: 142,
+  &quot;manifest_note&quot;: &quot;上游断言数而非独立端到端业务链数；上游passed不代表本机运行&quot;,
+  &quot;reviewed_test_functions&quot;: [
+    &quot;test_reset_undo&quot;,
+    &quot;test_skip_sequence&quot;,
+    &quot;test_longpress_guard_running&quot;,
+    &quot;test_edit_focus_persists&quot;,
+    &quot;test_multi_field_integrity&quot;
+  ],
+  &quot;vlm_totals&quot;: {
+    &quot;assertions&quot;: 45,
+    &quot;with_verdict&quot;: 44,
+    &quot;calibrated&quot;: 0,
+    &quot;usable&quot;: null,
+    &quot;scored_records&quot;: 44,
+    &quot;unbacked_records&quot;: 0
+  },
+  &quot;actual_assertion_limits&quot;: [
+    &quot;undo仅要求低于25:00，不等于恢复精确pre-reset时间&quot;,
+    &quot;skip只精确断言第1、2、7项，其余中间模式未检查&quot;,
+    &quot;强停测试保存设置，未证明进行中session正确续时&quot;
+  ]
+}</pre><h4>可扩展范围</h4><pre>{
+  &quot;status&quot;: &quot;NOT_VERIFIED_REPOSITORY_CAPABILITY&quot;,
+  &quot;items&quot;: [
+    &quot;后台截止时间、暂停/重启剩余时间、时钟变更与通知去重&quot;
+  ],
+  &quot;basis&quot;: &quot;项目业务表面和测试入口支持的后续探索方向，未将完整源码/未执行能力当实证&quot;
+}</pre><h4>证据缺口</h4><pre>[
+  &quot;本机未运行任何App/设备测试，未校准难度&quot;,
+  &quot;本次只按下载到的测试文件静态审查；其余manifest模块没有逐行全部源码证据&quot;,
+  &quot;未检查完整上游仓库源码与许可证；元数据commit不是实现验证&quot;,
+  &quot;未下载公共android_testgen_kit和全部fixture，依赖行为需要核验&quot;,
+  &quot;VLM calibrated=0；未取得完整截图、raw推理与本机复验证据&quot;,
+  &quot;undo仅要求低于25:00，不等于恢复精确pre-reset时间&quot;,
+  &quot;skip只精确断言第1、2、7项，其余中间模式未检查&quot;,
+  &quot;强停测试保存设置，未证明进行中session正确续时&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;倒计时/模式/下轮预览和reset/undo联动&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;skip循环及reset/undo分支改变相同状态&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;倒计时进度有读数，但无漂移、后台期限或取消时序保证，未知&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;设置分钟数强停仍保留，不是运行中剩余时间恢复&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;运行态长按必须不切换无限模式；真正有状态条件手势&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;Settings Timer与主页/下轮预览跨屏&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>oliexdev-openscale<br><a target="_blank" rel="noopener" href="https://github.com/oliexdev/openscale">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/oliexdev/openscale/tree/939143c9369d5533f265f121d50fc0a9f58e9b75">数据集固定版本</a><br><strong>当前五题来源</strong></td><td>已审查</td><td>3</td><td>3</td><td>?</td><td>3</td><td>1</td><td>2</td><td><p>{
+  &quot;description&quot;: &quot;创建用户→80kg测量→编辑90kg→保存→强停→概览回读&quot;,
+  &quot;initial_state&quot;: &quot;按所引用测试的clear_data/launch或既定fixture复位；不把相互独立测试默认为单次连续轨迹&quot;,
+  &quot;reset&quot;: &quot;独立执行测试要求的复位，正式题需冻结fixture与设备&quot;,
+  &quot;branches_and_boundaries&quot;: [
+    &quot;BMI Avg用单个80kg样本等于24.7，不足验证多样本平均或缺测处理&quot;,
+    &quot;多记录只assert&gt;=2卡及80/70存在，不检查唯一ID或日期排序&quot;,
+    &quot;BLE秤、健康平台同步和用户切换隔离无已读证据&quot;
+  ],
+  &quot;action_count_status&quot;: &quot;NOT_MEASURED；未以步骤数抬高难度，辅助等待和重试不计业务动作&quot;
+}</p><details><summary>可做体重记录编辑和派生指标题；统计数学难度单列，不把BLE和真实健康采集算入。</summary><h4>主操作链</h4><pre>{
+  &quot;description&quot;: &quot;创建用户→80kg测量→编辑90kg→保存→强停→概览回读&quot;,
+  &quot;initial_state&quot;: &quot;按所引用测试的clear_data/launch或既定fixture复位；不把相互独立测试默认为单次连续轨迹&quot;,
+  &quot;reset&quot;: &quot;独立执行测试要求的复位，正式题需冻结fixture与设备&quot;,
+  &quot;branches_and_boundaries&quot;: [
+    &quot;BMI Avg用单个80kg样本等于24.7，不足验证多样本平均或缺测处理&quot;,
+    &quot;多记录只assert&gt;=2卡及80/70存在，不检查唯一ID或日期排序&quot;,
+    &quot;BLE秤、健康平台同步和用户切换隔离无已读证据&quot;
+  ],
+  &quot;action_count_status&quot;: &quot;NOT_MEASURED；未以步骤数抬高难度，辅助等待和重试不计业务动作&quot;
+}</pre><h4>实际覆盖</h4><pre>{
+  &quot;manifest_total&quot;: 115,
+  &quot;manifest_note&quot;: &quot;上游断言数而非独立端到端业务链数；上游passed不代表本机运行&quot;,
+  &quot;reviewed_test_functions&quot;: [
+    &quot;test_edit_persists_process_death&quot;,
+    &quot;test_stats_bmi_avg&quot;,
+    &quot;test_multi_record_integrity&quot;,
+    &quot;test_chain_edit_weight_dialog&quot;,
+    &quot;test_backstack_unwind_to_overview&quot;
+  ],
+  &quot;vlm_totals&quot;: {
+    &quot;assertions&quot;: 38,
+    &quot;with_verdict&quot;: 33,
+    &quot;calibrated&quot;: 0,
+    &quot;usable&quot;: null,
+    &quot;scored_records&quot;: 33,
+    &quot;unbacked_records&quot;: 0
+  },
+  &quot;actual_assertion_limits&quot;: [
+    &quot;BMI Avg用单个80kg样本等于24.7，不足验证多样本平均或缺测处理&quot;,
+    &quot;多记录只assert&gt;=2卡及80/70存在，不检查唯一ID或日期排序&quot;,
+    &quot;BLE秤、健康平台同步和用户切换隔离无已读证据&quot;
+  ]
+}</pre><h4>可扩展范围</h4><pre>{
+  &quot;status&quot;: &quot;NOT_VERIFIED_REPOSITORY_CAPABILITY&quot;,
+  &quot;items&quot;: [
+    &quot;多用户历史、精确单位转换、BLE测量去重/异常恢复&quot;
+  ],
+  &quot;basis&quot;: &quot;项目业务表面和测试入口支持的后续探索方向，未将完整源码/未执行能力当实证&quot;
+}</pre><h4>证据缺口</h4><pre>[
+  &quot;本机未运行任何App/设备测试，未校准难度&quot;,
+  &quot;本次只按下载到的测试文件静态审查；其余manifest模块没有逐行全部源码证据&quot;,
+  &quot;未检查完整上游仓库源码与许可证；元数据commit不是实现验证&quot;,
+  &quot;未下载公共android_testgen_kit和全部fixture，依赖行为需要核验&quot;,
+  &quot;VLM calibrated=0；未取得完整截图、raw推理与本机复验证据&quot;,
+  &quot;BMI Avg用单个80kg样本等于24.7，不足验证多样本平均或缺测处理&quot;,
+  &quot;多记录只assert&gt;=2卡及80/70存在，不检查唯一ID或日期排序&quot;,
+  &quot;BLE秤、健康平台同步和用户切换隔离无已读证据&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;用户身高/测量体重→BMI/统计派生，修改与多记录存在联动&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;用户→测量→重量弹框→保存与返回栈有上下文&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;无蓝牙包乱序、同步或冲突业务测试&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;80改90强停后90存在80消失&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;点击、文本与stepper，无已读精细手势&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;概览/编辑/统计模块为应用内数据传递，保守X2&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>patzly-doodle-android<br><a target="_blank" rel="noopener" href="https://github.com/patzly/doodle-android">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/patzly/doodle-android/tree/4f98c3ec9fadfddf7afb312e4dcd5a01c6617e9f">数据集固定版本</a></td><td>已审查</td><td>2</td><td>2</td><td>?</td><td>3</td><td>2</td><td>2</td><td><p>{
+  &quot;description&quot;: &quot;尺寸滑块拖高→拖低→重启→进入尺寸页→读回同一低值&quot;,
+  &quot;initial_state&quot;: &quot;按所引用测试的clear_data/launch或既定fixture复位；不把相互独立测试默认为单次连续轨迹&quot;,
+  &quot;reset&quot;: &quot;独立执行测试要求的复位，正式题需冻结fixture与设备&quot;,
+  &quot;branches_and_boundaries&quot;: [
+    &quot;设置存活不证明系统壁纸实际渲染、传感器视差和GPU行为&quot;,
+    &quot;_fresh_home helper宣称restart，但公共kit缺少，需运行核实kill语义&quot;,
+    &quot;VLM totals有8条unbacked记录；语言Follow system是安全无操作而非切换语言&quot;
+  ],
+  &quot;action_count_status&quot;: &quot;NOT_MEASURED；未以步骤数抬高难度，辅助等待和重试不计业务动作&quot;
+}</p><details><summary>可做持久化设置/滑块题；强壁纸交互尚需原版实操，不能靠设定项数量升级。</summary><h4>主操作链</h4><pre>{
+  &quot;description&quot;: &quot;尺寸滑块拖高→拖低→重启→进入尺寸页→读回同一低值&quot;,
+  &quot;initial_state&quot;: &quot;按所引用测试的clear_data/launch或既定fixture复位；不把相互独立测试默认为单次连续轨迹&quot;,
+  &quot;reset&quot;: &quot;独立执行测试要求的复位，正式题需冻结fixture与设备&quot;,
+  &quot;branches_and_boundaries&quot;: [
+    &quot;设置存活不证明系统壁纸实际渲染、传感器视差和GPU行为&quot;,
+    &quot;_fresh_home helper宣称restart，但公共kit缺少，需运行核实kill语义&quot;,
+    &quot;VLM totals有8条unbacked记录；语言Follow system是安全无操作而非切换语言&quot;
+  ],
+  &quot;action_count_status&quot;: &quot;NOT_MEASURED；未以步骤数抬高难度，辅助等待和重试不计业务动作&quot;
+}</pre><h4>实际覆盖</h4><pre>{
+  &quot;manifest_total&quot;: 145,
+  &quot;manifest_note&quot;: &quot;上游断言数而非独立端到端业务链数；上游passed不代表本机运行&quot;,
+  &quot;reviewed_test_functions&quot;: [
+    &quot;test_persist_size_scale_slider&quot;,
+    &quot;test_sequence_night_mode_cycle&quot;,
+    &quot;test_multi_record_integrity&quot;,
+    &quot;test_persist_theme_dark_surface_vlm&quot;
+  ],
+  &quot;vlm_totals&quot;: {
+    &quot;assertions&quot;: 37,
+    &quot;with_verdict&quot;: 37,
+    &quot;calibrated&quot;: 0,
+    &quot;usable&quot;: null,
+    &quot;scored_records&quot;: 37,
+    &quot;unbacked_records&quot;: 8,
+    &quot;unbacked_sample&quot;: [
+      &quot;structure_nav_appearance_shape_vlm&quot;,
+      &quot;structure_nav_other_shape_vlm&quot;,
+      &quot;structure_appearance_design_grid_vlm&quot;,
+      &quot;structure_appearance_variant_chips_vlm&quot;,
+      &quot;structure_changelog_sheet_shape_vlm&quot;,
+      &quot;structure_colors_sheet_shape_vlm&quot;,
+      &quot;structure_home_layout_vlm&quot;,
+      &quot;structure_home_fab_bottom_vlm&quot;
+    ]
+  },
+  &quot;actual_assertion_limits&quot;: [
+    &quot;设置存活不证明系统壁纸实际渲染、传感器视差和GPU行为&quot;,
+    &quot;_fresh_home helper宣称restart，但公共kit缺少，需运行核实kill语义&quot;,
+    &quot;VLM totals有8条unbacked记录；语言Follow system是安全无操作而非切换语言&quot;
+  ]
+}</pre><h4>可扩展范围</h4><pre>{
+  &quot;status&quot;: &quot;NOT_VERIFIED_REPOSITORY_CAPABILITY&quot;,
+  &quot;items&quot;: [
+    &quot;系统壁纸预览/应用、多传感器视差、真实帧渲染与恢复&quot;
+  ],
+  &quot;basis&quot;: &quot;项目业务表面和测试入口支持的后续探索方向，未将完整源码/未执行能力当实证&quot;
+}</pre><h4>证据缺口</h4><pre>[
+  &quot;本机未运行任何App/设备测试，未校准难度&quot;,
+  &quot;本次只按下载到的测试文件静态审查；其余manifest模块没有逐行全部源码证据&quot;,
+  &quot;未检查完整上游仓库源码与许可证；元数据commit不是实现验证&quot;,
+  &quot;未下载公共android_testgen_kit和全部fixture，依赖行为需要核验&quot;,
+  &quot;VLM calibrated=0；未取得完整截图、raw推理与本机复验证据&quot;,
+  &quot;设置存活不证明系统壁纸实际渲染、传感器视差和GPU行为&quot;,
+  &quot;_fresh_home helper宣称restart，但公共kit缺少，需运行核实kill语义&quot;,
+  &quot;VLM totals有8条unbacked记录；语言Follow system是安全无操作而非切换语言&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;选择值→样式/主题和多个设置保持，未见复杂派生不变量&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;Auto→On→重启→Off为线性循环，未见复杂分支补偿&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;无真实动态壁纸帧/传感器并发断言&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;滑块值和夜间主题跨restart恢复&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;实际拖动滑块高→低并回读target，G2&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;Appearance/Other跨fragment设置&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>razeeman-android-simpletimetracker<br><a target="_blank" rel="noopener" href="https://github.com/Razeeman/Android-SimpleTimeTracker">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/Razeeman/Android-SimpleTimeTracker/tree/305527cc680fd3a01a511972ef796cf7bf2ea685">数据集固定版本</a></td><td>已审查</td><td>2</td><td>2</td><td>?</td><td>3</td><td>2</td><td>2</td><td><p>{
+  &quot;description&quot;: &quot;已有上游单测试链：生成一条记录 → 打开记录编辑 → End +5 → 保存 → 读取已保存时长 → 终止并重启 → 再读同一记录时长，要求非0m且相等。&quot;,
+  &quot;evidence_indices&quot;: [
+    1
+  ],
+  &quot;local_execution&quot;: false,
+  &quot;important_limit&quot;: &quot;同链不包含统计总量验证。统计测试独立且读取统计页活动汇总与总量；不能冒充跨重启后统计守恒。&quot;
+}</p><details><summary>确属复杂交互候选，但现有上游已证范围更接近局部编辑/恢复的D2预估，不能因完整时间管理产品潜力直接称D3或最复杂。优先完善精确统计一致性链后再评估升级。</summary><h4>主操作链</h4><pre>{
+  &quot;description&quot;: &quot;已有上游单测试链：生成一条记录 → 打开记录编辑 → End +5 → 保存 → 读取已保存时长 → 终止并重启 → 再读同一记录时长，要求非0m且相等。&quot;,
+  &quot;evidence_indices&quot;: [
+    1
+  ],
+  &quot;local_execution&quot;: false,
+  &quot;important_limit&quot;: &quot;同链不包含统计总量验证。统计测试独立且读取统计页活动汇总与总量；不能冒充跨重启后统计守恒。&quot;
+}</pre><h4>实际覆盖</h4><pre>[
+  &quot;计时开始/停止产生记录&quot;,
+  &quot;起止时间调整的时长差值&quot;,
+  &quot;手工添加和保存回读&quot;,
+  &quot;编辑后记录进程恢复&quot;,
+  &quot;单活动统计100%与活动值等于总量&quot;,
+  &quot;两个近30分钟记录的双色环形图VLM外观&quot;,
+  &quot;活动/类别/设置的持久化与导航&quot;
+]</pre><h4>可扩展范围</h4><pre>可合成跨日计时、更改历史记录后分日统计重算、多任务计时与后台重建的高阶任务，但当前源码材料不足以确认这些复杂规则，必须另取证或标明合成扩展。</pre><h4>证据缺口</h4><pre>[
+  &quot;未执行任何本地Android操作，源码中的GROUND TRUTH不等于本轮实测&quot;,
+  &quot;缺少同一记录编辑→统计更新→进程死亡→统计与明细共同恢复链&quot;,
+  &quot;test_stats_total_equals_record比较同一统计页汇总，未直接对比Records页原始记录&quot;,
+  &quot;test_stats_two_slices仅VLM看双色近半，未精确校验百分比和总量&quot;,
+  &quot;多任务仅开关状态，未测两个同时运行计时器冲突&quot;,
+  &quot;缺少固定时钟、跨午夜/时区/DST、非法起止时间及舍入规则&quot;,
+  &quot;长按没有量化阈值与取消边界&quot;,
+  &quot;没有模型实测难度&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;编辑预览与保存记录维持+5分钟差值；统计单活动值与总量相等。未覆盖编辑后跨统计、重启三方一致的完整链或多实体精确金额式守恒，保守2分。&quot;,
+    &quot;evidence_indices&quot;: [
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;创建/编辑/保存/重启/重新读取是一条有前置依赖的线性链；返回测试独立存在，不足以据此宣称同一业务链含复杂分支/重试。&quot;,
+    &quot;evidence_indices&quot;: [
+      1,
+      6
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;多任务开关只验证checked=false持久化，没有并发计时、乱序、失败回滚或冲突断言，未知。&quot;,
+    &quot;evidence_indices&quot;: [
+      5
+    ]
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;test_edited_duration_persists_death在同一测试内编辑结束时间+5、保存、重启、重新读取时长，满足已保存用户状态进程重建恢复。&quot;,
+    &quot;evidence_indices&quot;: [
+      1
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;长按活动进入编辑提供精细输入信号；未见量化长按阈值/移动取消或手势冲突边界，因此最高2，不能给3。&quot;,
+    &quot;evidence_indices&quot;: [
+      7
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;计时、记录编辑、统计之间跨页面状态关联。未见这条核心链跨系统选择器或其他进程协议，2分。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>rbn-apps-quick-tile-settings<br><a target="_blank" rel="noopener" href="https://github.com/rbn-apps/quick-tile-settings">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/rbn-apps/quick-tile-settings/tree/77e60ae1b903e5965df8d4742015c2e205661fcf">数据集固定版本</a></td><td>已审查</td><td>3</td><td>3</td><td>?</td><td>3</td><td>1</td><td>2</td><td><p>{
+  &quot;description&quot;: &quot;新建自定义hostname→编辑名字→保存→强停→核对新名/原host/旧名消失&quot;,
+  &quot;initial_state&quot;: &quot;按所引用测试的clear_data/launch或既定fixture复位；不把相互独立测试默认为单次连续轨迹&quot;,
+  &quot;reset&quot;: &quot;独立执行测试要求的复位，正式题需冻结fixture与设备&quot;,
+  &quot;branches_and_boundaries&quot;: [
+    &quot;测试集中hostname CRUD不等于系统快速设置Tile可用或DNS实际切换&quot;,
+    &quot;VLM记录34条但22 unbacked；不能宣称视觉全部有可靠对应&quot;,
+    &quot;外部网络、ADB权限、真实解析结果不应从项目名推导&quot;
+  ],
+  &quot;action_count_status&quot;: &quot;NOT_MEASURED；未以步骤数抬高难度，辅助等待和重试不计业务动作&quot;
+}</p><details><summary>可做配置记录CRUD/删除取消题；真实网络控制另立合成契约并验证。</summary><h4>主操作链</h4><pre>{
+  &quot;description&quot;: &quot;新建自定义hostname→编辑名字→保存→强停→核对新名/原host/旧名消失&quot;,
+  &quot;initial_state&quot;: &quot;按所引用测试的clear_data/launch或既定fixture复位；不把相互独立测试默认为单次连续轨迹&quot;,
+  &quot;reset&quot;: &quot;独立执行测试要求的复位，正式题需冻结fixture与设备&quot;,
+  &quot;branches_and_boundaries&quot;: [
+    &quot;测试集中hostname CRUD不等于系统快速设置Tile可用或DNS实际切换&quot;,
+    &quot;VLM记录34条但22 unbacked；不能宣称视觉全部有可靠对应&quot;,
+    &quot;外部网络、ADB权限、真实解析结果不应从项目名推导&quot;
+  ],
+  &quot;action_count_status&quot;: &quot;NOT_MEASURED；未以步骤数抬高难度，辅助等待和重试不计业务动作&quot;
+}</pre><h4>实际覆盖</h4><pre>{
+  &quot;manifest_total&quot;: 94,
+  &quot;manifest_note&quot;: &quot;上游断言数而非独立端到端业务链数；上游passed不代表本机运行&quot;,
+  &quot;reviewed_test_functions&quot;: [
+    &quot;test_delete_confirm_appears_then_cancel&quot;,
+    &quot;test_edit_survives_process_death&quot;,
+    &quot;test_three_records_edit_middle&quot;,
+    &quot;test_delete_one_keeps_other&quot;,
+    &quot;test_delete_survives_process_death&quot;
+  ],
+  &quot;vlm_totals&quot;: {
+    &quot;assertions&quot;: 34,
+    &quot;with_verdict&quot;: 34,
+    &quot;calibrated&quot;: 0,
+    &quot;usable&quot;: null,
+    &quot;scored_records&quot;: 34,
+    &quot;unbacked_records&quot;: 22,
+    &quot;unbacked_sample&quot;: [
+      &quot;computation_counter_enable_one_vlm&quot;,
+      &quot;computation_usb_enable_flip_vlm&quot;,
+      &quot;interaction_create_row_appears_vlm&quot;,
+      &quot;interaction_multi_record_both_present_vlm&quot;,
+      &quot;interaction_edit_updates_in_place_vlm&quot;,
+      &quot;interaction_delete_confirm_appears_vlm&quot;,
+      &quot;interaction_data_survives_process_death_vlm&quot;,
+      &quot;interaction_multi_survives_restart_vlm&quot;
+    ]
+  },
+  &quot;actual_assertion_limits&quot;: [
+    &quot;测试集中hostname CRUD不等于系统快速设置Tile可用或DNS实际切换&quot;,
+    &quot;VLM记录34条但22 unbacked；不能宣称视觉全部有可靠对应&quot;,
+    &quot;外部网络、ADB权限、真实解析结果不应从项目名推导&quot;
+  ]
+}</pre><h4>可扩展范围</h4><pre>{
+  &quot;status&quot;: &quot;NOT_VERIFIED_REPOSITORY_CAPABILITY&quot;,
+  &quot;items&quot;: [
+    &quot;实际系统Tile→DNS设置→真实解析与权限失败恢复&quot;
+  ],
+  &quot;basis&quot;: &quot;项目业务表面和测试入口支持的后续探索方向，未将完整源码/未执行能力当实证&quot;
+}</pre><h4>证据缺口</h4><pre>[
+  &quot;本机未运行任何App/设备测试，未校准难度&quot;,
+  &quot;本次只按下载到的测试文件静态审查；其余manifest模块没有逐行全部源码证据&quot;,
+  &quot;未检查完整上游仓库源码与许可证；元数据commit不是实现验证&quot;,
+  &quot;未下载公共android_testgen_kit和全部fixture，依赖行为需要核验&quot;,
+  &quot;VLM calibrated=0；未取得完整截图、raw推理与本机复验证据&quot;,
+  &quot;测试集中hostname CRUD不等于系统快速设置Tile可用或DNS实际切换&quot;,
+  &quot;VLM记录34条但22 unbacked；不能宣称视觉全部有可靠对应&quot;,
+  &quot;外部网络、ADB权限、真实解析结果不应从项目名推导&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;hostname名称/地址独立记录，多记录编辑和删除保留兄弟&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;确认删除/取消两分支返回列表，编辑上下文&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;无真实DNS请求或系统tile时序&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;编辑后新名/host与旧名消失跨强停保持，删除也有恢复检查&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;点击/文本，无精细轨迹&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;列表/编辑/确认浮层；实际系统tile应用不在已读覆盖&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>rozpierog-cofi<br><a target="_blank" rel="noopener" href="https://github.com/rozPierog/Cofi">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/rozPierog/Cofi/tree/85fc3d9b1e72aff1682b9a10d01c00b1f5ba1885">数据集固定版本</a></td><td>已审查</td><td>3</td><td>2</td><td>1</td><td>3</td><td>1</td><td>2</td><td><p>{
+  &quot;description&quot;: &quot;创建配方→添加三种不同时间步骤→保存→详情回读；另有French Press运行后Up next改变&quot;,
+  &quot;initial_state&quot;: &quot;按所引用测试的clear_data/launch或既定fixture复位；不把相互独立测试默认为单次连续轨迹&quot;,
+  &quot;reset&quot;: &quot;独立执行测试要求的复位，正式题需冻结fixture与设备&quot;,
+  &quot;branches_and_boundaries&quot;: [
+    &quot;step_count实际只检查三个时间标签集合，不检查精确3行或重复项&quot;,
+    &quot;timer只比较first!=later，不验证下一步身份/顺序/累计秒数&quot;,
+    &quot;14秒墙钟和2秒轮询易受设备负载影响；仅静态尚未校准&quot;
+  ],
+  &quot;action_count_status&quot;: &quot;NOT_MEASURED；未以步骤数抬高难度，辅助等待和重试不计业务动作&quot;
+}</p><details><summary>多步骤配方是有用题源；先加强计时阶段身份与重复步骤断言，再冻结难度。</summary><h4>主操作链</h4><pre>{
+  &quot;description&quot;: &quot;创建配方→添加三种不同时间步骤→保存→详情回读；另有French Press运行后Up next改变&quot;,
+  &quot;initial_state&quot;: &quot;按所引用测试的clear_data/launch或既定fixture复位；不把相互独立测试默认为单次连续轨迹&quot;,
+  &quot;reset&quot;: &quot;独立执行测试要求的复位，正式题需冻结fixture与设备&quot;,
+  &quot;branches_and_boundaries&quot;: [
+    &quot;step_count实际只检查三个时间标签集合，不检查精确3行或重复项&quot;,
+    &quot;timer只比较first!=later，不验证下一步身份/顺序/累计秒数&quot;,
+    &quot;14秒墙钟和2秒轮询易受设备负载影响；仅静态尚未校准&quot;
+  ],
+  &quot;action_count_status&quot;: &quot;NOT_MEASURED；未以步骤数抬高难度，辅助等待和重试不计业务动作&quot;
+}</pre><h4>实际覆盖</h4><pre>{
+  &quot;manifest_total&quot;: 130,
+  &quot;manifest_note&quot;: &quot;上游断言数而非独立端到端业务链数；上游passed不代表本机运行&quot;,
+  &quot;reviewed_test_functions&quot;: [
+    &quot;test_timer_sequence_advances&quot;,
+    &quot;test_step_count_integrity&quot;,
+    &quot;test_edit_isolation&quot;,
+    &quot;test_multi_record_persist&quot;,
+    &quot;test_step_form_prefill&quot;
+  ],
+  &quot;vlm_totals&quot;: {
+    &quot;assertions&quot;: 33,
+    &quot;with_verdict&quot;: 33,
+    &quot;calibrated&quot;: 0,
+    &quot;usable&quot;: null,
+    &quot;scored_records&quot;: 33,
+    &quot;unbacked_records&quot;: 0
+  },
+  &quot;actual_assertion_limits&quot;: [
+    &quot;step_count实际只检查三个时间标签集合，不检查精确3行或重复项&quot;,
+    &quot;timer只比较first!=later，不验证下一步身份/顺序/累计秒数&quot;,
+    &quot;14秒墙钟和2秒轮询易受设备负载影响；仅静态尚未校准&quot;
+  ]
+}</pre><h4>可扩展范围</h4><pre>{
+  &quot;status&quot;: &quot;NOT_VERIFIED_REPOSITORY_CAPABILITY&quot;,
+  &quot;items&quot;: [
+    &quot;精确步骤时钟、暂停恢复、配方编辑版本与在途计时隔离&quot;
+  ],
+  &quot;basis&quot;: &quot;项目业务表面和测试入口支持的后续探索方向，未将完整源码/未执行能力当实证&quot;
+}</pre><h4>证据缺口</h4><pre>[
+  &quot;本机未运行任何App/设备测试，未校准难度&quot;,
+  &quot;本次只按下载到的测试文件静态审查；其余manifest模块没有逐行全部源码证据&quot;,
+  &quot;未检查完整上游仓库源码与许可证；元数据commit不是实现验证&quot;,
+  &quot;未下载公共android_testgen_kit和全部fixture，依赖行为需要核验&quot;,
+  &quot;VLM calibrated=0；未取得完整截图、raw推理与本机复验证据&quot;,
+  &quot;step_count实际只检查三个时间标签集合，不检查精确3行或重复项&quot;,
+  &quot;timer只比较first!=later，不验证下一步身份/顺序/累计秒数&quot;,
+  &quot;14秒墙钟和2秒轮询易受设备负载影响；仅静态尚未校准&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;配方拥有多个步骤与时长，编辑隔离和详情显示依赖&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;创建配方/步骤/详情/运行是线性依赖，没复杂回退&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;14秒等待Up next改变，支持单时序推进A1，不支持并发/取消保证&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;多配方和编辑保存后强停恢复&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;普通点按/文本/滚动，不赋予多指分&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;配方列表/步骤表单/计时详情跨屏&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>secuso-privacy-friendly-2048<br><a target="_blank" rel="noopener" href="https://github.com/SecUSo/privacy-friendly-2048">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/SecUSo/privacy-friendly-2048/tree/4ee3cf356376c1f8905f81a02ffc9f37b3db6c96">数据集固定版本</a></td><td>已审查</td><td>3</td><td>3</td><td>?</td><td>3</td><td>1</td><td>2</td><td><p>{
+  &quot;description&quot;: &quot;4x4移动→返回保存→终止重启→Continue→核对分数和方块集合&quot;,
+  &quot;initial_state&quot;: &quot;按所引用测试的clear_data/launch或既定fixture复位；不把相互独立测试默认为单次连续轨迹&quot;,
+  &quot;reset&quot;: &quot;独立执行测试要求的复位，正式题需冻结fixture与设备&quot;,
+  &quot;branches_and_boundaries&quot;: [
+    &quot;_tiles返回sorted数值多重集合，完全不保留格子坐标，打乱棋盘仍可能通过&quot;,
+    &quot;undo只校验分数和按钮消失，VLM只问棋盘非空，不证明精确回退格局&quot;,
+    &quot;两存档测试P4与P5未要求不同，分数碰撞可能弱化串档识别&quot;,
+    &quot;强停不保存是上游行为契约，不能在合成时偷偷要求始终自动保存&quot;
+  ],
+  &quot;action_count_status&quot;: &quot;NOT_MEASURED；未以步骤数抬高难度，辅助等待和重试不计业务动作&quot;
+}</p><details><summary>本组较强题源，但必须从方块多重集合升级到坐标级状态，并以成熟规则引擎提供独立oracle。</summary><h4>主操作链</h4><pre>{
+  &quot;description&quot;: &quot;4x4移动→返回保存→终止重启→Continue→核对分数和方块集合&quot;,
+  &quot;initial_state&quot;: &quot;按所引用测试的clear_data/launch或既定fixture复位；不把相互独立测试默认为单次连续轨迹&quot;,
+  &quot;reset&quot;: &quot;独立执行测试要求的复位，正式题需冻结fixture与设备&quot;,
+  &quot;branches_and_boundaries&quot;: [
+    &quot;_tiles返回sorted数值多重集合，完全不保留格子坐标，打乱棋盘仍可能通过&quot;,
+    &quot;undo只校验分数和按钮消失，VLM只问棋盘非空，不证明精确回退格局&quot;,
+    &quot;两存档测试P4与P5未要求不同，分数碰撞可能弱化串档识别&quot;,
+    &quot;强停不保存是上游行为契约，不能在合成时偷偷要求始终自动保存&quot;
+  ],
+  &quot;action_count_status&quot;: &quot;NOT_MEASURED；未以步骤数抬高难度，辅助等待和重试不计业务动作&quot;
+}</pre><h4>实际覆盖</h4><pre>{
+  &quot;manifest_total&quot;: 132,
+  &quot;manifest_note&quot;: &quot;上游断言数而非独立端到端业务链数；上游passed不代表本机运行&quot;,
+  &quot;reviewed_test_functions&quot;: [
+    &quot;test_persistence_across_process_death&quot;,
+    &quot;test_undo_reverts_points&quot;,
+    &quot;test_two_independent_saved_games&quot;,
+    &quot;test_kill_without_back_not_saved&quot;,
+    &quot;test_stats_mode_isolation&quot;,
+    &quot;test_restart_then_persist&quot;
+  ],
+  &quot;vlm_totals&quot;: {
+    &quot;assertions&quot;: 36,
+    &quot;with_verdict&quot;: 36,
+    &quot;calibrated&quot;: 0,
+    &quot;usable&quot;: null,
+    &quot;scored_records&quot;: 36,
+    &quot;unbacked_records&quot;: 0
+  },
+  &quot;actual_assertion_limits&quot;: [
+    &quot;_tiles返回sorted数值多重集合，完全不保留格子坐标，打乱棋盘仍可能通过&quot;,
+    &quot;undo只校验分数和按钮消失，VLM只问棋盘非空，不证明精确回退格局&quot;,
+    &quot;两存档测试P4与P5未要求不同，分数碰撞可能弱化串档识别&quot;,
+    &quot;强停不保存是上游行为契约，不能在合成时偷偷要求始终自动保存&quot;
+  ]
+}</pre><h4>可扩展范围</h4><pre>{
+  &quot;status&quot;: &quot;NOT_VERIFIED_REPOSITORY_CAPABILITY&quot;,
+  &quot;items&quot;: [
+    &quot;确定性随机种子、坐标级格局、合并一次规则、无效移动不刷统计&quot;
+  ],
+  &quot;basis&quot;: &quot;项目业务表面和测试入口支持的后续探索方向，未将完整源码/未执行能力当实证&quot;
+}</pre><h4>证据缺口</h4><pre>[
+  &quot;本机未运行任何App/设备测试，未校准难度&quot;,
+  &quot;本次只按下载到的测试文件静态审查；其余manifest模块没有逐行全部源码证据&quot;,
+  &quot;未检查完整上游仓库源码与许可证；元数据commit不是实现验证&quot;,
+  &quot;未下载公共android_testgen_kit和全部fixture，依赖行为需要核验&quot;,
+  &quot;VLM calibrated=0；未取得完整截图、raw推理与本机复验证据&quot;,
+  &quot;_tiles返回sorted数值多重集合，完全不保留格子坐标，打乱棋盘仍可能通过&quot;,
+  &quot;undo只校验分数和按钮消失，VLM只问棋盘非空，不证明精确回退格局&quot;,
+  &quot;两存档测试P4与P5未要求不同，分数碰撞可能弱化串档识别&quot;,
+  &quot;强停不保存是上游行为契约，不能在合成时偷偷要求始终自动保存&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;棋盘/分数/undo可用/模式存档与统计联动，多步派生一致性&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;游戏/返回保存/继续循环与restart、undo分支&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;无异步业务精确边界；保存时机探针归生命周期&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;返回保存后强停恢复分数/方块多重集合；未返回强停不保存形成边界&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;使用DPAD_LEFT/UP，非真实屏幕滑动，不按滑动轨迹加分&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;模式页/游戏/统计跨屏身份&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    &quot;scope&quot;: &quot;静态测试断言可支持的上界，非整仓实现难度&quot;
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>secuso-privacy-friendly-pedometer<br><a target="_blank" rel="noopener" href="https://github.com/SecUSo/privacy-friendly-pedometer">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/SecUSo/privacy-friendly-pedometer/tree/c38c60a31691b07fbda7efdd9b4cd9d6b85fddd8">数据集固定版本</a></td><td>已审查</td><td>2</td><td>3</td><td>?</td><td>3</td><td>1</td><td>2</td><td><p>保存321步→终止进程→重新打开→读取321；另链保存250→编辑999→取消→仍250。</p><details><summary>不是最复杂首选；现有测试主要覆盖可持久化表单和模式状态。</summary><h4>主操作链</h4><pre>保存321步→终止进程→重新打开→读取321；另链保存250→编辑999→取消→仍250。</pre><h4>实际覆盖</h4><pre>手动更正步数、活动模式互斥、训练结束后列表呈现。</pre><h4>可扩展范围</h4><pre>可扩展为传感器事件、模式步长与距离联动，但需要事件注入及独立计算基准。</pre><h4>证据缺口</h4><pre>[
+  &quot;training_creates_session只断言after&gt;=1，已有记录可掩盖未新增。&quot;,
+  &quot;未证明真实步数传感器输入、距离计算或后台累计准确性。&quot;,
+  &quot;本机未运行原版；分值只描述所引用测试覆盖，不代表整个仓库或模型实测难度。&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;步数编辑回填首页；模式选择联动两项checked状态&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      2
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;保存基线后重新编辑并取消，明确回退分支&quot;,
+    &quot;evidence_indices&quot;: [
+      1
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;引用测试未证明传感器并发、异步去重或竞态&quot;,
+    &quot;evidence_indices&quot;: []
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;321步保存后force-stop重启回读&quot;,
+    &quot;evidence_indices&quot;: [
+      0
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;实际模式操作为普通点击，不因注释提长按而加分&quot;,
+    &quot;evidence_indices&quot;: [
+      2
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;设置/弹层/首页之间联动&quot;,
+    &quot;evidence_indices&quot;: [
+      2
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>secuso-privacy-friendly-sudoku<br><a target="_blank" rel="noopener" href="https://github.com/SecUSo/privacy-friendly-sudoku">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/SecUSo/privacy-friendly-sudoku/tree/17fa5880ef6c81f6da52617dc9ea794a452f5568">数据集固定版本</a></td><td>已审查</td><td>3</td><td>3</td><td>?</td><td>3</td><td>2</td><td>2</td><td><p>新局→选择空格输入7→force-stop→继续游戏→恢复存档→核对相同格。撤销重做另有独立测试。</p><details><summary>适合交互状态机候选；不能据上游界面断言推定数独规则全覆盖。</summary><h4>主操作链</h4><pre>新局→选择空格输入7→force-stop→继续游戏→恢复存档→核对相同格。撤销重做另有独立测试。</pre><h4>实际覆盖</h4><pre>棋盘输入、注记、撤销重做、存档续局、长按菜单。</pre><h4>可扩展范围</h4><pre>可设计多步历史分支与跨局身份隔离；游戏求解规则应使用成熟引擎。</pre><h4>证据缺口</h4><pre>[
+  &quot;恢复与撤销重做是不同测试，未证明重启后撤销栈仍存在。&quot;,
+  &quot;格值与棋盘大量依赖VLM，缺少可独立读出的完整棋盘状态。&quot;,
+  &quot;本机未运行原版；分值只描述所引用测试覆盖，不代表整个仓库或模型实测难度。&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;棋盘选中格、数字输入和撤销重做相互依赖&quot;,
+    &quot;evidence_indices&quot;: [
+      0
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;输入→撤销→重做，以及导入取消后重开分支&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      2
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;未见独立异步或竞态断言&quot;,
+    &quot;evidence_indices&quot;: []
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;保存特定格7后杀进程并恢复同局&quot;,
+    &quot;evidence_indices&quot;: [
+      1
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;载入列表长按及数字格定位&quot;,
+    &quot;evidence_indices&quot;: [
+      3,
+      1
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;主菜单/存档列表/棋盘跨屏&quot;,
+    &quot;evidence_indices&quot;: [
+      1
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>swati4star-images-to-pdf<br><a target="_blank" rel="noopener" href="https://github.com/swati4star/images-to-pdf">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/swati4star/images-to-pdf/tree/54576589b0c410a07a986ec317b643c7ba14597e">数据集固定版本</a><br><strong>当前五题来源</strong></td><td>已审查</td><td>3</td><td>3</td><td>?</td><td>3</td><td>2</td><td>3</td><td><p>选择图片→设LETTER→命名创建→观察OPEN PDF及磁盘文件；另测试重启后文件列表仍可见。</p><details><summary>优先候选之一，但必须补PDF内容oracle，不能直接沿用存在性测试。</summary><h4>主操作链</h4><pre>选择图片→设LETTER→命名创建→观察OPEN PDF及磁盘文件；另测试重启后文件列表仍可见。</pre><h4>实际覆盖</h4><pre>图片选择、PDF生成入口、列表和历史、多选、持久化。</pre><h4>可扩展范围</h4><pre>补真实PDF解码、页序/纸张尺寸/像素内容后，有望形成高质量文件处理题。</pre><h4>证据缺口</h4><pre>[
+  &quot;pagesize_then_create只校验创建与文件存在，不证明PDF MediaBox为LETTER。&quot;,
+  &quot;multi_image_count只核对3 image(s) selected，不证明3页、顺序或实际内容。&quot;,
+  &quot;输出语义不能仅以文件存在验收。&quot;,
+  &quot;本机未运行原版；分值只描述所引用测试覆盖，不代表整个仓库或模型实测难度。&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;选择状态、创建按钮、文件列表/磁盘输出相互联动&quot;,
+    &quot;evidence_indices&quot;: [
+      0
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;选图→页尺寸→确认→命名→生成依赖链&quot;,
+    &quot;evidence_indices&quot;: [
+      1
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;等待创建不等于已覆盖取消/并发/失败回滚&quot;,
+    &quot;evidence_indices&quot;: []
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;生成记录在进程重启后读取&quot;,
+    &quot;evidence_indices&quot;: [
+      2
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;PDF长按动作菜单&quot;,
+    &quot;evidence_indices&quot;: [
+      4
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;图库选择与输出文件管理跨模块&quot;,
+    &quot;evidence_indices&quot;: [
+      0
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>teamamaze-amazefilemanager<br><a target="_blank" rel="noopener" href="https://github.com/TeamAmaze/AmazeFileManager">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/TeamAmaze/AmazeFileManager/tree/e28d3751a5003aa2299cb2222a998d0ecd3cf5c7">数据集固定版本</a></td><td>已审查</td><td>3</td><td>3</td><td>?</td><td>3</td><td>2</td><td>2</td><td><p>Download/amaze_probe选择alpha.txt→复制→目标目录→粘贴→核对目标条目；重启持久化另链验证。</p><details><summary>可作为高复杂文件管理题来源；本批较强，但原测试不足以验证完整文件语义。</summary><h4>主操作链</h4><pre>Download/amaze_probe选择alpha.txt→复制→目标目录→粘贴→核对目标条目；重启持久化另链验证。</pre><h4>实际覆盖</h4><pre>目录层级、文件身份、多选、复制粘贴、改名和记录重启。</pre><h4>可扩展范围</h4><pre>适合加入同名冲突、跨目录移动、撤销与中断复制，并用字节校验作独立结果。</pre><h4>证据缺口</h4><pre>[
+  &quot;create_persists_in_folder注释说恢复原路径，代码却reset_home并显式重新进入父目录，未证明导航位置恢复。&quot;,
+  &quot;copy_paste本函数只检目标行，不在此检查复制字节或源文件仍完整。&quot;,
+  &quot;无已测的中断复制一致性证据。&quot;,
+  &quot;本机未运行原版；分值只描述所引用测试覆盖，不代表整个仓库或模型实测难度。&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;选择集、当前目录、复制来源和目标列表依赖&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      3
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;跨目录长按复制→返回根→目标目录粘贴&quot;,
+    &quot;evidence_indices&quot;: [
+      0
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;双settle不是并发/取消覆盖，异步语义未知&quot;,
+    &quot;evidence_indices&quot;: []
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;子目录记录重启后可重新访问&quot;,
+    &quot;evidence_indices&quot;: [
+      1
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;长按拾取选择及多选&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      3
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;多个目录视图往返；不自动算跨进程&quot;,
+    &quot;evidence_indices&quot;: [
+      0
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>tom-murphy-development-fasttimes<br><a target="_blank" rel="noopener" href="https://github.com/tom-murphy-development/FastTimes">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/tom-murphy-development/FastTimes/tree/cb951255b998a31ada7e3181aeb304dd89880a73">数据集固定版本</a></td><td>已审查</td><td>2</td><td>3</td><td>?</td><td>3</td><td>2</td><td>2</td><td><p>空首页→开始Open Fast→force-stop→重开→应显示Elapsed Time和End Fast而非目标网格。</p><details><summary>现有范围中等，真实计时精度和恢复语义尚不足以判极高难。</summary><h4>主操作链</h4><pre>空首页→开始Open Fast→force-stop→重开→应显示Elapsed Time和End Fast而非目标网格。</pre><h4>实际覆盖</h4><pre>计时会话的状态存在性、保存记录、评分及喜爱项。</pre><h4>可扩展范围</h4><pre>可扩展时区/时钟变化与跨会话时间正确性，需固定时钟基准。</pre><h4>证据缺口</h4><pre>[
+  &quot;active_fast_survives仅检查运行标签及按钮，未比较计时数值或原始起始时间。&quot;,
+  &quot;多记录测试按数量验证，不能独立证明每条内容身份。&quot;,
+  &quot;本机未运行原版；分值只描述所引用测试覆盖，不代表整个仓库或模型实测难度。&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;活动断食状态影响首页目标网格与结束操作&quot;,
+    &quot;evidence_indices&quot;: [
+      0
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;开始/结束/取消与重新打开形成分支&quot;,
+    &quot;evidence_indices&quot;: [
+      0
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;计时存在但未对时间推进或后台竞态作数值断言&quot;,
+    &quot;evidence_indices&quot;: []
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;活动会话与历史记录跨进程&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;长按设置喜爱项目&quot;,
+    &quot;evidence_indices&quot;: [
+      2
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;首页、历史、Profile列表之间切换&quot;,
+    &quot;evidence_indices&quot;: [
+      1,
+      2
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>tristinbaker-idlefantasy<br><a target="_blank" rel="noopener" href="https://github.com/tristinbaker/idlefantasy">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/tristinbaker/idlefantasy/tree/f1cab31f69de01ea95bf1e5e8cce96cdd00fd44c">数据集固定版本</a></td><td>已审查</td><td>3</td><td>3</td><td>1</td><td>3</td><td>1</td><td>2</td><td><p>开始Mining/Rune Essence→完成领取→关闭奖励→Home等级23变30；运行中杀进程恢复另链。</p><details><summary>较好的跨屏状态题来源，优先于仅设置页面项目；需补收益与幂等oracle。</summary><h4>主操作链</h4><pre>开始Mining/Rune Essence→完成领取→关闭奖励→Home等级23变30；运行中杀进程恢复另链。</pre><h4>实际覆盖</h4><pre>奖励、等级、库存/活动记录及会话切换。</pre><h4>可扩展范围</h4><pre>若补重复领取/响应丢失/离线累积，可形成强状态一致性任务。</pre><h4>证据缺口</h4><pre>[
+  &quot;固定23→30算例不代表任意经验公式已验证。&quot;,
+  &quot;未证明领取幂等、后台累计时长或离线收益正确。&quot;,
+  &quot;本机未运行原版；分值只描述所引用测试覆盖，不代表整个仓库或模型实测难度。&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;完成采集后总等级23→30，技能/活动记录存在耦合&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      4
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;开始、取消、切换技能和结束形成状态分支&quot;,
+    &quot;evidence_indices&quot;: [
+      2,
+      3
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;活动会话存在时间过程但没有竞态/幂等故障覆盖&quot;,
+    &quot;evidence_indices&quot;: [
+      1
+    ]
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;运行中会话杀进程后仍为对应技能&quot;,
+    &quot;evidence_indices&quot;: [
+      1
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;普通点击主导；长按无副作用不提升输入复杂度&quot;,
+    &quot;evidence_indices&quot;: [
+      2
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;技能、Home奖励和记录跨屏&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      4
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>urikdev-urik<br><a target="_blank" rel="noopener" href="https://github.com/urikdev/urik">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/urikdev/urik/tree/0d3a9aca3304d61029ce9639cd7ac6b61b30b870">数据集固定版本</a></td><td>已审查</td><td>2</td><td>3</td><td>?</td><td>3</td><td>1</td><td>2</td><td><p>键映射页点G→浮层输入z→保存→浮层关闭；拼写开关关闭后两个依赖项禁用为另一链。</p><details><summary>上游测试范围不足以支持“复杂键盘实现”高难结论。</summary><h4>主操作链</h4><pre>键映射页点G→浮层输入z→保存→浮层关闭；拼写开关关闭后两个依赖项禁用为另一链。</pre><h4>实际覆盖</h4><pre>主题、喜爱项、设置依赖、键映射编辑表单。</pre><h4>可扩展范围</h4><pre>仓库作为键盘具有跨App输入潜力，但必须实际验证IME输出与焦点协议。</pre><h4>证据缺口</h4><pre>[
+  &quot;layoutmapper_custom_char只检查字段持有z及弹层关闭，没有按重映射键确认输出z。&quot;,
+  &quot;主题持久化不能作为键映射持久化证据。&quot;,
+  &quot;本机未运行原版；分值只描述所引用测试覆盖，不代表整个仓库或模型实测难度。&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;总开关控制两个依赖设置enabled状态&quot;,
+    &quot;evidence_indices&quot;: [
+      1
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;进入映射编辑页→编辑键→保存关闭→重置&quot;,
+    &quot;evidence_indices&quot;: [
+      0
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;未证明输入法跨App时序或并发&quot;,
+    &quot;evidence_indices&quot;: []
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;主题选择在重启后回读&quot;,
+    &quot;evidence_indices&quot;: [
+      2
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;映射操作为点击和输入；没有验证实际键盘精细手势&quot;,
+    &quot;evidence_indices&quot;: [
+      0
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;配置页与编辑浮层，不等同系统IME跨App验收&quot;,
+    &quot;evidence_indices&quot;: [
+      0
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>v1tzor-timeplanner<br><a target="_blank" rel="noopener" href="https://github.com/v1tzor/TimePlanner">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/v1tzor/TimePlanner/tree/945b222df2b7a7e559751a1efddd3c18aa30b17e">数据集固定版本</a></td><td>已审查</td><td>2</td><td>3</td><td>?</td><td>3</td><td>1</td><td>2</td><td><p>空时间线→新建Study任务→返回新增任务及添加行→编辑为Health→旧分类消失。</p><details><summary>常规状态与持久化候选，现有范围不优先于文件/游戏复杂业务。</summary><h4>主操作链</h4><pre>空时间线→新建Study任务→返回新增任务及添加行→编辑为Health→旧分类消失。</pre><h4>实际覆盖</h4><pre>时间线新增、分类修改、取消、保存恢复、运行控件展开。</pre><h4>可扩展范围</h4><pre>可扩展重叠任务、拖动时间块和提醒冲突；上游代码未证明这些范围。</pre><h4>证据缺口</h4><pre>[
+  &quot;note_text_roundtrip只看输入或placeholder消失，没有保存重开；placeholder消失甚至可在错误文本时通过。&quot;,
+  &quot;未证明时间段冲突、计时数值或真正调度执行。&quot;,
+  &quot;本机未运行原版；分值只描述所引用测试覆盖，不代表整个仓库或模型实测难度。&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;创建任务后时间线卡片与添加行共同出现&quot;,
+    &quot;evidence_indices&quot;: [
+      0
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;创建/编辑分类/取消构成依赖和回退&quot;,
+    &quot;evidence_indices&quot;: [
+      2,
+      3
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;没有实际验证提醒并发或调度竞态&quot;,
+    &quot;evidence_indices&quot;: []
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;任务保存跨进程存在&quot;,
+    &quot;evidence_indices&quot;: [
+      1
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;普通表单和点击&quot;,
+    &quot;evidence_indices&quot;: [
+      2
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;编辑器和时间线跨屏&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      2
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>wewewe718-qrandbarcodescanner<br><a target="_blank" rel="noopener" href="https://github.com/wewewe718/qrandbarcodescanner">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/wewewe718/qrandbarcodescanner/tree/da922e7b96906ec55a7437733378e850ca9262f7">数据集固定版本</a></td><td>已审查</td><td>3</td><td>3</td><td>?</td><td>3</td><td>1</td><td>2</td><td><p>创建WiFi码→验证格式串→历史定位SSID→另从记录进入详情改名→返回历史同步新名称。</p><details><summary>可用但需补编码解码独立校验，不能只测字符串。</summary><h4>主操作链</h4><pre>创建WiFi码→验证格式串→历史定位SSID→另从记录进入详情改名→返回历史同步新名称。</pre><h4>实际覆盖</h4><pre>条码创建的数据字符串、历史/收藏、改名、重启持久化。</pre><h4>可扩展范围</h4><pre>加真实二维码解码与多格式转义规则可构造强输入输出题。</pre><h4>证据缺口</h4><pre>[
+  &quot;WiFi测试检查文本编码及历史行，不证明二维码像素可正确解码。&quot;,
+  &quot;未检相机权限/真实扫描/码制容错。&quot;,
+  &quot;本机未运行原版；分值只描述所引用测试覆盖，不代表整个仓库或模型实测难度。&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;WiFi序列化、结果内容和历史标识联动；改名同步列表&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;创建→历史→详情→改名→返回历史，另含清空取消&quot;,
+    &quot;evidence_indices&quot;: [
+      1,
+      4
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;未证明摄像头/异步扫描时序&quot;,
+    &quot;evidence_indices&quot;: []
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;历史记录跨重启&quot;,
+    &quot;evidence_indices&quot;: [
+      2
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;主要普通点击输入，不据扫描器名称加手势分&quot;,
+    &quot;evidence_indices&quot;: [
+      0
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;创建页、结果、历史与收藏跨屏&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      3
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>woheller69-arity<br><a target="_blank" rel="noopener" href="https://github.com/woheller69/Arity">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/woheller69/Arity/tree/fe8c7cdbc13204353cc2ae8072657cf3505d423e">数据集固定版本</a></td><td>已审查</td><td>3</td><td>3</td><td>?</td><td>3</td><td>2</td><td>1</td><td><p>输入6+4提交→ans=10→输入ans*2得20；多记录创建后删除中间项保持邻居。</p><details><summary>具有真实数据依赖，不能因上游easy就忽略，但不宜称移动端交互最复杂。</summary><h4>主操作链</h4><pre>输入6+4提交→ans=10→输入ans*2得20；多记录创建后删除中间项保持邻居。</pre><h4>实际覆盖</h4><pre>表达式历史、ans数据依赖、历史回载、长按删除、重启顺序。状态通道另验证表达式驱动HISTORY、GRAPH、GRAPH3D互斥内容状态。</pre><h4>可扩展范围</h4><pre>解析语义/函数/图形可更难，但需公开语言规则并使用成熟引擎做oracle。</pre><h4>证据缺口</h4><pre>[
+  &quot;固定几个表达式不能证明解析器全面正确。&quot;,
+  &quot;交互链虽有状态，但跨屏与系统边界较少；算法难度需单列。&quot;,
+  &quot;本机未运行原版；分值只描述所引用测试覆盖，不代表整个仓库或模型实测难度。&quot;,
+  &quot;模式可见性并不证明2D/3D几何计算、缩放或旋转正确。&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;提交结果更新ans，后续表达式计算依赖前值状态通道另验证表达式驱动HISTORY、GRAPH、GRAPH3D互斥内容状态。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      5
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;连续运算及删除中间项保持两侧记录&quot;,
+    &quot;evidence_indices&quot;: [
+      1,
+      2
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;未发现异步时序覆盖&quot;,
+    &quot;evidence_indices&quot;: []
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;两条历史跨进程保持顺序&quot;,
+    &quot;evidence_indices&quot;: [
+      3
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;长按删除特定历史项&quot;,
+    &quot;evidence_indices&quot;: [
+      4
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;主要同屏输入、结果与历史，不人为算跨模块&quot;,
+    &quot;evidence_indices&quot;: [
+      0
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>you-apps-calcyou<br><a target="_blank" rel="noopener" href="https://github.com/you-apps/CalcYou">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/you-apps/CalcYou/tree/bb9905a78ce8bf7f6f5c7112c31dcb9a8705f221">数据集固定版本</a></td><td>已审查</td><td>3</td><td>3</td><td>?</td><td>3</td><td>2</td><td>2</td><td><p>图形页添加sin(x)→再加x²→两条函数记录及不同色曲线；删除链另验。</p><details><summary>视觉/计算结合候选，有良好扩展潜力；上游easy标签不代表所有扩展也简单。</summary><h4>主操作链</h4><pre>图形页添加sin(x)→再加x²→两条函数记录及不同色曲线；删除链另验。</pre><h4>实际覆盖</h4><pre>运算历史、单位转换、函数记录和视觉曲线、喜爱持久化。状态通道另验证DEG下sin(30)=0.5，且杀进程后模式恢复RAD。</pre><h4>可扩展范围</h4><pre>可组合参数变化、图形缩放与求值，但须验证图形数值几何而非仅颜色。</pre><h4>证据缺口</h4><pre>[
+  &quot;两曲线VLM只询问不同颜色，不证明曲线坐标正确。&quot;,
+  &quot;单位喜爱持久化不能推论函数集合持久化。&quot;,
+  &quot;多个独立模块不能相加当成一条高耦合链。&quot;,
+  &quot;本机未运行原版；分值只描述所引用测试覆盖，不代表整个仓库或模型实测难度。&quot;,
+  &quot;原版三角模式明确不持久化；新题不能把一切状态都恢复当正确契约。&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;单位影响数值；函数集合影响列表图例和画布状态通道另验证DEG下sin(30)=0.5，且杀进程后模式恢复RAD。&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1,
+      5
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;增加/删除函数回到无函数状态&quot;,
+    &quot;evidence_indices&quot;: [
+      3
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;未证明异步绘图取消或竞态&quot;,
+    &quot;evidence_indices&quot;: []
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;单位喜爱跨进程保持&quot;,
+    &quot;evidence_indices&quot;: [
+      2
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;长按全清与单击删除区分&quot;,
+    &quot;evidence_indices&quot;: [
+      4
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;计算器、转换和图形各模块；仅各自内部链已测&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      1
+    ]
+  }
+}</pre></details></td></tr><tr data-status="COMPLETED"><td>you-apps-connectyou<br><a target="_blank" rel="noopener" href="https://github.com/you-apps/ConnectYou">GitHub 仓库</a> · <a target="_blank" rel="noopener" href="https://github.com/you-apps/ConnectYou/tree/c4d5c5cf43740afe3d018712ce5f1d06efe688f9">数据集固定版本</a></td><td>已审查</td><td>3</td><td>3</td><td>?</td><td>3</td><td>2</td><td>2</td><td><p>新建联系人→改姓→返回列表→终止进程→重开仍为新姓；多记录测试确保只修改中间对象。</p><details><summary>稳健CRUD/身份题来源，但不能靠通讯录领域名称包装为最高交互复杂度。</summary><h4>主操作链</h4><pre>新建联系人→改姓→返回列表→终止进程→重开仍为新姓；多记录测试确保只修改中间对象。</pre><h4>实际覆盖</h4><pre>联系人CRUD、多值字段、多选模式、存储恢复。</pre><h4>可扩展范围</h4><pre>可扩展重复身份、合并及系统通讯录同步，需明确隐私/权限和确定性夹具。</pre><h4>证据缺口</h4><pre>[
+  &quot;showmore_persist只检查昵称编辑框持有文本，源码明确避开save/reopen，不能算昵称持久化。&quot;,
+  &quot;multi_record_integrity仅在3行都可见时检查排序，否则ordered默认True。&quot;,
+  &quot;没有实际跨App通信与联系人同步证据。&quot;,
+  &quot;本机未运行原版；分值只描述所引用测试覆盖，不代表整个仓库或模型实测难度。&quot;
+]</pre><h4>六维依据</h4><pre>{
+  &quot;C&quot;: {
+    &quot;reason&quot;: &quot;联系人对象和多个号码行、列表显示关联&quot;,
+    &quot;evidence_indices&quot;: [
+      1,
+      2
+    ]
+  },
+  &quot;H&quot;: {
+    &quot;reason&quot;: &quot;创建→详情→编辑→保存→列表→重启&quot;,
+    &quot;evidence_indices&quot;: [
+      0
+    ]
+  },
+  &quot;A&quot;: {
+    &quot;reason&quot;: &quot;未覆盖同步冲突、通讯录异步变更&quot;,
+    &quot;evidence_indices&quot;: []
+  },
+  &quot;L&quot;: {
+    &quot;reason&quot;: &quot;姓氏编辑后重启确认新值&quot;,
+    &quot;evidence_indices&quot;: [
+      0
+    ]
+  },
+  &quot;G&quot;: {
+    &quot;reason&quot;: &quot;长按进入多选并检查工具栏替换&quot;,
+    &quot;evidence_indices&quot;: [
+      3
+    ]
+  },
+  &quot;X&quot;: {
+    &quot;reason&quot;: &quot;列表、编辑和详情跨屏；未验证外部通讯录提供者&quot;,
+    &quot;evidence_indices&quot;: [
+      0,
+      2
+    ]
+  }
+}</pre></details></td></tr></tbody></table></div></main><script>function filter(){let n=0;const q=document.querySelector('#q').value.toLowerCase(),s=document.querySelector('#status').value;document.querySelectorAll('tbody tr').forEach(r=>{r.hidden=!(r.textContent.toLowerCase().includes(q)&&(s==='ALL'||r.dataset.status===s));if(!r.hidden)n++});document.querySelector('#visible').textContent=n+' 项'}document.querySelector('#q').oninput=filter;document.querySelector('#status').onchange=filter;filter()</script></html>
