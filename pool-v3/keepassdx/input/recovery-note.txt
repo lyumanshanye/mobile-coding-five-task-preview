@@ -1,0 +1,4 @@
+PUBLIC FIXTURE ONLY
+Recovery exercise: no real account or credential.
+Entry UUID 20000000-0000-4000-8000-000000000001
+

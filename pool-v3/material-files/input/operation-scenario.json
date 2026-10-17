@@ -1,0 +1,10 @@
+{
+  "order": "relative_path_lexicographic",
+  "pause_after_committed_files": 1,
+  "rename_pattern": "stem (N).extension",
+  "unsafe_zip_policy": "reject_whole_archive_before_writes",
+  "archive_files": [
+    "safe.zip",
+    "unsafe.zip"
+  ]
+}

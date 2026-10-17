@@ -1,0 +1,46 @@
+{
+  "clock": "2026-10-19T08:30:00+08:00",
+  "timezone": "Asia/Shanghai",
+  "list": "社区活动",
+  "tasks": [
+    {
+      "id": "parent",
+      "title": "活动采购",
+      "completed": false
+    },
+    {
+      "id": "cups",
+      "parent": "parent",
+      "title": "纸杯100只",
+      "tags": [
+        "采购"
+      ],
+      "completed": false
+    },
+    {
+      "id": "tape",
+      "parent": "parent",
+      "title": "胶带2卷",
+      "tags": [
+        "采购"
+      ],
+      "completed": false
+    },
+    {
+      "id": "badges",
+      "parent": "parent",
+      "title": "名牌40份",
+      "tags": [
+        "采购"
+      ],
+      "completed": false
+    },
+    {
+      "id": "weekly",
+      "title": "检查物资",
+      "due": "2026-10-19T09:00:00+08:00",
+      "repeat": "FREQ=WEEKLY;BYDAY=MO",
+      "completed": false
+    }
+  ]
+}

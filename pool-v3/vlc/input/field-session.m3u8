@@ -1,0 +1,7 @@
+#EXTM3U
+#EXTINF:24,Red Survey
+media/video-a.mp4
+#EXTINF:24,Green Valley
+media/video-b.mp4
+#EXTINF:24,Blue Ridge
+media/video-c.mp4

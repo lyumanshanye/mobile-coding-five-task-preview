@@ -1,0 +1,23 @@
+[
+  {
+    "path": "media/活动/landscape.jpg",
+    "width": 1280,
+    "height": 720,
+    "sha256": "be6d02e0033636361384dbc26dd9e6575e5034b6ffa0fac458bfadc9467a1960",
+    "origin": "generated geometric input fixture, not reference UI"
+  },
+  {
+    "path": "media/活动/portrait.jpg",
+    "width": 720,
+    "height": 1280,
+    "sha256": "ba321f9c53858a4916735485a088bec2fb4f19bb829505a545e1d46cc3e26864",
+    "origin": "generated geometric input fixture, not reference UI"
+  },
+  {
+    "path": "media/活动/checker.jpg",
+    "width": 960,
+    "height": 960,
+    "sha256": "5b770dede70e6fb62c666755f6a1062e8ae0aac683706884addc4f37196de48f",
+    "origin": "generated geometric input fixture, not reference UI"
+  }
+]

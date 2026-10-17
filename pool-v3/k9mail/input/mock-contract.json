@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "scope": "provided local HTTP service in mock_server.py; see mock-service.md; never connects to real mail servers",
+  "identity": [
+    "account_id",
+    "request_id"
+  ],
+  "payload_fields": [
+    "from",
+    "to",
+    "subject",
+    "body",
+    "in_reply_to",
+    "attachments_bytes"
+  ],
+  "states": [
+    "queued",
+    "pending_confirmation",
+    "sent"
+  ],
+  "modes": {
+    "offline": "No acceptance; request stays queued",
+    "normal": "Persist acceptance, return 200 and stable server_id",
+    "accept_then_timeout": "For first unseen request persist acceptance then return timeout; an identical retry returns original 200 result"
+  },
+  "conflict": "Same key different payload:409, preserve original record",
+  "retry": "manual only; reuse immutable request snapshot and request_id",
+  "reset": "Explicit reset deletes only this application's demo client and fake-server records"
+}

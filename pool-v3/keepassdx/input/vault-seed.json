@@ -1,0 +1,35 @@
+{
+  "public_test_only": true,
+  "master_password": "Demo-only-Vault-2026!",
+  "groups": [
+    {
+      "uuid": "10000000-0000-4000-8000-000000000001",
+      "name": "Work"
+    },
+    {
+      "uuid": "10000000-0000-4000-8000-000000000002",
+      "name": "Personal"
+    }
+  ],
+  "entries": [
+    {
+      "uuid": "20000000-0000-4000-8000-000000000001",
+      "group_uuid": "10000000-0000-4000-8000-000000000001",
+      "title": "Portal",
+      "username": "work@example.invalid",
+      "password": "PUBLIC-Test-Old-01",
+      "url": "https://work.example.invalid",
+      "notes": "Synthetic test only"
+    },
+    {
+      "uuid": "20000000-0000-4000-8000-000000000002",
+      "group_uuid": "10000000-0000-4000-8000-000000000002",
+      "title": "Portal",
+      "username": "home@example.invalid",
+      "password": "PUBLIC-Test-Home-02",
+      "url": "https://home.example.invalid",
+      "notes": "Synthetic test only"
+    }
+  ],
+  "edit_password": "PUBLIC-Test-New-03"
+}

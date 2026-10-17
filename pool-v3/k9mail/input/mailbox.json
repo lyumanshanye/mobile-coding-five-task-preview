@@ -1,0 +1,40 @@
+{
+  "accounts": [
+    {
+      "id": "work",
+      "address": "worker@example.test"
+    },
+    {
+      "id": "personal",
+      "address": "reader@example.test"
+    }
+  ],
+  "messages": [
+    {
+      "account_id": "work",
+      "folder": "Inbox",
+      "uid": 1,
+      "message_id": "<meeting@example.test>",
+      "from": "team@example.test",
+      "to": "worker@example.test",
+      "subject": "项目例会",
+      "body": "请回复确认，并附议程。",
+      "received_at": "2026-10-01T09:00:00Z",
+      "read": false,
+      "starred": false
+    },
+    {
+      "account_id": "personal",
+      "folder": "Inbox",
+      "uid": 1,
+      "message_id": "<meeting@example.test>",
+      "from": "friend@example.test",
+      "to": "reader@example.test",
+      "subject": "项目例会",
+      "body": "这是个人账户独立邮件。",
+      "received_at": "2026-10-01T08:00:00Z",
+      "read": false,
+      "starred": false
+    }
+  ]
+}

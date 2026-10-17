@@ -1,0 +1,14 @@
+{
+  "today": "2026-01-15",
+  "timezone": "UTC",
+  "query": {
+    "state": "TODO",
+    "inherited_tag": "work",
+    "scheduled_on_or_before": "2026-01-16"
+  },
+  "move": {
+    "id": "sensors",
+    "new_parent": "home"
+  },
+  "repeat_id": "battery"
+}

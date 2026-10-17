@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "id": "v-a",
+      "title": "North Survey",
+      "channel": "Field Studio",
+      "duration_seconds": 24,
+      "media_path": "/media/video-a.mp4"
+    },
+    {
+      "id": "v-b",
+      "title": "Green Valley",
+      "channel": "Field Studio",
+      "duration_seconds": 24,
+      "media_path": "/media/video-b.mp4"
+    },
+    {
+      "id": "v-c",
+      "title": "Blue Ridge",
+      "channel": "Field Studio",
+      "duration_seconds": 24,
+      "media_path": "/media/video-c.mp4"
+    }
+  ]
+}

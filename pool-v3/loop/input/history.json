@@ -1,0 +1,644 @@
+{
+  "schema_version": 1,
+  "purpose": "original_input_not_expected_statistics",
+  "date_range": [
+    "2026-09-25",
+    "2026-10-16"
+  ],
+  "calendar_zone": "UTC",
+  "habits": [
+    {
+      "id": "read-check",
+      "name": "Read",
+      "kind": "binary",
+      "frequency": [
+        1,
+        1
+      ],
+      "direction": "at_least",
+      "target": "1.00",
+      "unit": "",
+      "archived": false
+    },
+    {
+      "id": "read-minutes",
+      "name": "Read",
+      "kind": "numeric",
+      "frequency": [
+        1,
+        1
+      ],
+      "direction": "at_least",
+      "target": "30.00",
+      "unit": "min",
+      "archived": false
+    },
+    {
+      "id": "training",
+      "name": "Training",
+      "kind": "binary",
+      "frequency": [
+        3,
+        7
+      ],
+      "direction": "at_least",
+      "target": "1.00",
+      "unit": "",
+      "archived": false
+    },
+    {
+      "id": "coffee",
+      "name": "Coffee",
+      "kind": "numeric",
+      "frequency": [
+        1,
+        1
+      ],
+      "direction": "at_most",
+      "target": "2.00",
+      "unit": "cups",
+      "archived": false
+    },
+    {
+      "id": "archived",
+      "name": "Practice",
+      "kind": "binary",
+      "frequency": [
+        1,
+        1
+      ],
+      "direction": "at_least",
+      "target": "1.00",
+      "unit": "",
+      "archived": true
+    }
+  ],
+  "entries": [
+    {
+      "habit_id": "read-check",
+      "date": "2026-09-25",
+      "state": "yes",
+      "notes": "read-check: observation 1"
+    },
+    {
+      "habit_id": "read-check",
+      "date": "2026-09-26",
+      "state": "yes",
+      "notes": "read-check: observation 2"
+    },
+    {
+      "habit_id": "read-check",
+      "date": "2026-09-28",
+      "state": "no",
+      "notes": "read-check: observation 4"
+    },
+    {
+      "habit_id": "read-check",
+      "date": "2026-09-29",
+      "state": "skip",
+      "notes": "read-check: observation 5"
+    },
+    {
+      "habit_id": "read-check",
+      "date": "2026-09-30",
+      "state": "yes",
+      "notes": "read-check: observation 6"
+    },
+    {
+      "habit_id": "read-check",
+      "date": "2026-10-01",
+      "state": "no",
+      "notes": "read-check: observation 7"
+    },
+    {
+      "habit_id": "read-check",
+      "date": "2026-10-02",
+      "state": "yes",
+      "notes": "read-check: observation 8"
+    },
+    {
+      "habit_id": "read-check",
+      "date": "2026-10-03",
+      "state": "yes",
+      "notes": "read-check: observation 9"
+    },
+    {
+      "habit_id": "read-check",
+      "date": "2026-10-05",
+      "state": "no",
+      "notes": "read-check: observation 11"
+    },
+    {
+      "habit_id": "read-check",
+      "date": "2026-10-06",
+      "state": "skip",
+      "notes": "read-check: observation 12"
+    },
+    {
+      "habit_id": "read-check",
+      "date": "2026-10-07",
+      "state": "yes",
+      "notes": "read-check: observation 13"
+    },
+    {
+      "habit_id": "read-check",
+      "date": "2026-10-08",
+      "state": "no",
+      "notes": "read-check: observation 14"
+    },
+    {
+      "habit_id": "read-check",
+      "date": "2026-10-09",
+      "state": "yes",
+      "notes": "read-check: observation 15"
+    },
+    {
+      "habit_id": "read-check",
+      "date": "2026-10-10",
+      "state": "yes",
+      "notes": "read-check: observation 16"
+    },
+    {
+      "habit_id": "read-check",
+      "date": "2026-10-12",
+      "state": "no",
+      "notes": "read-check: observation 18"
+    },
+    {
+      "habit_id": "read-check",
+      "date": "2026-10-13",
+      "state": "skip",
+      "notes": "read-check: observation 19"
+    },
+    {
+      "habit_id": "read-check",
+      "date": "2026-10-14",
+      "state": "yes",
+      "notes": "read-check: observation 20"
+    },
+    {
+      "habit_id": "read-check",
+      "date": "2026-10-15",
+      "state": "no",
+      "notes": "read-check: observation 21"
+    },
+    {
+      "habit_id": "read-check",
+      "date": "2026-10-16",
+      "state": "yes",
+      "notes": "read-check: observation 22"
+    },
+    {
+      "habit_id": "read-minutes",
+      "date": "2026-09-25",
+      "state": "value",
+      "notes": "read-minutes: observation 1",
+      "value": "30.00"
+    },
+    {
+      "habit_id": "read-minutes",
+      "date": "2026-09-26",
+      "state": "value",
+      "notes": "read-minutes: observation 2",
+      "value": "0.00"
+    },
+    {
+      "habit_id": "read-minutes",
+      "date": "2026-09-28",
+      "state": "value",
+      "notes": "read-minutes: observation 4",
+      "value": "15.50"
+    },
+    {
+      "habit_id": "read-minutes",
+      "date": "2026-09-29",
+      "state": "skip",
+      "notes": "read-minutes: observation 5"
+    },
+    {
+      "habit_id": "read-minutes",
+      "date": "2026-09-30",
+      "state": "value",
+      "notes": "read-minutes: observation 6",
+      "value": "45.00"
+    },
+    {
+      "habit_id": "read-minutes",
+      "date": "2026-10-01",
+      "state": "value",
+      "notes": "read-minutes: observation 7",
+      "value": "29.50"
+    },
+    {
+      "habit_id": "read-minutes",
+      "date": "2026-10-02",
+      "state": "value",
+      "notes": "read-minutes: observation 8",
+      "value": "30.00"
+    },
+    {
+      "habit_id": "read-minutes",
+      "date": "2026-10-03",
+      "state": "value",
+      "notes": "read-minutes: observation 9",
+      "value": "0.00"
+    },
+    {
+      "habit_id": "read-minutes",
+      "date": "2026-10-05",
+      "state": "value",
+      "notes": "read-minutes: observation 11",
+      "value": "15.50"
+    },
+    {
+      "habit_id": "read-minutes",
+      "date": "2026-10-06",
+      "state": "skip",
+      "notes": "read-minutes: observation 12"
+    },
+    {
+      "habit_id": "read-minutes",
+      "date": "2026-10-07",
+      "state": "value",
+      "notes": "read-minutes: observation 13",
+      "value": "45.00"
+    },
+    {
+      "habit_id": "read-minutes",
+      "date": "2026-10-08",
+      "state": "value",
+      "notes": "read-minutes: observation 14",
+      "value": "29.50"
+    },
+    {
+      "habit_id": "read-minutes",
+      "date": "2026-10-09",
+      "state": "value",
+      "notes": "read-minutes: observation 15",
+      "value": "30.00"
+    },
+    {
+      "habit_id": "read-minutes",
+      "date": "2026-10-10",
+      "state": "value",
+      "notes": "read-minutes: observation 16",
+      "value": "0.00"
+    },
+    {
+      "habit_id": "read-minutes",
+      "date": "2026-10-12",
+      "state": "value",
+      "notes": "read-minutes: observation 18",
+      "value": "15.50"
+    },
+    {
+      "habit_id": "read-minutes",
+      "date": "2026-10-13",
+      "state": "skip",
+      "notes": "read-minutes: observation 19"
+    },
+    {
+      "habit_id": "read-minutes",
+      "date": "2026-10-14",
+      "state": "value",
+      "notes": "read-minutes: observation 20",
+      "value": "45.00"
+    },
+    {
+      "habit_id": "read-minutes",
+      "date": "2026-10-15",
+      "state": "value",
+      "notes": "read-minutes: observation 21",
+      "value": "29.50"
+    },
+    {
+      "habit_id": "read-minutes",
+      "date": "2026-10-16",
+      "state": "value",
+      "notes": "read-minutes: observation 22",
+      "value": "30.00"
+    },
+    {
+      "habit_id": "training",
+      "date": "2026-09-25",
+      "state": "yes",
+      "notes": "training: observation 1"
+    },
+    {
+      "habit_id": "training",
+      "date": "2026-09-27",
+      "state": "no",
+      "notes": "training: observation 3"
+    },
+    {
+      "habit_id": "training",
+      "date": "2026-09-28",
+      "state": "yes",
+      "notes": "training: observation 4"
+    },
+    {
+      "habit_id": "training",
+      "date": "2026-09-29",
+      "state": "skip",
+      "notes": "training: observation 5"
+    },
+    {
+      "habit_id": "training",
+      "date": "2026-10-01",
+      "state": "yes",
+      "notes": "training: observation 7"
+    },
+    {
+      "habit_id": "training",
+      "date": "2026-10-02",
+      "state": "yes",
+      "notes": "training: observation 8"
+    },
+    {
+      "habit_id": "training",
+      "date": "2026-10-04",
+      "state": "no",
+      "notes": "training: observation 10"
+    },
+    {
+      "habit_id": "training",
+      "date": "2026-10-05",
+      "state": "yes",
+      "notes": "training: observation 11"
+    },
+    {
+      "habit_id": "training",
+      "date": "2026-10-06",
+      "state": "skip",
+      "notes": "training: observation 12"
+    },
+    {
+      "habit_id": "training",
+      "date": "2026-10-08",
+      "state": "yes",
+      "notes": "training: observation 14"
+    },
+    {
+      "habit_id": "training",
+      "date": "2026-10-09",
+      "state": "yes",
+      "notes": "training: observation 15"
+    },
+    {
+      "habit_id": "training",
+      "date": "2026-10-11",
+      "state": "no",
+      "notes": "training: observation 17"
+    },
+    {
+      "habit_id": "training",
+      "date": "2026-10-12",
+      "state": "yes",
+      "notes": "training: observation 18"
+    },
+    {
+      "habit_id": "training",
+      "date": "2026-10-13",
+      "state": "skip",
+      "notes": "training: observation 19"
+    },
+    {
+      "habit_id": "training",
+      "date": "2026-10-15",
+      "state": "yes",
+      "notes": "training: observation 21"
+    },
+    {
+      "habit_id": "training",
+      "date": "2026-10-16",
+      "state": "yes",
+      "notes": "training: observation 22"
+    },
+    {
+      "habit_id": "coffee",
+      "date": "2026-09-25",
+      "state": "value",
+      "notes": "coffee: observation 1",
+      "value": "2.00"
+    },
+    {
+      "habit_id": "coffee",
+      "date": "2026-09-26",
+      "state": "value",
+      "notes": "coffee: observation 2",
+      "value": "0.00"
+    },
+    {
+      "habit_id": "coffee",
+      "date": "2026-09-28",
+      "state": "value",
+      "notes": "coffee: observation 4",
+      "value": "3.50"
+    },
+    {
+      "habit_id": "coffee",
+      "date": "2026-09-29",
+      "state": "skip",
+      "notes": "coffee: observation 5"
+    },
+    {
+      "habit_id": "coffee",
+      "date": "2026-09-30",
+      "state": "value",
+      "notes": "coffee: observation 6",
+      "value": "1.50"
+    },
+    {
+      "habit_id": "coffee",
+      "date": "2026-10-01",
+      "state": "value",
+      "notes": "coffee: observation 7",
+      "value": "4.00"
+    },
+    {
+      "habit_id": "coffee",
+      "date": "2026-10-02",
+      "state": "value",
+      "notes": "coffee: observation 8",
+      "value": "2.00"
+    },
+    {
+      "habit_id": "coffee",
+      "date": "2026-10-03",
+      "state": "value",
+      "notes": "coffee: observation 9",
+      "value": "0.00"
+    },
+    {
+      "habit_id": "coffee",
+      "date": "2026-10-05",
+      "state": "value",
+      "notes": "coffee: observation 11",
+      "value": "3.50"
+    },
+    {
+      "habit_id": "coffee",
+      "date": "2026-10-06",
+      "state": "skip",
+      "notes": "coffee: observation 12"
+    },
+    {
+      "habit_id": "coffee",
+      "date": "2026-10-07",
+      "state": "value",
+      "notes": "coffee: observation 13",
+      "value": "1.50"
+    },
+    {
+      "habit_id": "coffee",
+      "date": "2026-10-08",
+      "state": "value",
+      "notes": "coffee: observation 14",
+      "value": "4.00"
+    },
+    {
+      "habit_id": "coffee",
+      "date": "2026-10-09",
+      "state": "value",
+      "notes": "coffee: observation 15",
+      "value": "2.00"
+    },
+    {
+      "habit_id": "coffee",
+      "date": "2026-10-10",
+      "state": "value",
+      "notes": "coffee: observation 16",
+      "value": "0.00"
+    },
+    {
+      "habit_id": "coffee",
+      "date": "2026-10-12",
+      "state": "value",
+      "notes": "coffee: observation 18",
+      "value": "3.50"
+    },
+    {
+      "habit_id": "coffee",
+      "date": "2026-10-13",
+      "state": "skip",
+      "notes": "coffee: observation 19"
+    },
+    {
+      "habit_id": "coffee",
+      "date": "2026-10-14",
+      "state": "value",
+      "notes": "coffee: observation 20",
+      "value": "1.50"
+    },
+    {
+      "habit_id": "coffee",
+      "date": "2026-10-15",
+      "state": "value",
+      "notes": "coffee: observation 21",
+      "value": "4.00"
+    },
+    {
+      "habit_id": "coffee",
+      "date": "2026-10-16",
+      "state": "value",
+      "notes": "coffee: observation 22",
+      "value": "2.00"
+    },
+    {
+      "habit_id": "archived",
+      "date": "2026-09-25",
+      "state": "yes",
+      "notes": "archived: observation 1"
+    },
+    {
+      "habit_id": "archived",
+      "date": "2026-09-26",
+      "state": "no",
+      "notes": "archived: observation 2"
+    },
+    {
+      "habit_id": "archived",
+      "date": "2026-09-28",
+      "state": "yes",
+      "notes": "archived: observation 4"
+    },
+    {
+      "habit_id": "archived",
+      "date": "2026-09-30",
+      "state": "yes",
+      "notes": "archived: observation 6"
+    },
+    {
+      "habit_id": "archived",
+      "date": "2026-10-01",
+      "state": "skip",
+      "notes": "archived: observation 7"
+    },
+    {
+      "habit_id": "archived",
+      "date": "2026-10-02",
+      "state": "yes",
+      "notes": "archived: observation 8"
+    },
+    {
+      "habit_id": "archived",
+      "date": "2026-10-03",
+      "state": "no",
+      "notes": "archived: observation 9"
+    },
+    {
+      "habit_id": "archived",
+      "date": "2026-10-05",
+      "state": "yes",
+      "notes": "archived: observation 11"
+    },
+    {
+      "habit_id": "archived",
+      "date": "2026-10-07",
+      "state": "yes",
+      "notes": "archived: observation 13"
+    },
+    {
+      "habit_id": "archived",
+      "date": "2026-10-08",
+      "state": "skip",
+      "notes": "archived: observation 14"
+    },
+    {
+      "habit_id": "archived",
+      "date": "2026-10-09",
+      "state": "yes",
+      "notes": "archived: observation 15"
+    },
+    {
+      "habit_id": "archived",
+      "date": "2026-10-10",
+      "state": "no",
+      "notes": "archived: observation 16"
+    },
+    {
+      "habit_id": "archived",
+      "date": "2026-10-12",
+      "state": "yes",
+      "notes": "archived: observation 18"
+    },
+    {
+      "habit_id": "archived",
+      "date": "2026-10-14",
+      "state": "yes",
+      "notes": "archived: observation 20"
+    },
+    {
+      "habit_id": "archived",
+      "date": "2026-10-15",
+      "state": "skip",
+      "notes": "archived: observation 21"
+    },
+    {
+      "habit_id": "archived",
+      "date": "2026-10-16",
+      "state": "yes",
+      "notes": "archived: observation 22"
+    }
+  ]
+}

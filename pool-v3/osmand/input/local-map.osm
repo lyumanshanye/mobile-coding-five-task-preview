@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<osm version="0.6" generator="synthetic-local-fixture"><node id="1" lat="31.23" lon="121.474" /><node id="2" lat="31.2304" lon="121.475" /><node id="3" lat="31.2308" lon="121.476" /><node id="4" lat="31.2314" lon="121.4768" /><node id="5" lat="31.2318" lon="121.4774" /><node id="6" lat="31.232" lon="121.478" /><way id="100"><nd ref="1" /><nd ref="2" /><nd ref="3" /><nd ref="4" /><nd ref="5" /><nd ref="6" /><tag k="highway" v="footway" /><tag k="name" v="Fixture Walk" /></way></osm>

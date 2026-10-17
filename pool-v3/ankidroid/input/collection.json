@@ -1,0 +1,82 @@
+{
+  "clock": 1768471200,
+  "notes": [
+    {
+      "id": "n1",
+      "front": "coast",
+      "back": "海岸",
+      "deck": "Field",
+      "tags": [
+        "geography"
+      ]
+    },
+    {
+      "id": "n2",
+      "front": "ridge",
+      "back": "山脊",
+      "deck": "Field",
+      "tags": [
+        "geography"
+      ]
+    },
+    {
+      "id": "n3",
+      "front": "battery",
+      "back": "电池",
+      "deck": "Gear",
+      "tags": [
+        "equipment"
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "id": "n1-f",
+      "note_id": "n1",
+      "direction": "f",
+      "due": 1768471200,
+      "interval_seconds": 0,
+      "suspended": false
+    },
+    {
+      "id": "n1-r",
+      "note_id": "n1",
+      "direction": "r",
+      "due": 1768471200,
+      "interval_seconds": 0,
+      "suspended": false
+    },
+    {
+      "id": "n2-f",
+      "note_id": "n2",
+      "direction": "f",
+      "due": 1768471200,
+      "interval_seconds": 0,
+      "suspended": false
+    },
+    {
+      "id": "n2-r",
+      "note_id": "n2",
+      "direction": "r",
+      "due": 1768471200,
+      "interval_seconds": 0,
+      "suspended": false
+    },
+    {
+      "id": "n3-f",
+      "note_id": "n3",
+      "direction": "f",
+      "due": 1768471200,
+      "interval_seconds": 0,
+      "suspended": false
+    },
+    {
+      "id": "n3-r",
+      "note_id": "n3",
+      "direction": "r",
+      "due": 1768471200,
+      "interval_seconds": 0,
+      "suspended": false
+    }
+  ]
+}

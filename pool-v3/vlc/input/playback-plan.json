@@ -1,0 +1,8 @@
+{
+  "playlist": "field-session.m3u8",
+  "current": "media/video-b.mp4",
+  "seek_seconds": 9,
+  "subtitle": "media/video-b.srt",
+  "subtitle_delay_ms": 1500,
+  "speed": 1.25
+}

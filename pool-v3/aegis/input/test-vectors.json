@@ -1,0 +1,24 @@
+{
+  "public_only": true,
+  "password": "Demo-only-OTP-2026!",
+  "totp": [
+    {
+      "unix_seconds": 59,
+      "expected": "94287082"
+    },
+    {
+      "unix_seconds": 1111111109,
+      "expected": "07081804"
+    }
+  ],
+  "hotp": [
+    {
+      "counter": 0,
+      "expected": "755224"
+    },
+    {
+      "counter": 1,
+      "expected": "287082"
+    }
+  ]
+}

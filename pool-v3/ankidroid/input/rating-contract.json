@@ -1,0 +1,7 @@
+{
+  "algorithm": "SYNTHETIC_FIXED_INTERVAL_NOT_FSRS_OR_SM2",
+  "Again": 60,
+  "Good": 86400,
+  "Easy": 345600,
+  "now": 1768471200
+}
