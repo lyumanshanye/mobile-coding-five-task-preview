@@ -1,0 +1,942 @@
+{
+  "task": "MCP-011 orgzly",
+  "audited_at_utc": "2026-10-19T12:18:03.061827+00:00",
+  "apk_sha256": "fef635ec6050dddf6cddf391372f60834e8e3868d2c75d6b3bbd380f14ca5aa2",
+  "purpose": "maintainer_assisted_repair_acceptance",
+  "parent_acceptance": "../../ACCEPTANCE.json",
+  "overall": "ACCEPTED_ASSISTED_REPAIR",
+  "counts": {
+    "PASS": 65,
+    "NOT_TESTED": 1
+  },
+  "required_counts": {
+    "PASS": 64
+  },
+  "required_total": 64,
+  "required_remaining": [],
+  "groups": [
+    {
+      "group": "T1 移动撤销",
+      "status": "PASS",
+      "remaining": []
+    },
+    {
+      "group": "T2 重复完成撤销",
+      "status": "PASS",
+      "remaining": []
+    },
+    {
+      "group": "T3 编辑取消",
+      "status": "PASS",
+      "remaining": []
+    },
+    {
+      "group": "T4 拒绝与文件往返",
+      "status": "PASS",
+      "remaining": []
+    },
+    {
+      "group": "异常与其余功能",
+      "status": "PASS",
+      "remaining": []
+    },
+    {
+      "group": "视觉与适配",
+      "status": "PASS",
+      "remaining": []
+    },
+    {
+      "group": "独立初态重放",
+      "status": "PASS",
+      "remaining": []
+    }
+  ],
+  "accessibility_name_audit": {
+    "agenda": {
+      "evidence": "android/20261019T105254.279124Z/portrait-font13-agenda.xml",
+      "clickable": 10,
+      "unnamed": 0
+    },
+    "notebooks": {
+      "evidence": "android/20261019T105553.094098Z/portrait-font13-notebooks.xml",
+      "clickable": 9,
+      "unnamed": 0
+    },
+    "tree": {
+      "evidence": "android/20261019T105553.094098Z/portrait-font13-tree.xml",
+      "clickable": 12,
+      "unnamed": 0
+    },
+    "searches": {
+      "evidence": "android/20261019T105553.094098Z/portrait-font13-searches.xml",
+      "clickable": 6,
+      "unnamed": 0
+    },
+    "query": {
+      "evidence": "android/20261019T105553.094098Z/portrait-font13-query.xml",
+      "clickable": 7,
+      "unnamed": 0
+    },
+    "detail": {
+      "evidence": "android/20261019T105553.094098Z/portrait-font13-detail.xml",
+      "clickable": 8,
+      "unnamed": 0
+    },
+    "editor": {
+      "evidence": "android/20261019T105553.094098Z/portrait-font13-editor.xml",
+      "clickable": 8,
+      "unnamed": 0
+    }
+  },
+  "status_definitions": {
+    "PASS": "Exact scoped claim established by cited actual evidence; does not imply surrounding requirement passes.",
+    "FAIL": "Actual observed violation of the written product contract; missing tests or independent replay evidence never count as failure.",
+    "NOT_TESTED": "Required observation/comparison or independent initial-state replay absent or awaiting review.",
+    "TOOL_BLOCKED": "Attempt failed before valid product outcome because of execution tooling.",
+    "SPEC_UNCLEAR": "Contract ambiguity requiring explicit resolution; no such blocker asserted in this snapshot."
+  },
+  "items": [
+    {
+      "id": "R01-01",
+      "contract": "R01/T01",
+      "criterion": "通过真实系统选择器导入mission.org并显示6个独立ID",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T095629.060287Z/report.json",
+        "android/20261019T100201.745054Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R01-02",
+      "contract": "R01",
+      "criterion": "解析星号层级、TODO/DONE、局部标签、日期/+1d、ID和正文",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T095629.060287Z/report.json",
+        "android/20261019T100201.745054Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R01-03",
+      "contract": "R01",
+      "criterion": "同名sensors/home-sensors不合并",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T095629.060287Z/report.json",
+        "android/20261019T100201.745054Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R01-04",
+      "contract": "R01",
+      "criterion": "重复ID整次导入拒绝且原数据不变",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T100541.325741Z/report.json",
+        "duplicate-id-device-check.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R02-01",
+      "contract": "R02",
+      "criterion": "真实折叠及展开节点",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T101038.093048Z/report.json",
+        "android/20261019T101227.381679Z/report.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R02-02",
+      "contract": "R02/T01",
+      "criterion": "长按sensors选择并移动到Personal",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T101515.288439Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R02-03",
+      "contract": "R02/T01",
+      "criterion": "移动即时重算继承work，Work due从2项变1项",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T101515.288439Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R02-04",
+      "contract": "R02",
+      "criterion": "移动保留ID、正文、局部标签、子节点顺序、日期",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T101918.385406Z/report.json",
+        "android/20261019T111058.234306Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R02-05",
+      "contract": "R02/T01",
+      "criterion": "撤销移动恢复sensors父节点及Work due两项",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T101918.385406Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R02-06",
+      "contract": "R02/T01",
+      "criterion": "撤销后sensors正文与原夹具一致",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T101918.385406Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R02-07",
+      "contract": "R02/T01",
+      "criterion": "同名home-sensors全部字段不变",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T101918.385406Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R02-08",
+      "contract": "R02/T04",
+      "criterion": "尝试Work移至后代battery显示拒绝",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T112609.227440Z/report.json",
+        "android/20261019T111058.234306Z/subtree-moved.org",
+        "android/20261019T112609.227440Z/descendant-rejected.org"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R02-09",
+      "contract": "R02/T04",
+      "criterion": "后代移动拒绝后完整树/数据不变",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T112609.227440Z/report.json",
+        "android/20261019T111058.234306Z/subtree-moved.org",
+        "android/20261019T112609.227440Z/descendant-rejected.org"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R02-10",
+      "contract": "R02",
+      "criterion": "移至自身被拒绝且数据不变",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T111600.726887Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R03-01",
+      "contract": "R03",
+      "criterion": "编辑标题保存到原ID且不新增",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T105553.094098Z/report.json",
+        "android/20261019T105932.495474Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R03-02",
+      "contract": "R03",
+      "criterion": "编辑TODO/DONE保存到原ID",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T110210.772544Z/report.json",
+        "android/20261019T105932.495474Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R03-03",
+      "contract": "R03/T03",
+      "criterion": "局部标签field改lab并保存，原ID sensors",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T104325.378276Z/report.json",
+        "android/20261019T104458.709247Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R03-04",
+      "contract": "R03",
+      "criterion": "编辑计划日期保存到原ID",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T105553.094098Z/report.json",
+        "android/20261019T105932.495474Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R03-05",
+      "contract": "R03/T03",
+      "criterion": "标题Discard真实输入后取消，原标题保留",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T104325.378276Z/report.json",
+        "android/20261019T104458.709247Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R03-06",
+      "contract": "R03",
+      "criterion": "树、搜索、Agenda同时反映同一次编辑",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T110210.772544Z/report.json",
+        "android/20261019T105932.495474Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R03-07",
+      "contract": "R03",
+      "criterion": "状态和标签有可读文本",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T104325.378276Z/report.json",
+        "android/20261019T104458.709247Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R04-01",
+      "contract": "R04/T01",
+      "criterion": "Work due初始恰battery/sensors",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T103930.588551Z/report.json",
+        "android/20261019T101515.288439Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R04-02",
+      "contract": "R04",
+      "criterion": "TODO AND继承work AND有日期<=16筛选",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T103930.588551Z/report.json",
+        "android/20261019T101515.288439Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R04-03",
+      "contract": "R04",
+      "criterion": "同日按ID升序，跨日按日期升序",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T103930.588551Z/report.json",
+        "android/20261019T103359.823311Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R04-04",
+      "contract": "R04",
+      "criterion": "无日期父节点不进入结果",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T103930.588551Z/report.json",
+        "android/20261019T101515.288439Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R04-05",
+      "contract": "R04",
+      "criterion": "固定今日2026-01-15，今日/未来分组与日期一致",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T102449.875523Z/report.json",
+        "android/20261019T103359.823311Z/report.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R04-06",
+      "contract": "R04",
+      "criterion": "存在逾期项时归入逾期分组",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T111058.234306Z/report.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R04-07",
+      "contract": "R04",
+      "criterion": "DONE不出现在Agenda",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T110210.772544Z/report.json",
+        "android/20261019T105932.495474Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R04-08",
+      "contract": "R04",
+      "criterion": "查询结果显示ID与来源面包屑",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T103930.588551Z/report.json",
+        "android/20261019T101515.288439Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R05-01",
+      "contract": "R05/T02",
+      "criterion": "完成battery日期15加一天到16且仍TODO",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T102449.875523Z/report.json",
+        "android/20261019T103054.552492Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R05-02",
+      "contract": "R05/T02",
+      "criterion": "首次完成立即恰1条历史",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T102449.875523Z/report.json",
+        "android/20261019T103054.552492Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R05-03",
+      "contract": "R05/T02",
+      "criterion": "撤销完成恢复日期15并移除历史",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T103054.552492Z/report.json",
+        "android/20261019T103754.183909Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "首次history拉取0字节被保留；延迟读取同一用户导出文件为[]，未重放撤销。",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R05-04",
+      "contract": "R05/T02",
+      "criterion": "再次完成并重启后日期16，history恰1条且字段正确",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T103359.823311Z/report.json",
+        "android/20261019T103754.183909Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R05-05",
+      "contract": "R05",
+      "criterion": "连续快速点按一次只提交一次",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T102449.875523Z/report.json",
+        "android/20261019T103054.552492Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "实际189ms双击仅一条完成历史；不推断任意时间间隔都合并。",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R05-06",
+      "contract": "R05",
+      "criterion": "提交期间Complete控件禁用",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T113550.151233Z/report.json",
+        "android/20261019T113731.312503Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "独立accessibility observer实际单击后9次观测enabled=false，随后恢复；不是从最终状态推断。",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R06-01",
+      "contract": "R06",
+      "criterion": "保存成功后force-stop恢复原ID与编辑数据",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T104325.378276Z/report.json",
+        "android/20261019T104458.709247Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R06-02",
+      "contract": "R06",
+      "criterion": "移动成功后force-stop恢复新父节点及继承标签",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T101515.288439Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R06-03",
+      "contract": "R06",
+      "criterion": "完成成功后force-stop恢复日期与历史",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T103359.823311Z/report.json",
+        "android/20261019T103754.183909Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R06-04",
+      "contract": "R06",
+      "criterion": "撤销移动后force-stop恢复层级/查询",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T101918.385406Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R06-05",
+      "contract": "R06",
+      "criterion": "撤销完成后force-stop恢复原日期/零历史",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T103054.552492Z/report.json",
+        "android/20261019T103754.183909Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R06-06",
+      "contract": "R06",
+      "criterion": "折叠状态按ID恢复",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T101038.093048Z/report.json",
+        "android/20261019T101227.381679Z/report.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": false
+    },
+    {
+      "id": "R07-01",
+      "contract": "R07",
+      "criterion": "系统导出选择器实际生成文件",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T095354.380183Z/report.json",
+        "android/20261019T095629.060287Z/report.json",
+        "android/20261019T095913.294837Z/report.json",
+        "android/20261019T100201.745054Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R07-02",
+      "contract": "R07",
+      "criterion": "导出文件扩展名为.org",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T095354.380183Z/report.json",
+        "android/20261019T095629.060287Z/report.json",
+        "android/20261019T095913.294837Z/report.json",
+        "android/20261019T100201.745054Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "修复版默认实际文件Mission.org；原版.org.txt FAIL仍保留在原版ACCEPTANCE。",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R07-03",
+      "contract": "R07",
+      "criterion": "导出UTF-8及ID/层级/局部标签/正文/日期/+1d完整",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T095354.380183Z/report.json",
+        "android/20261019T095629.060287Z/report.json",
+        "android/20261019T095913.294837Z/report.json",
+        "android/20261019T100201.745054Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R07-04",
+      "contract": "R07/T04",
+      "criterion": "清数据后仅以真实导出文件重新导入",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T095354.380183Z/report.json",
+        "android/20261019T095629.060287Z/report.json",
+        "android/20261019T095913.294837Z/report.json",
+        "android/20261019T100201.745054Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R07-05",
+      "contract": "R07/T04",
+      "criterion": "往返后6 ID、字段、子节点顺序保持",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T095354.380183Z/report.json",
+        "android/20261019T095629.060287Z/report.json",
+        "android/20261019T095913.294837Z/report.json",
+        "android/20261019T100201.745054Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R07-06",
+      "contract": "R07/T04",
+      "criterion": "往返后Work due结果保持battery/sensors",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T095354.380183Z/report.json",
+        "android/20261019T095629.060287Z/report.json",
+        "android/20261019T095913.294837Z/report.json",
+        "android/20261019T100201.745054Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R07-07",
+      "contract": "R07",
+      "criterion": "系统另导出history.json含正确字段且无重复",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T103754.183909Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R08-01",
+      "contract": "R08",
+      "criterion": "Notebook/详情/保存搜索/Agenda均有真实可达页面",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T105254.279124Z/report.json",
+        "android/20261019T105553.094098Z/report.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R08-02",
+      "contract": "R08/T03",
+      "criterion": "从查询进入详情再返回保持Work due上下文",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T104325.378276Z/report.json",
+        "android/20261019T104458.709247Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R09-01",
+      "contract": "R09",
+      "criterion": "Notebook本地名称与主要层级",
+      "status": "PASS",
+      "evidence": [
+        "VISUAL-REVIEW.md"
+      ],
+      "gap": "修复APK竖屏/字体1.3主要信息层级经人工审查通过；R11横屏核心控件另由B03判定，不要求像素复刻。",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R10-01",
+      "contract": "R10",
+      "criterion": "大纲缩进/折叠/选择工具栏主要层级",
+      "status": "PASS",
+      "evidence": [
+        "VISUAL-REVIEW.md"
+      ],
+      "gap": "修复APK竖屏/字体1.3主要信息层级经人工审查通过；R11横屏核心控件另由B03判定，不要求像素复刻。",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R11-01",
+      "contract": "R11",
+      "criterion": "详情状态/标签/日期/正文主要层级",
+      "status": "PASS",
+      "evidence": [
+        "VISUAL-REVIEW.md"
+      ],
+      "gap": "修复APK竖屏/字体1.3主要信息层级经人工审查通过；R11横屏核心控件另由B03判定，不要求像素复刻。",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R12-01",
+      "contract": "R12",
+      "criterion": "保存搜索列表/查询名称主要层级",
+      "status": "PASS",
+      "evidence": [
+        "VISUAL-REVIEW.md"
+      ],
+      "gap": "修复APK竖屏/字体1.3主要信息层级经人工审查通过；R11横屏核心控件另由B03判定，不要求像素复刻。",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "R13-01",
+      "contract": "R13",
+      "criterion": "Agenda按日期分组与面包屑主要层级",
+      "status": "PASS",
+      "evidence": [
+        "VISUAL-REVIEW.md"
+      ],
+      "gap": "修复APK竖屏/字体1.3主要信息层级经人工审查通过；R11横屏核心控件另由B03判定，不要求像素复刻。",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "B01",
+      "contract": "输入与交付边界",
+      "criterion": "可安装APK/源码/构建说明/自测记录",
+      "status": "PASS",
+      "evidence": [
+        "stages/20261019T094345.227395Z-independent-build/report.json",
+        "report.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "B02",
+      "contract": "输入与交付边界",
+      "criterion": "所有核心控件有可访问名称与可读身份/状态/计数",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T105254.279124Z/report.json",
+        "android/20261019T105553.094098Z/report.json",
+        "ANDROID-RESULT.md"
+      ],
+      "gap": "7页font1.3 XML可点击节点含自身或子孙可访问名称；独立统计补充在本表，视觉遮挡另判。",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "B03",
+      "contract": "输入与交付边界",
+      "criterion": "横屏核心按钮不遮挡",
+      "status": "PASS",
+      "evidence": [
+        "VISUAL-REVIEW.md",
+        "android/20261019T120744.939814Z/report.json",
+        "android/20261019T120920.011051Z/report.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "B04",
+      "contract": "输入与交付边界",
+      "criterion": "1.3字体核心按钮不遮挡",
+      "status": "PASS",
+      "evidence": [
+        "VISUAL-REVIEW.md"
+      ],
+      "gap": "修复APK竖屏/字体1.3主要信息层级经人工审查通过；R11横屏核心控件另由B03判定，不要求像素复刻。",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "B05",
+      "contract": "输入与交付边界",
+      "criterion": "旋转不会重复提交",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T121359.252990Z/report.json",
+        "android/20261019T121520.065873Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "真实PNG尺寸1280x720→720x1280已核对，最终独立六节点T02-completed/history1通过；旧settings-only旋转证据不用于此通过。",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "B06",
+      "contract": "输入与交付边界",
+      "criterion": "Org导出和重新取得不依赖私有数据库/包名",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T095354.380183Z/report.json",
+        "android/20261019T095629.060287Z/report.json",
+        "android/20261019T095913.294837Z/report.json",
+        "android/20261019T100201.745054Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "T01-RESET",
+      "contract": "任务书独立轨迹",
+      "criterion": "T01从清数据并导入原始夹具开始",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T101515.288439Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "T02-RESET",
+      "contract": "任务书独立轨迹",
+      "criterion": "T02独立清数据导入原始夹具",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T102449.875523Z/report.json",
+        "android/20261019T103054.552492Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "T03-RESET",
+      "contract": "任务书独立轨迹",
+      "criterion": "T03独立清数据导入原始夹具",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T103930.588551Z/report.json",
+        "android/20261019T104458.709247Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "T04-RESET",
+      "contract": "任务书独立轨迹",
+      "criterion": "T04原始输入初态",
+      "status": "PASS",
+      "evidence": [
+        "android/20261019T095354.380183Z/report.json",
+        "android/20261019T095629.060287Z/report.json",
+        "android/20261019T095913.294837Z/report.json",
+        "android/20261019T100201.745054Z/report.json",
+        "device-export-checks.json"
+      ],
+      "gap": "",
+      "required_for_acceptance": true
+    },
+    {
+      "id": "ENV28",
+      "contract": "执行工具证据",
+      "criterion": "API28导入选择器可完成取文件",
+      "status": "NOT_TESTED",
+      "evidence": [
+        "../../ANDROID-RESULT.md"
+      ],
+      "gap": "原版API28工具诊断，修复版使用API29；非必选不阻断。",
+      "required_for_acceptance": false
+    }
+  ]
+}

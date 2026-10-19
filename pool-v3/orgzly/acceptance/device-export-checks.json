@@ -1,0 +1,174 @@
+{
+  "passed": true,
+  "scope": "Actual exports plus dedicated submission accessibility trace; complete UI trajectories and visuals are reviewed separately.",
+  "full_task_accepted": false,
+  "results": [
+    {
+      "status": "EXPORT_CHECK_PASSED",
+      "phase": "T01-moved",
+      "nodes": 6,
+      "work_due": [
+        "battery"
+      ],
+      "history_entries": 0,
+      "android_actions_verified": false,
+      "full_task_accepted": false,
+      "org": "android/20261019T101918.385406Z/t01-moved.org",
+      "history": "android/20261019T102316.431836Z/t01-history.json"
+    },
+    {
+      "status": "EXPORT_CHECK_PASSED",
+      "phase": "T01-restored",
+      "nodes": 6,
+      "work_due": [
+        "battery",
+        "sensors"
+      ],
+      "history_entries": 0,
+      "android_actions_verified": false,
+      "full_task_accepted": false,
+      "org": "android/20261019T101918.385406Z/t01-undone.org",
+      "history": "android/20261019T102316.431836Z/t01-history.json"
+    },
+    {
+      "status": "EXPORT_CHECK_PASSED",
+      "phase": "T02-completed",
+      "nodes": 6,
+      "work_due": [
+        "sensors",
+        "battery"
+      ],
+      "history_entries": 1,
+      "android_actions_verified": false,
+      "full_task_accepted": false,
+      "org": "android/20261019T103054.552492Z/t02-first.org",
+      "history": "android/20261019T103054.552492Z/t02-first-history.json"
+    },
+    {
+      "status": "EXPORT_CHECK_PASSED",
+      "phase": "T02-undone",
+      "nodes": 6,
+      "work_due": [
+        "battery",
+        "sensors"
+      ],
+      "history_entries": 0,
+      "android_actions_verified": false,
+      "full_task_accepted": false,
+      "org": "android/20261019T103054.552492Z/t02-undone.org",
+      "history": "android/20261019T103754.183909Z/t02-undone-history-late.json"
+    },
+    {
+      "status": "EXPORT_CHECK_PASSED",
+      "phase": "T02-completed",
+      "nodes": 6,
+      "work_due": [
+        "sensors",
+        "battery"
+      ],
+      "history_entries": 1,
+      "android_actions_verified": false,
+      "full_task_accepted": false,
+      "org": "android/20261019T103754.183909Z/t02-final-late.org",
+      "history": "android/20261019T103754.183909Z/t02-final-history-late.json"
+    },
+    {
+      "status": "EXPORT_CHECK_PASSED",
+      "phase": "T03-edited",
+      "nodes": 6,
+      "work_due": [
+        "battery",
+        "sensors"
+      ],
+      "history_entries": 0,
+      "android_actions_verified": false,
+      "full_task_accepted": false,
+      "org": "android/20261019T104458.709247Z/t03-edited.org",
+      "history": "android/20261019T104458.709247Z/t03-history.json"
+    },
+    {
+      "status": "EXPORT_CHECK_PASSED",
+      "phase": "T02-completed",
+      "nodes": 6,
+      "work_due": [
+        "sensors",
+        "battery"
+      ],
+      "history_entries": 1,
+      "android_actions_verified": false,
+      "full_task_accepted": false,
+      "org": "android/20261019T113731.312503Z/busy.org",
+      "history": "android/20261019T113731.312503Z/busy-history.json"
+    },
+    {
+      "status": "EXPORT_CHECK_PASSED",
+      "phase": "T02-completed",
+      "nodes": 6,
+      "work_due": [
+        "sensors",
+        "battery"
+      ],
+      "history_entries": 1,
+      "android_actions_verified": false,
+      "full_task_accepted": false,
+      "org": "android/20261019T121520.065873Z/true-rotation.org",
+      "history": "android/20261019T121520.065873Z/true-rotation-history.json"
+    },
+    {
+      "phase": "actual-display-rotation",
+      "passed": true,
+      "landscape": [
+        1280,
+        720
+      ],
+      "portrait": [
+        720,
+        1280
+      ]
+    },
+    {
+      "phase": "repaired-org-roundtrip",
+      "passed": true,
+      "byte_equal": true
+    },
+    {
+      "phase": "actual-landscape-edit-and-export",
+      "passed": true,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "nodes": 6,
+      "org": "android/20261019T120920.011051Z/landscape-edited.org"
+    },
+    {
+      "phase": "manual-fields",
+      "passed": true,
+      "query": [
+        "battery"
+      ]
+    },
+    {
+      "phase": "nonleaf-move-and-self-rejection",
+      "passed": true,
+      "byte_equal_after_rejection": true
+    },
+    {
+      "phase": "actual-submit-disabled",
+      "passed": true,
+      "disabled_sample_ms": [
+        1287,
+        1768,
+        1915,
+        2182,
+        2592,
+        2936,
+        3066,
+        3206,
+        3542
+      ],
+      "first_reenabled_sample_ms": 4459,
+      "semantic_clicks": 1
+    }
+  ]
+}
