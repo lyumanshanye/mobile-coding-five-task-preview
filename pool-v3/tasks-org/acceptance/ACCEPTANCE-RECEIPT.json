@@ -1,0 +1,28 @@
+{
+  "kind": "SINGLE_TASK_ACCEPTANCE_RECEIPT",
+  "task": "MCP-009",
+  "slug": "tasks-org",
+  "created_at_utc": "2026-10-20T06:30:23.076113+00:00",
+  "status": "ACCEPTED_ORIGINAL_MODEL_ANSWER",
+  "accepted": true,
+  "attempt_kind": "original_model_answer",
+  "manual_candidate_code_repairs": 0,
+  "blind_evaluation": false,
+  "apk_sha256": "0008d41e358d19dfe600a26743fecc1c0dffdb863c5af72da1456220832587b4",
+  "acceptance_matrix": "ACCEPTANCE.json",
+  "required_total": 35,
+  "required_counts": {
+    "PASS": 35
+  },
+  "required_remaining": [],
+  "all_evidence_paths_exist": true,
+  "evidence_validation": "acceptance-evidence-check.json",
+  "high_fidelity": "NOT_ESTABLISHED",
+  "long_horizon_difficulty": "NOT_ESTABLISHED",
+  "limits": [
+    "Limited published contract only.",
+    "Runner, capture and independent oracle fixes are not candidate-code repairs.",
+    "Cold SQLite actual blobs decoded with restricted data containers, never baseline metadata substitution.",
+    "Transitions and failed tool actions retained; no claim of high fidelity or long-horizon difficulty."
+  ]
+}

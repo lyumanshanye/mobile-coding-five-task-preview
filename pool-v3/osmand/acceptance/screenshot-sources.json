@@ -1,0 +1,42 @@
+[
+  {
+    "file": "walk-overview.png",
+    "source": "runs/model-20261019T082420Z-osmand/android/20261020T045448.268199Z/walk-overview.png",
+    "kind": "actual_candidate_device_capture"
+  },
+  {
+    "file": "selection-after-bad-file.png",
+    "source": "runs/model-20261019T082420Z-osmand/android/20261020T051616.500693Z/selection-after-bad-file.png",
+    "kind": "actual_candidate_device_capture"
+  },
+  {
+    "file": "viewpoint-filter.png",
+    "source": "runs/model-20261019T082420Z-osmand/android/20261020T051616.500693Z/viewpoint-filter.png",
+    "kind": "actual_candidate_device_capture"
+  },
+  {
+    "file": "all-after-edit.png",
+    "source": "runs/model-20261019T082420Z-osmand/android/20261020T050046.317766Z/all-after-edit.png",
+    "kind": "actual_candidate_device_capture"
+  },
+  {
+    "file": "rotated-saved-waypoints.png",
+    "source": "runs/model-20261019T082420Z-osmand/android/20261020T052035.705347Z/rotated-saved-waypoints.png",
+    "kind": "actual_candidate_device_capture"
+  },
+  {
+    "file": "map-swiped-refit.png",
+    "source": "runs/model-20261019T082420Z-osmand/android/20261020T052330.763462Z/map-swiped-refit.png",
+    "kind": "actual_candidate_device_capture"
+  },
+  {
+    "file": "stable-invalid-xml-dialog.png",
+    "source": "runs/model-20261019T082420Z-osmand/android/20261020T052925.400819Z/stable-invalid-xml-dialog.png",
+    "kind": "actual_candidate_device_capture"
+  },
+  {
+    "file": "stable-replace-policy.png",
+    "source": "runs/model-20261019T082420Z-osmand/android/20261020T053105.205338Z/stable-replace-policy.png",
+    "kind": "actual_candidate_device_capture"
+  }
+]

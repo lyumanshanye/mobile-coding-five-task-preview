@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "scope": "Independent validation tooling tests, not candidate task acceptance",
+  "tests": {
+    "test_tasks_state.py": "5 groups PASS",
+    "test_tasks_sqlite.py": "3 groups PASS: normalized adapter/mutations/sidecars, tar traversal and links, time instant plus offset",
+    "test_tasks_blob.py": "1 group PASS: unknown serialized class and size limit rejected"
+  },
+  "actual_crosscheck": "sqlite-t1-completed/decoded/independent-check.json",
+  "sources_sha256": {
+    "verify_tasks_state.py": "73a562a38860e17e1e991ed6484d137ff3a8db1d0608d2c949419eea3629ecc1",
+    "verify_tasks_sqlite.py": "d7850948c50dcd2063e84e452744f907f08c71edc33c16c45ddf4ea2651c445e",
+    "capture_tasks_db.py": "a501d2d95fd597aae4629a1050d376cb643609baa896c9d4fb27387e21ab0d4d",
+    "decode_tasks_snapshot.py": "1bfbca1e5a9317cb4dbfea4096674356b1835128b0d0d1c9426e9c6a65cc9b3b",
+    "TasksBlobDecode.java": "e0fb71bb5f49d92c96790f40463a27bd068a116ed577e1e70582a887604fc622",
+    "test_tasks_state.py": "93bd2431cb1bd07ae5aaa18204edf3b8660e600c744c8c98e379674ab6cbda41",
+    "test_tasks_sqlite.py": "155a2553267f145bf7ae7c8518882e600b75a3d0f85f0dbda3d982488a8ed6a1",
+    "test_tasks_blob.py": "26ecc50013d701c86c73c9dbe376b9eff366a82e43ed7735118d35e847dd8629"
+  },
+  "candidate_code_changed": false
+}

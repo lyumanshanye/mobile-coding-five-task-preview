@@ -1,0 +1,24 @@
+{
+  "kind": "SINGLE_TASK_ACCEPTANCE_RECEIPT",
+  "task": "MCP-012",
+  "slug": "ankidroid",
+  "created_at_utc": "2026-10-20T04:04:29.636346+00:00",
+  "status": "ACCEPTED_ORIGINAL_MODEL_ANSWER",
+  "accepted": true,
+  "attempt_kind": "original_model_answer",
+  "manual_candidate_code_repairs": 0,
+  "blind_evaluation": false,
+  "apk_sha256": "04589851c7e2158c746d3fd0231d185660e94f5b0c1aba73d518de1ef188ec17",
+  "acceptance_matrix": "ACCEPTANCE.json",
+  "required_total": 45,
+  "required_counts": {
+    "PASS": 45
+  },
+  "required_remaining": [],
+  "all_evidence_paths_exist": true,
+  "limits": [
+    "Acceptance covers the published limited task contract and tested APK.",
+    "Generation stages and device execution batches are not repair rounds.",
+    "Visual review establishes main information hierarchy and tested adaptation only, not pixel fidelity or long-horizon difficulty."
+  ]
+}

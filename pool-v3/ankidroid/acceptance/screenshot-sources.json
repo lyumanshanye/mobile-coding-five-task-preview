@@ -1,0 +1,42 @@
+[
+  {
+    "file": "t1-after-undo.png",
+    "source": "runs/model-20261017T234304Z-ankidroid/android/20261018T003158.312336Z/t1-after-undo.png",
+    "kind": "actual_candidate_device_capture"
+  },
+  {
+    "file": "t1-answer-unrecorded.png",
+    "source": "runs/model-20261017T234304Z-ankidroid/android/20261018T002654.866831Z/t1-answer-unrecorded.png",
+    "kind": "actual_candidate_device_capture"
+  },
+  {
+    "file": "t4-decks-due.png",
+    "source": "runs/model-20261017T234304Z-ankidroid/android/20261018T004334.349875Z/t4-decks-due.png",
+    "kind": "actual_candidate_device_capture"
+  },
+  {
+    "file": "t3-statistics.png",
+    "source": "runs/model-20261017T234304Z-ankidroid/android/20261018T011318.835953Z/t3-statistics.png",
+    "kind": "actual_candidate_device_capture"
+  },
+  {
+    "file": "actual-landscape13-editor.png",
+    "source": "runs/model-20261017T234304Z-ankidroid/android/20261020T034331.244290Z/actual-landscape13-editor.png",
+    "kind": "actual_candidate_device_capture"
+  },
+  {
+    "file": "landscape13-answer-actions.png",
+    "source": "runs/model-20261017T234304Z-ankidroid/android/20261020T034718.321026Z/landscape13-answer-actions.png",
+    "kind": "actual_candidate_device_capture"
+  },
+  {
+    "file": "landscape13-back-edited.png",
+    "source": "runs/model-20261017T234304Z-ankidroid/android/20261020T035512.309087Z/landscape13-back-edited.png",
+    "kind": "actual_candidate_device_capture"
+  },
+  {
+    "file": "landscape13-statistics-trend.png",
+    "source": "runs/model-20261017T234304Z-ankidroid/android/20261020T040004.307909Z/landscape13-statistics-trend.png",
+    "kind": "actual_candidate_device_capture"
+  }
+]

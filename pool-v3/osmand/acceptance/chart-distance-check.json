@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "scope": "Manual image audit of six x positions against independent cumulative Haversine distances; chart spans x88..684 in actual screenshot",
+  "distances_m": [
+    0,
+    104.97064808642723,
+    209.94093160124584,
+    311.11895359617597,
+    383.4569822202223,
+    444.6864874743635
+  ],
+  "expected_pixel_x": [
+    88,
+    228.7,
+    369.4,
+    505,
+    601.9,
+    684
+  ],
+  "observed_pixel_x_approx": [
+    88,
+    228,
+    369,
+    505,
+    602,
+    684
+  ],
+  "evidence": "android/20261020T051616.500693Z/selection-after-bad-file.png",
+  "full_task_accepted": false
+}

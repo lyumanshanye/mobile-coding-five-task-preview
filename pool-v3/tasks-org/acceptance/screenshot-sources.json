@@ -1,0 +1,42 @@
+[
+  {
+    "file": "t3-fresh-initial.png",
+    "source": "runs/model-20261019T081535Z-tasks-org/android/20261020T060332.848919Z/t3-fresh-initial.png",
+    "kind": "actual_candidate_device_capture"
+  },
+  {
+    "file": "parent-warning-stable.png",
+    "source": "runs/model-20261019T081535Z-tasks-org/android/20261020T054005.635648Z/parent-warning-stable.png",
+    "kind": "actual_candidate_device_capture"
+  },
+  {
+    "file": "r1-child-edited.png",
+    "source": "runs/model-20261019T081535Z-tasks-org/android/20261020T055930.689128Z/r1-child-edited.png",
+    "kind": "actual_candidate_device_capture"
+  },
+  {
+    "file": "t3-two-filtered.png",
+    "source": "runs/model-20261019T081535Z-tasks-org/android/20261020T060545.341254Z/t3-two-filtered.png",
+    "kind": "actual_candidate_device_capture"
+  },
+  {
+    "file": "t3-only-badges.png",
+    "source": "runs/model-20261019T081535Z-tasks-org/android/20261020T061059.095405Z/t3-only-badges.png",
+    "kind": "actual_candidate_device_capture"
+  },
+  {
+    "file": "t3-empty-search.png",
+    "source": "runs/model-20261019T081535Z-tasks-org/android/20261020T061328.175994Z/t3-empty-search.png",
+    "kind": "actual_candidate_device_capture"
+  },
+  {
+    "file": "t4-dark-unsaved-draft.png",
+    "source": "runs/model-20261019T081535Z-tasks-org/android/20261020T062207.142511Z/t4-dark-unsaved-draft.png",
+    "kind": "actual_candidate_device_capture"
+  },
+  {
+    "file": "t4-discarded-title-preserved.png",
+    "source": "runs/model-20261019T081535Z-tasks-org/android/20261020T062613.412533Z/t4-discarded-title-preserved.png",
+    "kind": "actual_candidate_device_capture"
+  }
+]

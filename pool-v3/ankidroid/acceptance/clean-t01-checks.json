@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "good_reviews": 1,
+  "undone_reviews": 0,
+  "all_fixture_fields_restored": true,
+  "inflight_repeat_rejected": true,
+  "evidence": "android/20261020T034834.127621Z",
+  "probe": "android/20261020T034718.321026Z/report.json",
+  "clean_initial": "android/20261020T034058.145820Z/report.json"
+}

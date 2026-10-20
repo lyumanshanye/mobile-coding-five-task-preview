@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "phase": "initial",
+  "task_count": 5,
+  "filter_expected_ids": null,
+  "full_task_accepted": false,
+  "scope": "Public state comparison only; UI/filter rendering, dialogs, theme appearance, lifecycle actions and temporal draft behavior need actual device evidence.",
+  "evidence": {
+    "/inspire/hdd2/project/special-project-1/public/yelv/research/合成工作类数据和移动coding数据/移动coding/扩展题库_v3/tasks/tasks-org/input/seed.json": "5ca6e5cc39aa0d499ddce64d4f5543933c199e441d37565110790b7d78040539",
+    "runs/model-20261019T081535Z-tasks-org/android/20261020T053821.601871Z/seed-export.json": "f0b8394eea28e867b0b8b7fc6ca5924f182c5829a9f63d164ad794ee6efc5928"
+  }
+}

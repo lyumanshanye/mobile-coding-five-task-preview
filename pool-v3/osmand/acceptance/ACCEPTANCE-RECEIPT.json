@@ -1,0 +1,27 @@
+{
+  "kind": "SINGLE_TASK_ACCEPTANCE_RECEIPT",
+  "task": "MCP-008",
+  "slug": "osmand",
+  "created_at_utc": "2026-10-20T05:34:28.895907+00:00",
+  "status": "ACCEPTED_ORIGINAL_MODEL_ANSWER",
+  "accepted": true,
+  "attempt_kind": "original_model_answer",
+  "manual_candidate_code_repairs": 0,
+  "blind_evaluation": false,
+  "apk_sha256": "19efda8869021b6ebcfb598e7c96494131e2cdcd005a7ef8e671589332565106",
+  "acceptance_matrix": "ACCEPTANCE.json",
+  "required_total": 35,
+  "required_counts": {
+    "PASS": 35
+  },
+  "required_remaining": [],
+  "all_evidence_paths_exist": true,
+  "evidence_validation": "acceptance-evidence-check.json",
+  "high_fidelity": "NOT_ESTABLISHED",
+  "long_horizon_difficulty": "NOT_ESTABLISHED",
+  "limits": [
+    "Published limited contract and tested original APK only.",
+    "Runner native hierarchy/swipe fixes and execution batches are not candidate code repair rounds.",
+    "Visual review covers tested information hierarchy and rotation, not high fidelity or long-horizon difficulty."
+  ]
+}

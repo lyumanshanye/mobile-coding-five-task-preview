@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "blank_preserved_contract_fields": [
+    "notes",
+    "cards",
+    "reviews",
+    "current_card_id",
+    "face",
+    "clock",
+    "buried_ids"
+  ],
+  "only_intended_change": "n2 tags geography -> terrain",
+  "unknown_rejection_full_export_equal": true,
+  "before": "android/20261019T130619.375617Z/undone.json",
+  "blank": "android/20261019T130912.665580Z/blank.json",
+  "unknown": "android/20261019T131219.735455Z/unknown.json",
+  "note": "Successful TSV import renews extra session.generation; frozen public fields remain as expected."
+}

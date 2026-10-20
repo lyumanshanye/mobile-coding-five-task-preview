@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "scope": "Exported coordinates/elevations/waypoint text only",
+  "full_task_accepted": false,
+  "edited_waypoint": true,
+  "track_points": 6,
+  "waypoints": 3,
+  "sha256": "d062e7bd8ccc388985280e036b8fff05ea55d40b7ff7aa836d59b38f0fe827ce",
+  "input_sha256": "66b9f5b15d5e71d1966b775a46dbc52b01577c0fa9fb0e6502d412dedfebff5e"
+}

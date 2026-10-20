@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "mixed": "runs/model-20261017T234304Z-ankidroid/android/20261019T130619.375617Z/mixed.json",
+  "undone": "runs/model-20261017T234304Z-ankidroid/android/20261019T130619.375617Z/undone.json",
+  "checks": [
+    "Easy345600",
+    "Again60",
+    "all_six_cards_and_three_notes",
+    "multiple_review_sorting",
+    "undo_only_latest_rating",
+    "undo_restores_question_burial_clock"
+  ],
+  "rating_counts": {
+    "Again": 1,
+    "Good": 0,
+    "Easy": 1
+  },
+  "deck_counts": {
+    "Field": 0,
+    "Gear": 2
+  }
+}

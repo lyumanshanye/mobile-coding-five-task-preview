@@ -1,0 +1,557 @@
+{
+  "task": "MCP-012",
+  "apk_sha256": "04589851c7e2158c746d3fd0231d185660e94f5b0c1aba73d518de1ef188ec17",
+  "audited_at_utc": "2026-10-20T04:04:01.180690+00:00",
+  "overall": "ACCEPTED_ORIGINAL_MODEL_ANSWER",
+  "counts": {
+    "PASS": 45
+  },
+  "items": [
+    {
+      "id": "R01-01",
+      "criterion": "fixture导入后note/card独立，双向共享内容而排期独立",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261018T003158.312336Z/t1-storage-result.json",
+        "android/20261018T010510.841222Z/t2-functional-result.json"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "R01-02",
+      "criterion": "真实TSV按note_id更新，不重复卡、不重置due/review",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261018T010510.841222Z/t2-functional-result.json"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "R01-03",
+      "criterion": "TSV空白字段保留原值",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "tsv-boundary-checks.json",
+        "android/20261019T130912.665580Z/blank.json",
+        "android/20261019T131219.735455Z/unknown.json",
+        "android/20261019T131219.735455Z/unknown-rejected.xml"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "R01-04",
+      "criterion": "未知ID整份TSV更新拒绝且数据不变",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "tsv-boundary-checks.json",
+        "android/20261019T130912.665580Z/blank.json",
+        "android/20261019T131219.735455Z/unknown.json",
+        "android/20261019T131219.735455Z/unknown-rejected.xml"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "R02-01",
+      "criterion": "due<=业务时钟且未bury的计数与队列",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261018T003158.312336Z/t1-storage-result.json",
+        "android/20261018T011318.835953Z/t3-functional-result.json",
+        "android/20261018T004334.349875Z/t4-functional-result.json"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "R02-02",
+      "criterion": "suspended卡排除于可复习计数/队列",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "variant-checks.json",
+        "android/20261020T033636.941381Z/variant.json",
+        "android/20261020T033636.941381Z/variant-decks.xml",
+        "android/20261020T033636.941381Z/variant-first-card.xml",
+        "android/20261020T033636.941381Z/variant-reentered.xml"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "R02-03",
+      "criterion": "按due再card_id升序",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261018T003158.312336Z/t1-storage-result.json",
+        "android/20261018T004334.349875Z/t4-functional-result.json"
+      ],
+      "gap": "限原fixture和已验证评分/撤销队列。"
+    },
+    {
+      "id": "R02-04",
+      "criterion": "业务时钟来自fixture并支持精确+60秒/+1天",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261018T011318.835953Z/t3-functional-result.json",
+        "android/20261018T004334.349875Z/t4-functional-result.json"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "R03-01",
+      "criterion": "问面只有当前方向提示，未翻面不可评分",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261018T003158.312336Z/t1-after-undo.xml"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "R03-02",
+      "criterion": "翻面答案及三评分操作可达",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261018T003158.312336Z/t1-storage-result.json",
+        "android/20261018T004334.349875Z/t4-functional-result.json"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "R03-03",
+      "criterion": "反向卡交换front/back",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261018T010510.841222Z/t2-functional-result.json"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "R03-04",
+      "criterion": "一次评分唯一review_id；207ms快速双击不重复",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261018T011318.835953Z/t3-functional-result.json",
+        "android/20261018T011742.910092Z/report.json"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "R03-05",
+      "criterion": "提交未完成时重复点按不重复记数",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "clean-t01-checks.json",
+        "android/20261020T034718.321026Z/report.json",
+        "android/20261020T034058.145820Z/report.json",
+        "android/20261020T034834.127621Z/good.json",
+        "android/20261020T034834.127621Z/undone.json",
+        "android/20261020T034834.127621Z/t01-undone-restarted.xml"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "R04-01",
+      "criterion": "Again due=clock+60且interval同步",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261018T004334.349875Z/t4-functional-result.json"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "R04-02",
+      "criterion": "Good due=clock+86400且interval同步",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261018T003158.312336Z/t1-storage-result.json",
+        "android/20261018T011318.835953Z/t3-functional-result.json"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "R04-03",
+      "criterion": "Easy due=clock+345600且interval同步",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "continuation-checks.json",
+        "android/20261019T130619.375617Z/mixed.json",
+        "android/20261019T130619.375617Z/undone.json",
+        "android/20261019T130619.375617Z/mixed-statistics.xml",
+        "android/20261019T130619.375617Z/undo-restarted.xml"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "R04-04",
+      "criterion": "统计从review日志重建各评分次数",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "continuation-checks.json",
+        "android/20261019T130619.375617Z/mixed.json",
+        "android/20261019T130619.375617Z/undone.json",
+        "android/20261019T130619.375617Z/mixed-statistics.xml",
+        "android/20261019T130619.375617Z/undo-restarted.xml"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "R04-05",
+      "criterion": "同note兄弟卡临时bury不改due；结束会话全部解除",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261018T003158.312336Z/t1-storage-result.json",
+        "android/20261018T011318.835953Z/t3-functional-result.json",
+        "android/20261018T004334.349875Z/t4-functional-result.json"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "R05-01",
+      "criterion": "撤销最近评分删对应review、恢复due/interval/bury/原问面",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261018T003158.312336Z/t1-storage-result.json"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "R05-02",
+      "criterion": "后续评分替换撤销栈顶，其余日志不变",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "continuation-checks.json",
+        "android/20261019T130619.375617Z/mixed.json",
+        "android/20261019T130619.375617Z/undone.json",
+        "android/20261019T130619.375617Z/mixed-statistics.xml",
+        "android/20261019T130619.375617Z/undo-restarted.xml"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "R05-03",
+      "criterion": "取消编辑不影响排期",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261018T010510.841222Z/t2-functional-result.json"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "R06-01",
+      "criterion": "编辑保存共享双向文本、回问面、due/history不变",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261018T010510.841222Z/t2-functional-result.json"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "R06-02",
+      "criterion": "返回牌组再进入按同队列规则，不用同标题作为ID",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "variant-checks.json",
+        "android/20261020T033636.941381Z/variant.json",
+        "android/20261020T033636.941381Z/variant-decks.xml",
+        "android/20261020T033636.941381Z/variant-first-card.xml",
+        "android/20261020T033636.941381Z/variant-reentered.xml"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "R07-01",
+      "criterion": "成功评分后force-stop恢复当前卡/面/bury/clock",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261019T130002.962968Z/easy-restarted.xml",
+        "continuation-checks.json"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "R07-02",
+      "criterion": "撤销成功后force-stop恢复所有due及原问面",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "continuation-checks.json",
+        "android/20261019T130619.375617Z/mixed.json",
+        "android/20261019T130619.375617Z/undone.json",
+        "android/20261019T130619.375617Z/mixed-statistics.xml",
+        "android/20261019T130619.375617Z/undo-restarted.xml"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "R07-03",
+      "criterion": "编辑成功持久化且取消草稿丢弃",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261018T010510.841222Z/t2-functional-result.json"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "R07-04",
+      "criterion": "答面旋转及force-stop仍同card/答面，不评分/抽卡",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261018T004334.349875Z/t4-functional-result.json",
+        "android/20261018T003632.134500Z/t4-landscape-answer.png"
+      ],
+      "gap": "真实横屏图尺寸1280x720已核对；不把此项当所有页面适配通过。"
+    },
+    {
+      "id": "R08-01",
+      "criterion": "系统选择器导出UTF-8 JSON包含七类公共字段并可恢复",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261018T011318.835953Z/t3-functional-result.json",
+        "android/20261018T011013.433920Z/report.json"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "R08-02",
+      "criterion": "reviews含review_id/card_id/rating/at/previous_due/new_due",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261018T011318.835953Z/t3-functional-result.json"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "R08-03",
+      "criterion": "reviews按at再review_id排序",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "continuation-checks.json",
+        "android/20261019T130619.375617Z/mixed.json",
+        "android/20261019T130619.375617Z/undone.json",
+        "android/20261019T130619.375617Z/mixed-statistics.xml",
+        "android/20261019T130619.375617Z/undo-restarted.xml"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "R08-04",
+      "criterion": "统计与牌组计数可由公共导出重建",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "continuation-checks.json",
+        "android/20261019T130619.375617Z/mixed.json",
+        "android/20261019T130619.375617Z/undone.json",
+        "android/20261019T130619.375617Z/mixed-statistics.xml",
+        "android/20261019T130619.375617Z/undo-restarted.xml"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "R09-01",
+      "criterion": "问面阶段提示层级",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261018T003158.312336Z/t1-after-undo.png",
+        "android/20261018T003158.312336Z/t1-after-undo.xml"
+      ],
+      "gap": "已复用实际截图/XML或独立公共导出核对；视觉仅主要信息层级，不代表像素级高保真。"
+    },
+    {
+      "id": "R10-01",
+      "criterion": "答面揭示与三评分区",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261018T002654.866831Z/t1-answer-unrecorded.png",
+        "android/20261018T002654.866831Z/t1-answer-unrecorded.xml"
+      ],
+      "gap": "已复用实际截图/XML或独立公共导出核对；视觉仅主要信息层级，不代表像素级高保真。"
+    },
+    {
+      "id": "R11-01",
+      "criterion": "牌组与到期计数层级",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261018T004334.349875Z/t4-decks-due.png",
+        "android/20261018T004334.349875Z/t4-decks-due.xml"
+      ],
+      "gap": "已复用实际截图/XML或独立公共导出核对；视觉仅主要信息层级，不代表像素级高保真。"
+    },
+    {
+      "id": "R12-01",
+      "criterion": "统计分类趋势层级",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261018T011318.835953Z/t3-statistics.png",
+        "android/20261018T011318.835953Z/t3-statistics.xml"
+      ],
+      "gap": "已复用实际截图/XML或独立公共导出核对；视觉仅主要信息层级，不代表像素级高保真。"
+    },
+    {
+      "id": "R13-01",
+      "criterion": "笔记字段与保存入口层级",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261018T004914.051485Z/t2-edited-fields.png",
+        "android/20261018T004914.051485Z/t2-edited-fields.xml"
+      ],
+      "gap": "已复用实际截图/XML或独立公共导出核对；视觉仅主要信息层级，不代表像素级高保真。"
+    },
+    {
+      "id": "B01",
+      "criterion": "APK/源码/构建说明/自测交付",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "stages/20261018T001653.736705Z-independent-build/report.json"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "B02",
+      "criterion": "核心控件可访问名称、列表身份/计数/状态可读",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261018T003158.312336Z/t1-after-undo.xml",
+        "android/20261018T002654.866831Z/t1-answer-unrecorded.xml",
+        "android/20261018T004334.349875Z/t4-decks-due.xml",
+        "android/20261018T011318.835953Z/t3-statistics.xml",
+        "android/20261018T004914.051485Z/t2-edited-fields.xml"
+      ],
+      "gap": "已复用实际截图/XML或独立公共导出核对；视觉仅主要信息层级，不代表像素级高保真。"
+    },
+    {
+      "id": "B03",
+      "criterion": "真实横屏核心控件无遮挡且可操作",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261020T034331.244290Z/actual-landscape13-editor.png",
+        "android/20261020T034331.244290Z/actual-landscape13-question.png",
+        "android/20261020T034718.321026Z/landscape13-answer-actions.png",
+        "android/20261020T035144.209659Z/actual-landscape13-decks.png",
+        "android/20261020T035144.209659Z/actual-landscape13-statistics.png",
+        "android/20261020T035512.309087Z/landscape13-back-edited.png",
+        "android/20261020T035731.609007Z/report.json",
+        "android/20261020T040004.307909Z/landscape13-statistics-trend.png",
+        "android/20261020T040004.307909Z/report.json"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "B04",
+      "criterion": "字体1.3核心控件无遮挡且可操作",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261020T034331.244290Z/actual-landscape13-editor.png",
+        "android/20261020T034331.244290Z/actual-landscape13-question.png",
+        "android/20261020T034718.321026Z/landscape13-answer-actions.png",
+        "android/20261020T035144.209659Z/actual-landscape13-decks.png",
+        "android/20261020T035144.209659Z/actual-landscape13-statistics.png",
+        "android/20261020T035512.309087Z/landscape13-back-edited.png",
+        "android/20261020T035731.609007Z/report.json",
+        "android/20261020T040004.307909Z/landscape13-statistics-trend.png",
+        "android/20261020T040004.307909Z/report.json"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "B05",
+      "criterion": "旋转不得重复评分提交",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261018T004334.349875Z/t4-functional-result.json",
+        "android/20261018T003632.134500Z/t4-landscape-answer.png"
+      ],
+      "gap": "合同未要求精确提交中瞬间旋转；已有答面旋转不评分及其后唯一Again证据。"
+    },
+    {
+      "id": "T01-INIT",
+      "criterion": "T01原始独立初态与恢复终态",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "clean-t01-checks.json",
+        "android/20261020T034718.321026Z/report.json",
+        "android/20261020T034058.145820Z/report.json",
+        "android/20261020T034834.127621Z/good.json",
+        "android/20261020T034834.127621Z/undone.json",
+        "android/20261020T034834.127621Z/t01-undone-restarted.xml"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "T02-INIT",
+      "criterion": "T02独立原始初态再Good→编辑/TSV/取消",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261018T004548.766185Z/report.json",
+        "android/20261018T010510.841222Z/t2-functional-result.json"
+      ],
+      "gap": ""
+    },
+    {
+      "id": "T03-INIT",
+      "criterion": "T03原始独立初态与导出恢复",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261018T011318.835953Z/t3-functional-result.json",
+        "android/20261018T011742.910092Z/report.json"
+      ],
+      "gap": "checker包含独立clean-state rapid测试与系统导出恢复。"
+    },
+    {
+      "id": "T04-INIT",
+      "criterion": "T04原始答面未评分初态、Again与60秒终态",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "evidence": [
+        "android/20261018T004334.349875Z/t4-functional-result.json"
+      ],
+      "gap": ""
+    }
+  ],
+  "minimal_supplement": [],
+  "excluded_extra_gates": [
+    "single continuous video",
+    "three stable reruns",
+    "bad implementation executions"
+  ],
+  "scope": "Published R01-R13/taskbook/adaptation only; existing independently checked actual evidence reused; absent evidence is NOT_TESTED, not FAIL."
+}

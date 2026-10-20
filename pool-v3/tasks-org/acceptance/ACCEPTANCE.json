@@ -1,0 +1,827 @@
+{
+  "task": "tasks-org",
+  "audited_at_utc": "2026-10-20T06:30:23.076113+00:00",
+  "source_run": "runs/model-20261019T081535Z-tasks-org",
+  "overall": "ACCEPTED_ORIGINAL_MODEL_ANSWER",
+  "kind": "CONTRACT_COVERAGE_ACCEPTANCE",
+  "counts": {
+    "PASS": 35,
+    "NOT_TESTED": 6
+  },
+  "items": [
+    {
+      "id": "R1-01",
+      "contract": "R1",
+      "criterion": "清单、任务编辑页展示标题、截止时间、优先级、标签及子任务",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/instruction.md",
+      "evidence": [
+        "android/20261020T055141.898244Z/t1-editor-restored.png",
+        "android/20261020T055411.088470Z/r1-child-new.png",
+        "android/20261020T054005.635648Z/parent-cancelled.png"
+      ],
+      "gap": "人工审核实际画面：纸杯editor展示标题/截止/优先级/标签，父editor滚动区域展示子任务和清单，任务列表展示层级。证据按实际内容而非截图label归类。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R1-02",
+      "contract": "R1",
+      "criterion": "允许增删改，不把嵌套数据压成只读文本",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/instruction.md",
+      "evidence": [
+        "android/20261020T055512.212411Z/r1-child-created.xml",
+        "android/20261020T055930.689128Z/r1-child-edited.png",
+        "android/20261020T060224.182512Z/r1-delete-restored-five.png",
+        "sqlite-r1-restored/state-check.json"
+      ],
+      "gap": "实际新增子任务A，保存改名B/高优先级/20日08:30，删除后独立SQLite恢复原5固定任务，weekly保持已完成链的26日。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R2-01",
+      "contract": "R2",
+      "criterion": "以input/seed.json建立活动清单与三个子任务",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/instruction.md",
+      "evidence": [
+        "initial-state-check.json",
+        "android/20261020T053821.601871Z/seed-export.json",
+        "android/20261020T053528.430825Z/seed-imported.xml"
+      ],
+      "gap": "实际用户导出经独立公共seed比对：固定ID、父子关系、三个采购子项、每周一09:00和上海时区/固定时钟一致。截图证据另由-14核对。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R2-02",
+      "contract": "R2",
+      "criterion": "父任务完成前须提示仍有未完成子任务，允许取消并保持状态",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/instruction.md",
+      "evidence": [
+        "android/20261020T054005.635648Z/parent-warning-stable.png",
+        "android/20261020T054005.635648Z/parent-cancelled.png",
+        "sqlite-t1-completed/capture-report.json",
+        "sqlite-t1-completed/state-check.json"
+      ],
+      "gap": "实际提示2个未完成子任务并取消；视觉及冷SQLite独立比较确认仅cups完成，父任务与其它任务/关系不变。数据库只证明核心数据，不代替metadata或UI。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R2-03",
+      "contract": "R2",
+      "criterion": "该提示策略是本题新增",
+      "status": "NOT_TESTED",
+      "required_for_acceptance": false,
+      "source": "tasks/tasks-org/instruction.md",
+      "evidence": [],
+      "gap": "公开说明原句完整保留；不将策略来源或不要求联网变成额外App动作。",
+      "original_required_for_acceptance": true,
+      "item_kind": "provenance_note"
+    },
+    {
+      "id": "R3-01",
+      "contract": "R3",
+      "criterion": "重复任务每周一09:00（Asia/Shanghai）",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/instruction.md",
+      "evidence": [
+        "initial-state-check.json",
+        "android/20261020T053821.601871Z/seed-export.json",
+        "android/20261020T053528.430825Z/seed-imported.xml"
+      ],
+      "gap": "实际用户导出经独立公共seed比对：固定ID、父子关系、三个采购子项、每周一09:00和上海时区/固定时钟一致。截图证据另由-14核对。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R3-02",
+      "contract": "R3",
+      "criterion": "完成2026-10-19实例后下次截止为2026-10-26 09:00",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/instruction.md",
+      "evidence": [
+        "sqlite-t2-next/state-recheck.json",
+        "sqlite-t2-undo/state-check.json",
+        "sqlite-t2-recomplete/state-check.json",
+        "android/20261020T054818.255517Z/t2-undo.xml",
+        "android/20261020T054932.284667Z/t2-recomplete.xml",
+        "android/20261020T055047.969607Z/t2-recomplete-cold-restart.xml"
+      ],
+      "gap": "实际完成→撤销→再次完成，独立冷数据库快照逐次核对19日/26日与唯一weekly及0/1条完成历史；再次冷启动XML保留唯一26日。截图完整性另由T02-14审核。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R3-03",
+      "contract": "R3",
+      "criterion": "撤销完成恢复原实例，不叠加生成",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/instruction.md",
+      "evidence": [
+        "sqlite-t2-next/state-recheck.json",
+        "sqlite-t2-undo/state-check.json",
+        "sqlite-t2-recomplete/state-check.json",
+        "android/20261020T054818.255517Z/t2-undo.xml",
+        "android/20261020T054932.284667Z/t2-recomplete.xml",
+        "android/20261020T055047.969607Z/t2-recomplete-cold-restart.xml"
+      ],
+      "gap": "实际完成→撤销→再次完成，独立冷数据库快照逐次核对19日/26日与唯一weekly及0/1条完成历史；再次冷启动XML保留唯一26日。截图完整性另由T02-14审核。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R4-01",
+      "contract": "R4",
+      "criterion": "按标签采购与未完成筛选，编辑子任务标签/完成状态后列表即时变化",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/instruction.md",
+      "evidence": [
+        "android/20261020T060545.341254Z/t3-two-filtered.png",
+        "android/20261020T061059.095405Z/t3-only-badges.png",
+        "sqlite-t3-filtered/state-check.json",
+        "sqlite-t3-tag-changed/state-check.json"
+      ],
+      "gap": "真实采购且未完成筛选先仅胶带/名牌；胶带标签保存场地后列表立即仅名牌。真实metadata与task表独立核对同一条件与2→1身份。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R4-02",
+      "contract": "R4",
+      "criterion": "清空筛选后完整恢复，重启不丢数据",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/instruction.md",
+      "evidence": [
+        "android/20261020T060332.848919Z/t3-fresh-initial.png",
+        "android/20261020T060545.341254Z/t3-two-filtered.png",
+        "android/20261020T061059.095405Z/t3-only-badges.png",
+        "android/20261020T061328.175994Z/t3-empty-search.png",
+        "android/20261020T061508.516608Z/t3-back-retains-filter.png",
+        "android/20261020T061508.516608Z/t3-cleared-all-five.png",
+        "sqlite-t3-tag-changed/state-check.json",
+        "sqlite-t3-empty/state-check.json",
+        "sqlite-t3-cleared/state-check.json"
+      ],
+      "gap": "实际独立reset→editor完成纸杯→采购未完成2项→胶带改场地仅名牌→不匹配空态→冷启动BACK恢复原筛选→clear五项；真实metadata/表及截图一致，完整关系与数据保持。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R5-01",
+      "contract": "R5",
+      "criterion": "深色/浅色主题切换保留筛选及编辑中的内容",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/instruction.md",
+      "evidence": [
+        "android/20261020T061932.233091Z/t4-draft-after-background.png",
+        "android/20261020T062207.142511Z/t4-dark-unsaved-draft.png",
+        "android/20261020T062317.741420Z/t4-light-unsaved-draft.png",
+        "android/20261020T062317.741420Z/t4-saved-title-light.png",
+        "android/20261020T062317.741420Z/t4-saved-title-dark.png",
+        "android/20261020T062613.412533Z/t4-dark-cold-restart.png",
+        "android/20261020T062613.412533Z/t4-discard-dialog.png",
+        "android/20261020T062613.412533Z/t4-continue-editing.png",
+        "android/20261020T062613.412533Z/t4-discarded-title-preserved.png",
+        "sqlite-t4-draft/state-check.json",
+        "sqlite-t4-dark/state-check.json",
+        "sqlite-t4-discarded/state-check.json"
+      ],
+      "gap": "真实HOME返回保草稿，深浅主题草稿内容保持，保存后深色冷启动保新标题/层级/非空采购未完成筛选；继续编辑保未存标题，放弃恢复已存标题；实际冷SQLite metadata/draft独立核对，放弃后目标draft清除。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R5-02",
+      "contract": "R5",
+      "criterion": "未保存返回可丢弃或继续",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/instruction.md",
+      "evidence": [
+        "android/20261020T061932.233091Z/t4-draft-after-background.png",
+        "android/20261020T062207.142511Z/t4-dark-unsaved-draft.png",
+        "android/20261020T062317.741420Z/t4-light-unsaved-draft.png",
+        "android/20261020T062317.741420Z/t4-saved-title-light.png",
+        "android/20261020T062317.741420Z/t4-saved-title-dark.png",
+        "android/20261020T062613.412533Z/t4-dark-cold-restart.png",
+        "android/20261020T062613.412533Z/t4-discard-dialog.png",
+        "android/20261020T062613.412533Z/t4-continue-editing.png",
+        "android/20261020T062613.412533Z/t4-discarded-title-preserved.png",
+        "sqlite-t4-draft/state-check.json",
+        "sqlite-t4-dark/state-check.json",
+        "sqlite-t4-discarded/state-check.json"
+      ],
+      "gap": "真实HOME返回保草稿，深浅主题草稿内容保持，保存后深色冷启动保新标题/层级/非空采购未完成筛选；继续编辑保未存标题，放弃恢复已存标题；实际冷SQLite metadata/draft独立核对，放弃后目标draft清除。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R5-03",
+      "contract": "R5",
+      "criterion": "无需接入真实账号、同步或定位服务",
+      "status": "NOT_TESTED",
+      "required_for_acceptance": false,
+      "source": "tasks/tasks-org/instruction.md",
+      "evidence": [],
+      "gap": "公开说明原句完整保留；不将策略来源或不要求联网变成额外App动作。",
+      "original_required_for_acceptance": true,
+      "item_kind": "scope_exclusion"
+    },
+    {
+      "id": "T01-02",
+      "contract": "T01",
+      "criterion": "初始状态：按seed.json导入1个父任务、3个子任务及1个重复任务。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/operation_taskbook.md",
+      "evidence": [
+        "initial-state-check.json",
+        "android/20261020T053821.601871Z/seed-export.json",
+        "android/20261020T053528.430825Z/seed-imported.xml"
+      ],
+      "gap": "实际用户导出经独立公共seed比对：固定ID、父子关系、三个采购子项、每周一09:00和上海时区/固定时钟一致。截图证据另由-14核对。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T01-04",
+      "contract": "T01",
+      "criterion": "操作：打开活动采购，完成纸杯，再尝试完成父任务并取消。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T054005.635648Z/parent-warning-stable.png",
+        "android/20261020T054005.635648Z/parent-cancelled.png",
+        "sqlite-t1-completed/capture-report.json",
+        "sqlite-t1-completed/state-check.json"
+      ],
+      "gap": "实际提示2个未完成子任务并取消；视觉及冷SQLite独立比较确认仅cups完成，父任务与其它任务/关系不变。数据库只证明核心数据，不代替metadata或UI。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T01-06",
+      "contract": "T01",
+      "criterion": "中间状态：纸杯已完成，另外两项未完成；父任务确认出现。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T054005.635648Z/parent-warning-stable.png",
+        "android/20261020T054005.635648Z/parent-cancelled.png",
+        "sqlite-t1-completed/capture-report.json",
+        "sqlite-t1-completed/state-check.json"
+      ],
+      "gap": "实际提示2个未完成子任务并取消；视觉及冷SQLite独立比较确认仅cups完成，父任务与其它任务/关系不变。数据库只证明核心数据，不代替metadata或UI。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T01-08",
+      "contract": "T01",
+      "criterion": "最终状态：父任务仍未完成，纸杯完成状态保留。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T054005.635648Z/parent-warning-stable.png",
+        "android/20261020T054005.635648Z/parent-cancelled.png",
+        "sqlite-t1-completed/capture-report.json",
+        "sqlite-t1-completed/state-check.json"
+      ],
+      "gap": "实际提示2个未完成子任务并取消；视觉及冷SQLite独立比较确认仅cups完成，父任务与其它任务/关系不变。数据库只证明核心数据，不代替metadata或UI。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T01-10",
+      "contract": "T01",
+      "criterion": "恢复/异常：再次编辑纸杯取消勾选，恢复初态。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T055141.898244Z/steps.json",
+        "android/20261020T055141.898244Z/t1-editor-restored.png",
+        "android/20261020T055141.898244Z/t1-editor-restored.xml",
+        "sqlite-r1-restored/state-check.json"
+      ],
+      "gap": "纸杯editor实际勾选保存，再次编辑取消勾选保存，目标恢复未完成；独立数据确认其余字段保持。weekly已另进入T2，未声称全局撤销T2。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T01-12",
+      "contract": "T01",
+      "criterion": "视觉依据：S01子任务编辑；父任务提示待补图。",
+      "status": "NOT_TESTED",
+      "required_for_acceptance": false,
+      "source": "tasks/tasks-org/operation_taskbook.md",
+      "evidence": [],
+      "gap": "参考来源和待补参考图说明，非要求候选补制官方参考图；实际界面证据仍由本链-14要求约束。",
+      "original_required_for_acceptance": true,
+      "item_kind": "visual_reference_note",
+      "applies_to": [
+        "T01-02",
+        "T01-04",
+        "T01-06",
+        "T01-08",
+        "T01-10",
+        "T01-14"
+      ]
+    },
+    {
+      "id": "T01-14",
+      "contract": "T01",
+      "criterion": "待采集证据：操作前、关键中间态、最终态截图；非视觉语义补导出文件/数据摘要。不能用官方截图冒充实测。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T060332.848919Z/t3-fresh-initial.png",
+        "android/20261020T054005.635648Z/parent-warning-stable.png",
+        "android/20261020T054005.635648Z/parent-cancelled.png",
+        "android/20261020T055141.898244Z/t1-editor-restored.png",
+        "initial-state-check.json",
+        "sqlite-t1-completed/state-check.json"
+      ],
+      "gap": "初态由独立重置同seed后的稳定截图补证，非冒称首次截图；关键父提示/取消/编辑恢复及独立状态摘要齐全。",
+      "original_required_for_acceptance": true,
+      "item_kind": "evidence_requirement"
+    },
+    {
+      "id": "T02-02",
+      "contract": "T02",
+      "criterion": "初始状态：检查物资截止2026-10-19 09:00+08:00，时钟固定2026-10-19 08:30。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/operation_taskbook.md",
+      "evidence": [
+        "initial-state-check.json",
+        "android/20261020T053821.601871Z/seed-export.json",
+        "android/20261020T053528.430825Z/seed-imported.xml"
+      ],
+      "gap": "实际用户导出经独立公共seed比对：固定ID、父子关系、三个采购子项、每周一09:00和上海时区/固定时钟一致。截图证据另由-14核对。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T02-04",
+      "contract": "T02",
+      "criterion": "操作：完成检查物资，查看下次截止，撤销完成，再次完成。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/operation_taskbook.md",
+      "evidence": [
+        "sqlite-t2-next/state-recheck.json",
+        "sqlite-t2-undo/state-check.json",
+        "sqlite-t2-recomplete/state-check.json",
+        "android/20261020T054818.255517Z/t2-undo.xml",
+        "android/20261020T054932.284667Z/t2-recomplete.xml",
+        "android/20261020T055047.969607Z/t2-recomplete-cold-restart.xml"
+      ],
+      "gap": "实际完成→撤销→再次完成，独立冷数据库快照逐次核对19日/26日与唯一weekly及0/1条完成历史；再次冷启动XML保留唯一26日。截图完整性另由T02-14审核。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T02-06",
+      "contract": "T02",
+      "criterion": "中间状态：先出现10月26日截止；撤销回19日。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/operation_taskbook.md",
+      "evidence": [
+        "sqlite-t2-next/state-recheck.json",
+        "sqlite-t2-undo/state-check.json",
+        "sqlite-t2-recomplete/state-check.json",
+        "android/20261020T054818.255517Z/t2-undo.xml",
+        "android/20261020T054932.284667Z/t2-recomplete.xml",
+        "android/20261020T055047.969607Z/t2-recomplete-cold-restart.xml"
+      ],
+      "gap": "实际完成→撤销→再次完成，独立冷数据库快照逐次核对19日/26日与唯一weekly及0/1条完成历史；再次冷启动XML保留唯一26日。截图完整性另由T02-14审核。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T02-08",
+      "contract": "T02",
+      "criterion": "最终状态：只有一个下次实例，截止26日，无重复任务。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/operation_taskbook.md",
+      "evidence": [
+        "sqlite-t2-next/state-recheck.json",
+        "sqlite-t2-undo/state-check.json",
+        "sqlite-t2-recomplete/state-check.json",
+        "android/20261020T054818.255517Z/t2-undo.xml",
+        "android/20261020T054932.284667Z/t2-recomplete.xml",
+        "android/20261020T055047.969607Z/t2-recomplete-cold-restart.xml"
+      ],
+      "gap": "实际完成→撤销→再次完成，独立冷数据库快照逐次核对19日/26日与唯一weekly及0/1条完成历史；再次冷启动XML保留唯一26日。截图完整性另由T02-14审核。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T02-10",
+      "contract": "T02",
+      "criterion": "恢复/异常：重启后仍只一个活动实例。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/operation_taskbook.md",
+      "evidence": [
+        "sqlite-t2-next/state-recheck.json",
+        "sqlite-t2-undo/state-check.json",
+        "sqlite-t2-recomplete/state-check.json",
+        "android/20261020T054818.255517Z/t2-undo.xml",
+        "android/20261020T054932.284667Z/t2-recomplete.xml",
+        "android/20261020T055047.969607Z/t2-recomplete-cold-restart.xml"
+      ],
+      "gap": "实际完成→撤销→再次完成，独立冷数据库快照逐次核对19日/26日与唯一weekly及0/1条完成历史；再次冷启动XML保留唯一26日。截图完整性另由T02-14审核。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T02-12",
+      "contract": "T02",
+      "criterion": "视觉依据：S01截止时间控件；重复规则与撤销结果待补图。",
+      "status": "NOT_TESTED",
+      "required_for_acceptance": false,
+      "source": "tasks/tasks-org/operation_taskbook.md",
+      "evidence": [],
+      "gap": "参考来源和待补参考图说明，非要求候选补制官方参考图；实际界面证据仍由本链-14要求约束。",
+      "original_required_for_acceptance": true,
+      "item_kind": "visual_reference_note",
+      "applies_to": [
+        "T02-02",
+        "T02-04",
+        "T02-06",
+        "T02-08",
+        "T02-10",
+        "T02-14"
+      ]
+    },
+    {
+      "id": "T02-14",
+      "contract": "T02",
+      "criterion": "待采集证据：操作前、关键中间态、最终态截图；非视觉语义补导出文件/数据摘要。不能用官方截图冒充实测。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T060332.848919Z/t3-fresh-initial.png",
+        "android/20261020T055047.969607Z/cups-editor.png",
+        "android/20261020T061508.516608Z/t2-undo-stable-supplement.png",
+        "sqlite-t2-next/state-recheck.json",
+        "sqlite-t2-undo/state-check.json",
+        "sqlite-t2-recomplete/state-check.json",
+        "sqlite-t3-cleared/decoded/state.json"
+      ],
+      "gap": "初态19日、完成后26日banner、实际再次完成再撤销后的19日稳定补图及原链各阶段独立数据齐全。补图时纸杯/标签已进入T3，不冒称原T2同一批截图。",
+      "original_required_for_acceptance": true,
+      "item_kind": "evidence_requirement"
+    },
+    {
+      "id": "T03-02",
+      "contract": "T03",
+      "criterion": "初始状态：独立重置并导入seed.json；先打开纸杯100只并勾选完成，保存。确认纸杯已完成，胶带/名牌未完成且标签采购。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T060332.848919Z/steps.json",
+        "android/20261020T060332.848919Z/t3-fresh-initial.png",
+        "android/20261020T060545.341254Z/t3-two-filtered.png",
+        "sqlite-t3-filtered/state-check.json",
+        "sqlite-t3-filtered/decoded/state.json"
+      ],
+      "gap": "实际独立重置seed后通过纸杯editor勾选保存；实际metadata及归一化表确认cups完成，其余两采购子项未完成，真实筛选画面仅胶带/名牌。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T03-04",
+      "contract": "T03",
+      "criterion": "操作：筛选采购且未完成；把胶带标签改为场地；清空筛选。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T060332.848919Z/t3-fresh-initial.png",
+        "android/20261020T060545.341254Z/t3-two-filtered.png",
+        "android/20261020T061059.095405Z/t3-only-badges.png",
+        "android/20261020T061328.175994Z/t3-empty-search.png",
+        "android/20261020T061508.516608Z/t3-back-retains-filter.png",
+        "android/20261020T061508.516608Z/t3-cleared-all-five.png",
+        "sqlite-t3-tag-changed/state-check.json",
+        "sqlite-t3-empty/state-check.json",
+        "sqlite-t3-cleared/state-check.json"
+      ],
+      "gap": "实际独立reset→editor完成纸杯→采购未完成2项→胶带改场地仅名牌→不匹配空态→冷启动BACK恢复原筛选→clear五项；真实metadata/表及截图一致，完整关系与数据保持。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T03-06",
+      "contract": "T03",
+      "criterion": "中间状态：筛选初始2项，编辑后仅名牌。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T060545.341254Z/t3-two-filtered.png",
+        "android/20261020T061059.095405Z/t3-only-badges.png",
+        "sqlite-t3-filtered/state-check.json",
+        "sqlite-t3-tag-changed/state-check.json"
+      ],
+      "gap": "真实采购且未完成筛选先仅胶带/名牌；胶带标签保存场地后列表立即仅名牌。真实metadata与task表独立核对同一条件与2→1身份。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T03-08",
+      "contract": "T03",
+      "criterion": "最终状态：清空后任务完整；胶带仍为场地。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T060332.848919Z/t3-fresh-initial.png",
+        "android/20261020T060545.341254Z/t3-two-filtered.png",
+        "android/20261020T061059.095405Z/t3-only-badges.png",
+        "android/20261020T061328.175994Z/t3-empty-search.png",
+        "android/20261020T061508.516608Z/t3-back-retains-filter.png",
+        "android/20261020T061508.516608Z/t3-cleared-all-five.png",
+        "sqlite-t3-tag-changed/state-check.json",
+        "sqlite-t3-empty/state-check.json",
+        "sqlite-t3-cleared/state-check.json"
+      ],
+      "gap": "实际独立reset→editor完成纸杯→采购未完成2项→胶带改场地仅名牌→不匹配空态→冷启动BACK恢复原筛选→clear五项；真实metadata/表及截图一致，完整关系与数据保持。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T03-10",
+      "contract": "T03",
+      "criterion": "恢复/异常：搜索不存在词显示空态，返回原筛选不丢条件。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T060332.848919Z/t3-fresh-initial.png",
+        "android/20261020T060545.341254Z/t3-two-filtered.png",
+        "android/20261020T061059.095405Z/t3-only-badges.png",
+        "android/20261020T061328.175994Z/t3-empty-search.png",
+        "android/20261020T061508.516608Z/t3-back-retains-filter.png",
+        "android/20261020T061508.516608Z/t3-cleared-all-five.png",
+        "sqlite-t3-tag-changed/state-check.json",
+        "sqlite-t3-empty/state-check.json",
+        "sqlite-t3-cleared/state-check.json"
+      ],
+      "gap": "实际独立reset→editor完成纸杯→采购未完成2项→胶带改场地仅名牌→不匹配空态→冷启动BACK恢复原筛选→clear五项；真实metadata/表及截图一致，完整关系与数据保持。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T03-12",
+      "contract": "T03",
+      "criterion": "视觉依据：S04任务列表、S05标签导航；空态待补图。",
+      "status": "NOT_TESTED",
+      "required_for_acceptance": false,
+      "source": "tasks/tasks-org/operation_taskbook.md",
+      "evidence": [],
+      "gap": "参考来源和待补参考图说明，非要求候选补制官方参考图；实际界面证据仍由本链-14要求约束。",
+      "original_required_for_acceptance": true,
+      "item_kind": "visual_reference_note",
+      "applies_to": [
+        "T03-02",
+        "T03-04",
+        "T03-06",
+        "T03-08",
+        "T03-10",
+        "T03-14"
+      ]
+    },
+    {
+      "id": "T03-14",
+      "contract": "T03",
+      "criterion": "待采集证据：操作前、关键中间态、最终态截图；非视觉语义补导出文件/数据摘要。不能用官方截图冒充实测。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T060332.848919Z/t3-fresh-initial.png",
+        "android/20261020T060545.341254Z/t3-two-filtered.png",
+        "android/20261020T061059.095405Z/t3-only-badges.png",
+        "android/20261020T061328.175994Z/t3-empty-search.png",
+        "android/20261020T061508.516608Z/t3-back-retains-filter.png",
+        "android/20261020T061508.516608Z/t3-cleared-all-five.png",
+        "sqlite-t3-tag-changed/state-check.json",
+        "sqlite-t3-empty/state-check.json",
+        "sqlite-t3-cleared/state-check.json"
+      ],
+      "gap": "实际独立reset→editor完成纸杯→采购未完成2项→胶带改场地仅名牌→不匹配空态→冷启动BACK恢复原筛选→clear五项；真实metadata/表及截图一致，完整关系与数据保持。",
+      "original_required_for_acceptance": true,
+      "item_kind": "evidence_requirement"
+    },
+    {
+      "id": "T04-02",
+      "contract": "T04",
+      "criterion": "初始状态：编辑名牌，尚未保存。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T061932.233091Z/t4-draft-after-background.png",
+        "android/20261020T062207.142511Z/t4-dark-unsaved-draft.png",
+        "sqlite-t4-draft/state-check.json",
+        "sqlite-t4-draft/decoded/state.json"
+      ],
+      "gap": "实际编辑名牌为新标题，HOME返回保持草稿；cold实际blob确认原任务标题未变，只有draft新标题，非空filter与层级保持。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T04-04",
+      "contract": "T04",
+      "criterion": "操作：标题改为姓名牌40份，切后台后返回；保存；切深色，重启。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T061932.233091Z/t4-draft-after-background.png",
+        "android/20261020T062207.142511Z/t4-dark-unsaved-draft.png",
+        "android/20261020T062317.741420Z/t4-light-unsaved-draft.png",
+        "android/20261020T062317.741420Z/t4-saved-title-light.png",
+        "android/20261020T062317.741420Z/t4-saved-title-dark.png",
+        "android/20261020T062613.412533Z/t4-dark-cold-restart.png",
+        "android/20261020T062613.412533Z/t4-discard-dialog.png",
+        "android/20261020T062613.412533Z/t4-continue-editing.png",
+        "android/20261020T062613.412533Z/t4-discarded-title-preserved.png",
+        "sqlite-t4-draft/state-check.json",
+        "sqlite-t4-dark/state-check.json",
+        "sqlite-t4-discarded/state-check.json"
+      ],
+      "gap": "真实HOME返回保草稿，深浅主题草稿内容保持，保存后深色冷启动保新标题/层级/非空采购未完成筛选；继续编辑保未存标题，放弃恢复已存标题；实际冷SQLite metadata/draft独立核对，放弃后目标draft清除。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T04-06",
+      "contract": "T04",
+      "criterion": "中间状态：草稿返回仍在；保存后列表更新。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T061932.233091Z/t4-draft-after-background.png",
+        "android/20261020T062207.142511Z/t4-dark-unsaved-draft.png",
+        "android/20261020T062317.741420Z/t4-light-unsaved-draft.png",
+        "android/20261020T062317.741420Z/t4-saved-title-light.png",
+        "android/20261020T062317.741420Z/t4-saved-title-dark.png",
+        "android/20261020T062613.412533Z/t4-dark-cold-restart.png",
+        "android/20261020T062613.412533Z/t4-discard-dialog.png",
+        "android/20261020T062613.412533Z/t4-continue-editing.png",
+        "android/20261020T062613.412533Z/t4-discarded-title-preserved.png",
+        "sqlite-t4-draft/state-check.json",
+        "sqlite-t4-dark/state-check.json",
+        "sqlite-t4-discarded/state-check.json"
+      ],
+      "gap": "真实HOME返回保草稿，深浅主题草稿内容保持，保存后深色冷启动保新标题/层级/非空采购未完成筛选；继续编辑保未存标题，放弃恢复已存标题；实际冷SQLite metadata/draft独立核对，放弃后目标draft清除。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T04-08",
+      "contract": "T04",
+      "criterion": "最终状态：深色主题和新标题保留，层级关系不变。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T061932.233091Z/t4-draft-after-background.png",
+        "android/20261020T062207.142511Z/t4-dark-unsaved-draft.png",
+        "android/20261020T062317.741420Z/t4-light-unsaved-draft.png",
+        "android/20261020T062317.741420Z/t4-saved-title-light.png",
+        "android/20261020T062317.741420Z/t4-saved-title-dark.png",
+        "android/20261020T062613.412533Z/t4-dark-cold-restart.png",
+        "android/20261020T062613.412533Z/t4-discard-dialog.png",
+        "android/20261020T062613.412533Z/t4-continue-editing.png",
+        "android/20261020T062613.412533Z/t4-discarded-title-preserved.png",
+        "sqlite-t4-draft/state-check.json",
+        "sqlite-t4-dark/state-check.json",
+        "sqlite-t4-discarded/state-check.json"
+      ],
+      "gap": "真实HOME返回保草稿，深浅主题草稿内容保持，保存后深色冷启动保新标题/层级/非空采购未完成筛选；继续编辑保未存标题，放弃恢复已存标题；实际冷SQLite metadata/draft独立核对，放弃后目标draft清除。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T04-10",
+      "contract": "T04",
+      "criterion": "恢复/异常：重新编辑标题后返回放弃，不覆盖已保存版本。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T061932.233091Z/t4-draft-after-background.png",
+        "android/20261020T062207.142511Z/t4-dark-unsaved-draft.png",
+        "android/20261020T062317.741420Z/t4-light-unsaved-draft.png",
+        "android/20261020T062317.741420Z/t4-saved-title-light.png",
+        "android/20261020T062317.741420Z/t4-saved-title-dark.png",
+        "android/20261020T062613.412533Z/t4-dark-cold-restart.png",
+        "android/20261020T062613.412533Z/t4-discard-dialog.png",
+        "android/20261020T062613.412533Z/t4-continue-editing.png",
+        "android/20261020T062613.412533Z/t4-discarded-title-preserved.png",
+        "sqlite-t4-draft/state-check.json",
+        "sqlite-t4-dark/state-check.json",
+        "sqlite-t4-discarded/state-check.json"
+      ],
+      "gap": "真实HOME返回保草稿，深浅主题草稿内容保持，保存后深色冷启动保新标题/层级/非空采购未完成筛选；继续编辑保未存标题，放弃恢复已存标题；实际冷SQLite metadata/draft独立核对，放弃后目标draft清除。",
+      "original_required_for_acceptance": true,
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T04-12",
+      "contract": "T04",
+      "criterion": "视觉依据：S04双色主题；编辑草稿状态待补图。",
+      "status": "NOT_TESTED",
+      "required_for_acceptance": false,
+      "source": "tasks/tasks-org/operation_taskbook.md",
+      "evidence": [],
+      "gap": "参考来源和待补参考图说明，非要求候选补制官方参考图；实际界面证据仍由本链-14要求约束。",
+      "original_required_for_acceptance": true,
+      "item_kind": "visual_reference_note",
+      "applies_to": [
+        "T04-02",
+        "T04-04",
+        "T04-06",
+        "T04-08",
+        "T04-10",
+        "T04-14"
+      ]
+    },
+    {
+      "id": "T04-14",
+      "contract": "T04",
+      "criterion": "待采集证据：操作前、关键中间态、最终态截图；非视觉语义补导出文件/数据摘要。不能用官方截图冒充实测。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/tasks-org/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T061932.233091Z/t4-draft-after-background.png",
+        "android/20261020T062207.142511Z/t4-dark-unsaved-draft.png",
+        "android/20261020T062317.741420Z/t4-light-unsaved-draft.png",
+        "android/20261020T062317.741420Z/t4-saved-title-light.png",
+        "android/20261020T062317.741420Z/t4-saved-title-dark.png",
+        "android/20261020T062613.412533Z/t4-dark-cold-restart.png",
+        "android/20261020T062613.412533Z/t4-discard-dialog.png",
+        "android/20261020T062613.412533Z/t4-continue-editing.png",
+        "android/20261020T062613.412533Z/t4-discarded-title-preserved.png",
+        "sqlite-t4-draft/state-check.json",
+        "sqlite-t4-dark/state-check.json",
+        "sqlite-t4-discarded/state-check.json"
+      ],
+      "gap": "真实HOME返回保草稿，深浅主题草稿内容保持，保存后深色冷启动保新标题/层级/非空采购未完成筛选；继续编辑保未存标题，放弃恢复已存标题；实际冷SQLite metadata/draft独立核对，放弃后目标draft清除。",
+      "original_required_for_acceptance": true,
+      "item_kind": "evidence_requirement"
+    }
+  ],
+  "minimal_remaining": [],
+  "scope": "Published limited contract and tested original APK. All source rows retained. High fidelity and long-horizon difficulty NOT_ESTABLISHED.",
+  "required_counts": {
+    "PASS": 35
+  },
+  "item_kind_counts": {
+    "behavior_requirement": 31,
+    "provenance_note": 1,
+    "scope_exclusion": 1,
+    "visual_reference_note": 4,
+    "evidence_requirement": 4
+  },
+  "classification_audit": {
+    "at_utc": "2026-10-20T05:09:31.817083+00:00",
+    "public_files_changed": false,
+    "rows_removed": 0,
+    "rows_added": 0,
+    "instruction_sha256": "23a04ff28602e0b297f8b559ce7fb66548c6eef45dc95135e64dc61ce92b3703",
+    "taskbook_sha256": "d09c1b2d62347c04fcbce3ef28892db19a7e40f5b54272efa7797aeba3cc2281",
+    "note": "Preserve every public clause verbatim; distinguish behavior, evidence obligation, reference/provenance notes and explicit exclusions. No evidence requirement removed."
+  }
+}

@@ -1,0 +1,630 @@
+{
+  "task": "osmand",
+  "audited_at_utc": "2026-10-20T05:34:28.895907+00:00",
+  "source_run": "runs/model-20261019T082420Z-osmand",
+  "overall": "ACCEPTED_ORIGINAL_MODEL_ANSWER",
+  "kind": "CONTRACT_COVERAGE_ACCEPTANCE",
+  "counts": {
+    "PASS": 37,
+    "NOT_TESTED": 4
+  },
+  "items": [
+    {
+      "id": "R1-01",
+      "contract": "R1",
+      "criterion": "从系统文件选择器导入GPX，地图展示轨迹与3个航点",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/instruction.md",
+      "evidence": [
+        "overview-selection-check.json",
+        "android/20261020T045448.268199Z/walk-overview.png"
+      ],
+      "gap": "实际截图人工审核并与独立数据检查对应；图表直接点选及完整重导入分别另见R2-02/R4-01。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R1-02",
+      "contract": "R1",
+      "criterion": "概览展示文件名、距离、海拔范围，禁止只显示静态截图",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/instruction.md",
+      "evidence": [
+        "overview-selection-check.json",
+        "android/20261020T045448.268199Z/walk-overview.png"
+      ],
+      "gap": "实际截图人工审核并与独立数据检查对应；图表直接点选及完整重导入分别另见R2-02/R4-01。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R2-01",
+      "contract": "R2",
+      "criterion": "海拔图沿轨迹距离排列",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/instruction.md",
+      "evidence": [
+        "chart-distance-check.json",
+        "android/20261020T051616.500693Z/selection-after-bad-file.png"
+      ],
+      "gap": "六采样点横坐标逐点与独立累计Haversine距离比例相符；非等间距样本索引。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R2-02",
+      "contract": "R2",
+      "criterion": "选择图中采样点时地图定位该坐标，切换回概览后保持选点",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/instruction.md",
+      "evidence": [
+        "overview-selection-check.json",
+        "android/20261020T051358.121888Z/direct-chart-highest.xml",
+        "android/20261020T051358.121888Z/direct-chart-retained.xml"
+      ],
+      "gap": "独立核验及实际图像对应本条范围；完整往返另见R4-01证据。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R3-01",
+      "contract": "R3",
+      "criterion": "航点按补给/观景分组筛选，列表与地图同时变化",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/instruction.md",
+      "evidence": [
+        "android/20261020T045839.143261Z/supply-filter.png",
+        "android/20261020T051616.500693Z/viewpoint-filter.png",
+        "android/20261020T051616.500693Z/all-after-viewpoint.png"
+      ],
+      "gap": "独立核验及实际图像对应本条范围；完整往返另见R4-01证据。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R3-02",
+      "contract": "R3",
+      "criterion": "切换全部恢复3点",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/instruction.md",
+      "evidence": [
+        "edited-export-check.json",
+        "android/20261020T045839.143261Z/supply-filter.png",
+        "android/20261020T050046.317766Z/all-after-edit.png"
+      ],
+      "gap": "实际截图人工审核并与独立数据检查对应；图表直接点选及完整重导入分别另见R2-02/R4-01。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R3-03",
+      "contract": "R3",
+      "criterion": "编辑补给点名称与描述，返回地图仍显示新名称",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/instruction.md",
+      "evidence": [
+        "edited-export-check.json",
+        "android/20261020T045839.143261Z/supply-filter.png",
+        "android/20261020T050046.317766Z/all-after-edit.png"
+      ],
+      "gap": "实际截图人工审核并与独立数据检查对应；图表直接点选及完整重导入分别另见R2-02/R4-01。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R4-01",
+      "contract": "R4",
+      "criterion": "导出GPX后再次导入，坐标、海拔、航点名称描述保持",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/instruction.md",
+      "evidence": [
+        "edited-export-check.json",
+        "roundtrip-ui-check.json",
+        "after-broken-export-check.json",
+        "android/20261020T050333.738711Z/walk-edited.gpx",
+        "android/20261020T052810.301870Z/after-broken.gpx"
+      ],
+      "gap": "真实首次导出→清数据新会话SAF导入→第二次导出，六点/三航点全部坐标海拔文本由独立checker核对；两份导出逐字节相同。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R4-02",
+      "contract": "R4",
+      "criterion": "坏XML导入失败，已有轨迹和选点保持不变",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/instruction.md",
+      "evidence": [
+        "android/20261020T051527.497147Z/broken-rejected.xml",
+        "android/20261020T051616.500693Z/selection-after-bad-file.xml",
+        "android/20261020T051616.500693Z/selection-after-bad-file.png"
+      ],
+      "gap": "独立核验及实际图像对应本条范围；完整往返另见R4-01证据。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R5-01",
+      "contract": "R5",
+      "criterion": "地图支持平移缩放，重新居中能够显示完整轨迹",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/instruction.md",
+      "evidence": [
+        "android/20261020T051802.064071Z/water-cancel-preserved.png",
+        "android/20261020T051802.064071Z/map-zoomed.png",
+        "android/20261020T052330.763462Z/map-swiped.png",
+        "android/20261020T052330.763462Z/map-swiped-refit.png"
+      ],
+      "gap": "实际缩放200m→100m；普通swipe将轨迹移到右侧并部分出界；Fit恢复全部六点轨迹及三个航点。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R5-02",
+      "contract": "R5",
+      "criterion": "离线底图由本地OSM数据渲染，不接入真实定位、路由或在线瓦片",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/instruction.md",
+      "evidence": [
+        "bundled-map-check.json",
+        "apk-permissions.txt",
+        "android/20261020T045448.268199Z/walk-overview.png"
+      ],
+      "gap": "独立核验及实际图像对应本条范围；完整往返另见R4-01证据。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T01-02",
+      "contract": "T01",
+      "criterion": "初始状态：尚未导入轨迹；本地底图可用。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/operation_taskbook.md",
+      "evidence": [
+        "cancel-empty-check.json",
+        "android/20261020T050720.744005Z/fresh-cancel-empty.xml"
+      ],
+      "gap": "独立核验及实际图像对应本条范围；完整往返另见R4-01证据。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T01-04",
+      "contract": "T01",
+      "criterion": "操作：打开walk.gpx，查看地图和概览。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/operation_taskbook.md",
+      "evidence": [
+        "overview-selection-check.json",
+        "android/20261020T045448.268199Z/walk-overview.png"
+      ],
+      "gap": "实际截图人工审核并与独立数据检查对应；图表直接点选及完整重导入分别另见R2-02/R4-01。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T01-06",
+      "contract": "T01",
+      "criterion": "中间状态：一条6采样点轨迹、3个命名航点。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/operation_taskbook.md",
+      "evidence": [
+        "overview-selection-check.json",
+        "android/20261020T045448.268199Z/walk-overview.png"
+      ],
+      "gap": "实际截图人工审核并与独立数据检查对应；图表直接点选及完整重导入分别另见R2-02/R4-01。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T01-08",
+      "contract": "T01",
+      "criterion": "最终状态：海拔范围12至31米，地图边界包含所有点。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/operation_taskbook.md",
+      "evidence": [
+        "overview-selection-check.json",
+        "android/20261020T045448.268199Z/walk-overview.png"
+      ],
+      "gap": "实际截图人工审核并与独立数据检查对应；图表直接点选及完整重导入分别另见R2-02/R4-01。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T01-10",
+      "contract": "T01",
+      "criterion": "恢复/异常：取消文件选择器保持空态，不出现伪轨迹。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/operation_taskbook.md",
+      "evidence": [
+        "cancel-empty-check.json",
+        "android/20261020T050720.744005Z/fresh-cancel-empty.xml"
+      ],
+      "gap": "独立核验及实际图像对应本条范围；完整往返另见R4-01证据。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T01-12",
+      "contract": "T01",
+      "criterion": "视觉依据：S01地图、S02概览；本题数据与原图位置不同。",
+      "status": "NOT_TESTED",
+      "required_for_acceptance": false,
+      "source": "tasks/osmand/operation_taskbook.md",
+      "evidence": [],
+      "gap": "保留视觉参考原文；该行说明参考图适用范围，不是独立App行为验收项。实际截图证据义务仍由同任务-14行承担。",
+      "original_required_for_acceptance": true,
+      "item_kind": "visual_reference_note"
+    },
+    {
+      "id": "T01-14",
+      "contract": "T01",
+      "criterion": "待采集证据：操作前、关键中间态、最终态截图；非视觉语义补导出文件/数据摘要。不能用官方截图冒充实测。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T050720.744005Z/fresh-cancel-empty.png",
+        "android/20261020T045043.117921Z/native-import-picker.png",
+        "android/20261020T045448.268199Z/walk-overview.png",
+        "overview-selection-check.json"
+      ],
+      "gap": "真实空态/SAF/导入概览截图和独立数据摘要覆盖本任务。",
+      "item_kind": "evidence_requirement"
+    },
+    {
+      "id": "T02-02",
+      "contract": "T02",
+      "criterion": "初始状态：walk已导入。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/operation_taskbook.md",
+      "evidence": [
+        "overview-selection-check.json",
+        "android/20261020T045448.268199Z/walk-overview.png"
+      ],
+      "gap": "实际截图人工审核并与独立数据检查对应；图表直接点选及完整重导入分别另见R2-02/R4-01。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T02-04",
+      "contract": "T02",
+      "criterion": "操作：打开海拔图，选最高31米点，切换概览再返回。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/operation_taskbook.md",
+      "evidence": [
+        "overview-selection-check.json",
+        "android/20261020T051358.121888Z/direct-chart-highest.xml",
+        "android/20261020T051358.121888Z/direct-chart-retained.xml"
+      ],
+      "gap": "独立核验及实际图像对应本条范围；完整往返另见R4-01证据。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T02-06",
+      "contract": "T02",
+      "criterion": "中间状态：地图标记31.2314,121.4768。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/operation_taskbook.md",
+      "evidence": [
+        "overview-selection-check.json",
+        "android/20261020T045710.612143Z/highest-selected.png"
+      ],
+      "gap": "实际截图人工审核并与独立数据检查对应；图表直接点选及完整重导入分别另见R2-02/R4-01。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T02-08",
+      "contract": "T02",
+      "criterion": "最终状态：图表和地图选点一致，选点未丢。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/operation_taskbook.md",
+      "evidence": [
+        "overview-selection-check.json",
+        "android/20261020T045710.612143Z/highest-selected.png"
+      ],
+      "gap": "实际截图人工审核并与独立数据检查对应；图表直接点选及完整重导入分别另见R2-02/R4-01。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T02-10",
+      "contract": "T02",
+      "criterion": "恢复/异常：点击图表空白不跳到无效坐标。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T045448.268199Z/walk-elevation.png",
+        "android/20261020T051358.121888Z/direct-chart-highest.png",
+        "android/20261020T051358.121888Z/direct-chart-retained.png",
+        "android/20261020T052653.937442Z/blank-chart-reference.png",
+        "android/20261020T052810.301870Z/chart-blank-result.png",
+        "android/20261020T052810.301870Z/chart-blank-result.xml",
+        "overview-selection-check.json"
+      ],
+      "gap": "实际图表右上空白(700,704)点击后31m有效选点和地图位置保持；截图覆盖图表初态/直接选点/切页保持/空白点击，独立摘要核对坐标。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T02-12",
+      "contract": "T02",
+      "criterion": "视觉依据：S04海拔图；选点联动细节是本题新增。",
+      "status": "NOT_TESTED",
+      "required_for_acceptance": false,
+      "source": "tasks/osmand/operation_taskbook.md",
+      "evidence": [],
+      "gap": "保留视觉参考原文；该行说明参考图适用范围，不是独立App行为验收项。实际截图证据义务仍由同任务-14行承担。",
+      "original_required_for_acceptance": true,
+      "item_kind": "visual_reference_note"
+    },
+    {
+      "id": "T02-14",
+      "contract": "T02",
+      "criterion": "待采集证据：操作前、关键中间态、最终态截图；非视觉语义补导出文件/数据摘要。不能用官方截图冒充实测。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T045448.268199Z/walk-elevation.png",
+        "android/20261020T051358.121888Z/direct-chart-highest.png",
+        "android/20261020T051358.121888Z/direct-chart-retained.png",
+        "android/20261020T052653.937442Z/blank-chart-reference.png",
+        "android/20261020T052810.301870Z/chart-blank-result.png",
+        "android/20261020T052810.301870Z/chart-blank-result.xml",
+        "overview-selection-check.json"
+      ],
+      "gap": "实际图表右上空白(700,704)点击后31m有效选点和地图位置保持；截图覆盖图表初态/直接选点/切页保持/空白点击，独立摘要核对坐标。",
+      "item_kind": "evidence_requirement"
+    },
+    {
+      "id": "T03-02",
+      "contract": "T03",
+      "criterion": "初始状态：全部3个航点可见。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/operation_taskbook.md",
+      "evidence": [
+        "overview-selection-check.json",
+        "android/20261020T045448.268199Z/walk-overview.png"
+      ],
+      "gap": "实际截图人工审核并与独立数据检查对应；图表直接点选及完整重导入分别另见R2-02/R4-01。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T03-04",
+      "contract": "T03",
+      "criterion": "操作：筛选补给，打开饮水处，改名为饮水处已确认并填营业至18点；返回全部。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/operation_taskbook.md",
+      "evidence": [
+        "edited-export-check.json",
+        "android/20261020T045839.143261Z/supply-filter.png",
+        "android/20261020T050046.317766Z/all-after-edit.png"
+      ],
+      "gap": "实际截图人工审核并与独立数据检查对应；图表直接点选及完整重导入分别另见R2-02/R4-01。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T03-06",
+      "contract": "T03",
+      "criterion": "中间状态：补给组2点、观景组1点；编辑只改目标。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/operation_taskbook.md",
+      "evidence": [
+        "edited-export-check.json",
+        "android/20261020T045839.143261Z/supply-filter.png",
+        "android/20261020T050046.317766Z/all-after-edit.png"
+      ],
+      "gap": "实际截图人工审核并与独立数据检查对应；图表直接点选及完整重导入分别另见R2-02/R4-01。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T03-08",
+      "contract": "T03",
+      "criterion": "最终状态：全部3点，新名称和描述一致。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/operation_taskbook.md",
+      "evidence": [
+        "edited-export-check.json",
+        "android/20261020T045839.143261Z/supply-filter.png",
+        "android/20261020T050046.317766Z/all-after-edit.png"
+      ],
+      "gap": "实际截图人工审核并与独立数据检查对应；图表直接点选及完整重导入分别另见R2-02/R4-01。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T03-10",
+      "contract": "T03",
+      "criterion": "恢复/异常：编辑后取消不写回；旋转设备后已保存数据不丢。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T051802.064071Z/steps.json",
+        "android/20261020T051802.064071Z/water-cancel-preserved.png",
+        "android/20261020T052035.705347Z/rotated-saved-waypoints.png",
+        "android/20261020T052330.763462Z/map-swiped-refit.png"
+      ],
+      "gap": "实际输入不同草稿后取消保留原名称描述；实际1280×720横屏布局重排后已保存名称描述仍在。返回竖屏截图处于旋转过渡，不作为稳定竖屏适配证据。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T03-12",
+      "contract": "T03",
+      "criterion": "视觉依据：S03航点页；编辑保存状态待补图。",
+      "status": "NOT_TESTED",
+      "required_for_acceptance": false,
+      "source": "tasks/osmand/operation_taskbook.md",
+      "evidence": [],
+      "gap": "保留视觉参考原文；该行说明参考图适用范围，不是独立App行为验收项。实际截图证据义务仍由同任务-14行承担。",
+      "original_required_for_acceptance": true,
+      "item_kind": "visual_reference_note"
+    },
+    {
+      "id": "T03-14",
+      "contract": "T03",
+      "criterion": "待采集证据：操作前、关键中间态、最终态截图；非视觉语义补导出文件/数据摘要。不能用官方截图冒充实测。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T045710.612143Z/waypoints-all.png",
+        "android/20261020T045839.143261Z/supply-filter.png",
+        "android/20261020T045839.143261Z/water-editor.png",
+        "android/20261020T050046.317766Z/all-after-edit.png",
+        "android/20261020T051802.064071Z/water-cancel-preserved.png",
+        "android/20261020T052035.705347Z/rotated-saved-waypoints.png",
+        "edited-export-check.json"
+      ],
+      "gap": "真实初始全部/分组/编辑/保存/取消/旋转截图及实际导出数据摘要。",
+      "item_kind": "evidence_requirement"
+    },
+    {
+      "id": "T04-02",
+      "contract": "T04",
+      "criterion": "初始状态：已完成航点编辑。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/operation_taskbook.md",
+      "evidence": [
+        "edited-export-check.json",
+        "android/20261020T045839.143261Z/supply-filter.png",
+        "android/20261020T050046.317766Z/all-after-edit.png"
+      ],
+      "gap": "实际截图人工审核并与独立数据检查对应；图表直接点选及完整重导入分别另见R2-02/R4-01。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T04-04",
+      "contract": "T04",
+      "criterion": "操作：导出walk-edited.gpx；新会话导入；再尝试broken.gpx。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/operation_taskbook.md",
+      "evidence": [
+        "edited-export-check.json",
+        "roundtrip-ui-check.json",
+        "android/20261020T051527.497147Z/report.json"
+      ],
+      "gap": "导出→清数据新会话导入→坏XML的实际操作已完成；全坐标往返见R4-01独立核验。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T04-06",
+      "contract": "T04",
+      "criterion": "中间状态：正确文件恢复6个轨迹点、3航点与新文本。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/operation_taskbook.md",
+      "evidence": [
+        "roundtrip-ui-check.json",
+        "android/20261020T051125.194641Z/roundtrip-edited-points.xml"
+      ],
+      "gap": "独立核验及实际图像对应本条范围；完整往返另见R4-01证据。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T04-08",
+      "contract": "T04",
+      "criterion": "最终状态：坏文件报错且当前轨迹不被清空。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T051527.497147Z/broken-rejected.xml",
+        "android/20261020T051616.500693Z/selection-after-bad-file.xml",
+        "android/20261020T051616.500693Z/selection-after-bad-file.png"
+      ],
+      "gap": "独立核验及实际图像对应本条范围；完整往返另见R4-01证据。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T04-10",
+      "contract": "T04",
+      "criterion": "恢复/异常：重新选择正确文件可成功，重复导入需明确替换或另存而不默默叠加。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T052810.301870Z/duplicate-import-policy.xml",
+        "android/20261020T052925.400819Z/correct-import-recovered.png",
+        "android/20261020T053105.205338Z/stable-replace-policy.png",
+        "android/20261020T053105.205338Z/replace-cancel-retained.png"
+      ],
+      "gap": "坏文件后重新导入正确文件，明确Replace current track?/CANCEL/REPLACE；选择REPLACE恢复6/3不叠加，再次取消保留6/3。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T04-12",
+      "contract": "T04",
+      "criterion": "视觉依据：S02概览、S03航点；SAF/坏XML提示待补图。",
+      "status": "NOT_TESTED",
+      "required_for_acceptance": false,
+      "source": "tasks/osmand/operation_taskbook.md",
+      "evidence": [],
+      "gap": "保留视觉参考原文；该行说明参考图适用范围，不是独立App行为验收项。实际截图证据义务仍由同任务-14行承担。",
+      "original_required_for_acceptance": true,
+      "item_kind": "visual_reference_note"
+    },
+    {
+      "id": "T04-14",
+      "contract": "T04",
+      "criterion": "待采集证据：操作前、关键中间态、最终态截图；非视觉语义补导出文件/数据摘要。不能用官方截图冒充实测。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/osmand/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T050046.317766Z/all-after-edit.png",
+        "android/20261020T050224.009227Z/edited-export-picker.png",
+        "android/20261020T051125.194641Z/roundtrip-edited-points.png",
+        "android/20261020T052925.400819Z/stable-invalid-xml-dialog.png",
+        "android/20261020T052925.400819Z/correct-import-recovered.png",
+        "android/20261020T053105.205338Z/stable-replace-policy.png",
+        "android/20261020T053105.205338Z/replace-cancel-retained.png",
+        "after-broken-export-check.json"
+      ],
+      "gap": "真实编辑/导出SAF/新会话恢复/稳定坏XML提示/恢复/重复导入确认及取消截图；完整GPX独立核对。",
+      "item_kind": "evidence_requirement"
+    },
+    {
+      "id": "OBS-EXPORT",
+      "criterion": "真实导出GPX六点/三航点坐标海拔与编辑文本保持",
+      "status": "PASS",
+      "required_for_acceptance": false,
+      "evidence": [
+        "edited-export-check.json"
+      ],
+      "gap": "仅局部实际观察，不代替复合合同全项。",
+      "item_kind": "scoped_observation"
+    },
+    {
+      "id": "OBS-SUPPLY",
+      "criterion": "补给筛选地图只显示饮水处/补给站，观景航点隐藏，列表同步两点",
+      "status": "PASS",
+      "required_for_acceptance": false,
+      "evidence": [
+        "android/20261020T045839.143261Z/supply-filter.png"
+      ],
+      "gap": "仅局部实际观察，不代替复合合同全项。",
+      "item_kind": "scoped_observation"
+    }
+  ],
+  "minimal_remaining": [],
+  "scope": "Published limited contract and tested original APK. Reference notes retained separately. High-fidelity and long-horizon difficulty NOT_ESTABLISHED.",
+  "required_counts": {
+    "PASS": 35
+  },
+  "classification_audit": {
+    "source_sha256": {
+      "tasks/osmand/instruction.md": "28fb0ef7430bbc9ec3e79c98890a50111a8b5e60495c493106f4ae0324422161",
+      "tasks/osmand/operation_taskbook.md": "ca4874c6848bf51def18ed4d672b814bd0d66d75567590241ae644f8aaf6e80c"
+    },
+    "rule": "All original rows retained. Four visual-reference notes are not independent behavior gates; four evidence requirements remain mandatory."
+  }
+}
