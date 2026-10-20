@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "full_task_accepted": false,
+  "theme": "SYSTEM",
+  "font_scale": 1.0,
+  "track_count": 0,
+  "pending": null,
+  "export_cleanup": "HASH_VERIFIED_AND_REMOVED",
+  "state_sha256": "d1cada420b5ac75ff0f588f46c0a865e4cd4821c70f6a088b30c1f763c8c276b"
+}

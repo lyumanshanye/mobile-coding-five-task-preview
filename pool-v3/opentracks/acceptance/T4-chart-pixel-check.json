@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "full_task_accepted": false,
+  "scope": "Actual zoom expansion, pan visibility change, exact fit-restored plot pixels and accessible state/distance/segment/current-position values",
+  "line_widths": {
+    "fit": 560,
+    "zoom": 656,
+    "restored": 560,
+    "before_pan": 0,
+    "after_pan": 656
+  },
+  "sha256": {
+    "/inspire/hdd2/project/special-project-1/public/yelv/research/\u5408\u6210\u5de5\u4f5c\u7c7b\u6570\u636e\u548c\u79fb\u52a8coding\u6570\u636e/\u79fb\u52a8coding/\u6269\u5c55\u9898\u5e93_v3/runner_support/verify_opentracks_chart.py": "1f0f9fb62d0deabb5eb0aea15e0046232e880bf9c2f63c86bdf422cf62e3b689",
+    "runs/model-20261019T073327Z-opentracks/android/20261020T094023.130833Z/t4-route-fit-visible.xml": "9844fa5979b0d7cf2b1c1cd6851ee0fd7705aed380685bff49ab9f2770844cd2",
+    "runs/model-20261019T073327Z-opentracks/android/20261020T094023.130833Z/t4-route-fit-visible.png": "8b46cb377073b247f8e325f025cd9187aa611fb66e14034e3649ff1e68abdaeb",
+    "runs/model-20261019T073327Z-opentracks/android/20261020T094023.130833Z/t4-route-zoom-visible.xml": "4d250973ebb982db81ee9d7935be56a710805109d8f68180ebddb244d997b2fc",
+    "runs/model-20261019T073327Z-opentracks/android/20261020T094023.130833Z/t4-route-zoom-visible.png": "18348176adb1af9435f6e533ce336574a7fa6a80e39a4a4f913f1369baabf518",
+    "runs/model-20261019T073327Z-opentracks/android/20261020T094023.130833Z/t4-route-fit-visible-restored.xml": "9844fa5979b0d7cf2b1c1cd6851ee0fd7705aed380685bff49ab9f2770844cd2",
+    "runs/model-20261019T073327Z-opentracks/android/20261020T094023.130833Z/t4-route-fit-visible-restored.png": "7e00a2fa1546fa3dc221624b5e29ed39c330eb74cabcb0a0be827848d6547b13",
+    "runs/model-20261019T073327Z-opentracks/android/20261020T093659.940525Z/t4-route-zoomed.xml": "9a6e23fe8491f2e4a820ce405ade6ef664f34b0115d1f65b908009fc5f671ddd",
+    "runs/model-20261019T073327Z-opentracks/android/20261020T093659.940525Z/t4-route-zoomed.png": "b6c24cf6eecb22f148b57cf7547c983692d1575d45f30ac80461dbe7b13bfa13",
+    "runs/model-20261019T073327Z-opentracks/android/20261020T093659.940525Z/t4-route-panned.xml": "f5d21d46ca9cfbe264f81ac0ed01ce9d504d810bd19d5ae29c5a8463a6989513",
+    "runs/model-20261019T073327Z-opentracks/android/20261020T093659.940525Z/t4-route-panned.png": "aa979abaac926b356fcb82634c18ad1956bbead0d89df30a9f0c62b827cfacd9"
+  }
+}

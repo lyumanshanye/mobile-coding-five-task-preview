@@ -1,0 +1,28 @@
+{
+  "kind": "SINGLE_TASK_ACCEPTANCE_RECEIPT",
+  "task": "MCP-019",
+  "slug": "opentracks",
+  "created_at_utc": "2026-10-20T10:01:22.282395+00:00",
+  "status": "ACCEPTED_ORIGINAL_MODEL_ANSWER",
+  "accepted": true,
+  "attempt_kind": "original_model_answer",
+  "manual_candidate_code_repairs": 0,
+  "blind_evaluation": false,
+  "apk_sha256": "f44a0516f94fe68d35616c7a70907f3c808a1a98b55331b320115056da3a1cb6",
+  "acceptance_matrix": "ACCEPTANCE.json",
+  "required_total": 63,
+  "required_counts": {
+    "PASS": 63
+  },
+  "required_remaining": [],
+  "all_evidence_paths_exist": true,
+  "evidence_validation": "acceptance-evidence-check.json",
+  "high_fidelity": "NOT_ESTABLISHED",
+  "long_horizon_difficulty": "NOT_ESTABLISHED",
+  "limits": [
+    "Limited published contract only; generated candidate, not upstream app.",
+    "Runner and oracle corrections are not candidate-code repairs.",
+    "Retained failed actions and flipped captures are not visual PASS evidence.",
+    "Commit ordering combines source review and actual cold-state recovery; no exhaustive power-loss claim."
+  ]
+}

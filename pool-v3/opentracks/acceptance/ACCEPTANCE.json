@@ -1,0 +1,1086 @@
+{
+  "task": "opentracks",
+  "audited_at_utc": "2026-10-20T10:01:20.842986+00:00",
+  "source_run": "runs/model-20261019T073327Z-opentracks",
+  "overall": "ACCEPTED_ORIGINAL_MODEL_ANSWER",
+  "kind": "CONTRACT_COVERAGE_BASELINE",
+  "counts": {
+    "PASS": 63,
+    "NOT_TESTED": 2
+  },
+  "items": [
+    {
+      "id": "R01-01",
+      "contract": "R01",
+      "criterion": "从空工程实现活动列表、开始/暂停/继续/停止、实时统计、轨迹折线、标记编辑、活动详情、重命名、导入导出与设置",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "initial-generation-report.json",
+        "T1-complete-export-check.json",
+        "T2-finished-state-check.json",
+        "T3-all-content-state-check.json",
+        "T4-rename-state-check.json",
+        "T4-chart-pixel-check.json",
+        "positive-lock-recovery-check.json",
+        "final-reset-check.json"
+      ],
+      "gap": "从空工程生成的原APK覆盖公开完整流程：列表、控制、统计、轨迹、标记、详情、重命名、导入导出与设置；详见各精确条款，非上游完整App或高保真结论。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R01-02",
+      "contract": "R01",
+      "criterion": "采用官方页面信息结构，但不要求在线地图、蓝牙或商业服务",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "VISUAL-STRUCTURE-REVIEW.md",
+        "android/20261019T092227.216762Z/T1-initial.png",
+        "android/20261020T063401.647663Z/marker-remark-editor.png",
+        "android/20261020T064459.487471Z/t3-seed-duplicate.png"
+      ],
+      "gap": "人工打开4张公开参考及实际页面，核对空历史/列表、统计标签与标记名称备注表单的信息层次；仅页面结构范围，不声称像素或高保真等价。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R02-01",
+      "contract": "R02",
+      "criterion": "公开input/replay.json是本题确定性定位源，提供明显的回放模式与下一事件命令，每次按顺序投递一个事件",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "android/20261019T092227.216762Z/T1-initial.png",
+        "android/20261019T092801.462834Z/T1-point2.png"
+      ],
+      "gap": "实际T1设备动作、人工图像审核及独立公开回放GPX比对；原导出备注为空（执行器未输入），不据此通过备注/草稿/生命周期等其他条款。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R02-02",
+      "contract": "R02",
+      "criterion": "不得假称为真实GPS",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "android/20261019T092227.216762Z/T1-initial.png",
+        "android/20261019T092801.462834Z/T1-point2.png"
+      ],
+      "gap": "实际T1设备动作、人工图像审核及独立公开回放GPX比对；原导出备注为空（执行器未输入），不据此通过备注/草稿/生命周期等其他条款。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R02-03",
+      "contract": "R02",
+      "criterion": "生产GPS接入不在本题评分",
+      "status": "NOT_TESTED",
+      "required_for_acceptance": false,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [],
+      "gap": "保留原文：评分范围/来源说明不是独立App行为门槛。",
+      "original_required_for_acceptance": true,
+      "item_kind": "scope_exclusion"
+    },
+    {
+      "id": "R02-04",
+      "contract": "R02",
+      "criterion": "idle开始后recording",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "android/20261019T092227.216762Z/T1-initial.png",
+        "android/20261019T092801.462834Z/T1-point2.png"
+      ],
+      "gap": "实际T1设备动作、人工图像审核及独立公开回放GPX比对；原导出备注为空（执行器未输入），不据此通过备注/草稿/生命周期等其他条款。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R02-05",
+      "contract": "R02",
+      "criterion": "暂停变paused",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "T1-export-check.json",
+        "android/20261020T034646.956766Z/t1-export.gpx",
+        "android/20261020T033538.055103Z/t1-paused.png",
+        "android/20261020T033715.089552Z/paused-point3-ignored.png",
+        "android/20261020T034228.073357Z/t1-finished-screen.png"
+      ],
+      "gap": "实际T1设备动作、人工图像审核及独立公开回放GPX比对；原导出备注为空（执行器未输入），不据此通过备注/草稿/生命周期等其他条款。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R02-06",
+      "contract": "R02",
+      "criterion": "继续开启新段",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "T1-export-check.json",
+        "android/20261020T034646.956766Z/t1-export.gpx",
+        "android/20261020T033538.055103Z/t1-paused.png",
+        "android/20261020T033715.089552Z/paused-point3-ignored.png",
+        "android/20261020T034228.073357Z/t1-finished-screen.png"
+      ],
+      "gap": "实际T1设备动作、人工图像审核及独立公开回放GPX比对；原导出备注为空（执行器未输入），不据此通过备注/草稿/生命周期等其他条款。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R02-07",
+      "contract": "R02",
+      "criterion": "停止变finished并持久化",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "T1-export-check.json",
+        "android/20261020T034646.956766Z/t1-export.gpx",
+        "android/20261020T033538.055103Z/t1-paused.png",
+        "android/20261020T033715.089552Z/paused-point3-ignored.png",
+        "android/20261020T034228.073357Z/t1-finished-screen.png"
+      ],
+      "gap": "实际T1设备动作、人工图像审核及独立公开回放GPX比对；原导出备注为空（执行器未输入），不据此通过备注/草稿/生命周期等其他条款。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R02-08",
+      "contract": "R02",
+      "criterion": "paused时位置事件丢弃，不补录，不用暂停段连接两端距离",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "T1-export-check.json",
+        "android/20261020T034646.956766Z/t1-export.gpx",
+        "android/20261020T033538.055103Z/t1-paused.png",
+        "android/20261020T033715.089552Z/paused-point3-ignored.png",
+        "android/20261020T034228.073357Z/t1-finished-screen.png"
+      ],
+      "gap": "实际T1设备动作、人工图像审核及独立公开回放GPX比对；原导出备注为空（执行器未输入），不据此通过备注/草稿/生命周期等其他条款。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R02-09",
+      "contract": "R02",
+      "criterion": "另提供公开的按seq重投入口，可选择已投递事件并再次发送",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "T2-CONTINUATION.md",
+        "T2-resend-state-recheck.json",
+        "android/20261020T072448.714764Z/t2-seq2-duplicate-ignored.xml"
+      ],
+      "gap": "实际选择已投递seq2并重投，独立冷状态核对仅增加明确恢复与duplicate审计。首检查器范围失败保留。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R02-10",
+      "contract": "R02",
+      "criterion": "重投不推进下一事件游标，用于操作任务书的去重验收",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "T2-resend-state-recheck.json",
+        "sqlite-t2-after-resend/decoded/state.json"
+      ],
+      "gap": "重投后cursor3与全部点/段/身份逐字段不变，仅增加恢复和duplicate审计。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R03-01",
+      "contract": "R03",
+      "criterion": "每条位置有唯一seq、UTC秒、lat/lon",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "T1-export-check.json",
+        "android/20261020T034646.956766Z/t1-export.gpx",
+        "android/20261020T033538.055103Z/t1-paused.png",
+        "android/20261020T033715.089552Z/paused-point3-ignored.png",
+        "android/20261020T034228.073357Z/t1-finished-screen.png"
+      ],
+      "gap": "实际T1设备动作、人工图像审核及独立公开回放GPX比对；原导出备注为空（执行器未输入），不据此通过备注/草稿/生命周期等其他条款。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R03-02",
+      "contract": "R03",
+      "criterion": "已处理seq再次到达必须忽略",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "T1-export-check.json",
+        "android/20261020T034646.956766Z/t1-export.gpx",
+        "android/20261020T033538.055103Z/t1-paused.png",
+        "android/20261020T033715.089552Z/paused-point3-ignored.png",
+        "android/20261020T034228.073357Z/t1-finished-screen.png"
+      ],
+      "gap": "实际T1设备动作、人工图像审核及独立公开回放GPX比对；原导出备注为空（执行器未输入），不据此通过备注/草稿/生命周期等其他条款。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R03-03",
+      "contract": "R03",
+      "criterion": "只在recording且accuracy_m<=20时接受，其他坐标不计入轨迹",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "T1-export-check.json",
+        "android/20261020T034646.956766Z/t1-export.gpx",
+        "android/20261020T033538.055103Z/t1-paused.png",
+        "android/20261020T033715.089552Z/paused-point3-ignored.png",
+        "android/20261020T034228.073357Z/t1-finished-screen.png"
+      ],
+      "gap": "实际T1设备动作、人工图像审核及独立公开回放GPX比对；原导出备注为空（执行器未输入），不据此通过备注/草稿/生命周期等其他条款。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R03-04",
+      "contract": "R03",
+      "criterion": "距离采用球半径6371000m的Haversine，逐段相邻点累加",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "T1-export-check.json",
+        "android/20261020T034646.956766Z/t1-export.gpx",
+        "android/20261020T033538.055103Z/t1-paused.png",
+        "android/20261020T033715.089552Z/paused-point3-ignored.png",
+        "android/20261020T034228.073357Z/t1-finished-screen.png"
+      ],
+      "gap": "实际T1设备动作、人工图像审核及独立公开回放GPX比对；原导出备注为空（执行器未输入），不据此通过备注/草稿/生命周期等其他条款。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R03-05",
+      "contract": "R03",
+      "criterion": "时长为每段最后接受点时间减首点之和，空/单点段0",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "android/20261020T070757.972530Z/t2-zero-point-statistics.png",
+        "android/20261020T070757.972530Z/t2-single-point-statistics.png",
+        "android/20261020T070757.972530Z/t2-single-point-statistics.xml",
+        "T1-complete-export-check.json",
+        "sqlite-seed-duplicate/decoded/state.json"
+      ],
+      "gap": "实际零点/单点均0.00m/0s，双段时长独立GPX/SQLite为10+10=20；空段/单点不计时长。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R03-06",
+      "contract": "R03",
+      "criterion": "显示距离米2位/时长整数秒",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "T1-export-check.json",
+        "android/20261020T034646.956766Z/t1-export.gpx",
+        "android/20261020T033538.055103Z/t1-paused.png",
+        "android/20261020T033715.089552Z/paused-point3-ignored.png",
+        "android/20261020T034228.073357Z/t1-finished-screen.png"
+      ],
+      "gap": "实际T1设备动作、人工图像审核及独立公开回放GPX比对；原导出备注为空（执行器未输入），不据此通过备注/草稿/生命周期等其他条款。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R03-07",
+      "contract": "R03",
+      "criterion": "默认示例两段距离222.39m±0.02、时长20秒，暂停点不计入",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "T1-export-check.json",
+        "android/20261020T034646.956766Z/t1-export.gpx",
+        "android/20261020T033538.055103Z/t1-paused.png",
+        "android/20261020T033715.089552Z/paused-point3-ignored.png",
+        "android/20261020T034228.073357Z/t1-finished-screen.png"
+      ],
+      "gap": "实际T1设备动作、人工图像审核及独立公开回放GPX比对；原导出备注为空（执行器未输入），不据此通过备注/草稿/生命周期等其他条款。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R04-01",
+      "contract": "R04",
+      "criterion": "录制中可添加文字标记，标记定位到最近已接受点，不消费新的定位seq",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "T1-export-check.json",
+        "android/20261020T034646.956766Z/t1-export.gpx",
+        "android/20261020T033538.055103Z/t1-paused.png",
+        "android/20261020T033715.089552Z/paused-point3-ignored.png",
+        "android/20261020T034228.073357Z/t1-finished-screen.png"
+      ],
+      "gap": "实际T1设备动作、人工图像审核及独立公开回放GPX比对；原导出备注为空（执行器未输入），不据此通过备注/草稿/生命周期等其他条款。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R04-02",
+      "contract": "R04",
+      "criterion": "没有接受点时禁用并说明",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "android/20261020T070757.972530Z/t2-no-point-marker-disabled.png",
+        "android/20261020T070757.972530Z/t2-no-point-marker-disabled.xml"
+      ],
+      "gap": "实际recording无点，三个Add marker入口enabled=false；页面说明先接受点及Marker unavailable。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R04-03",
+      "contract": "R04",
+      "criterion": "标记有唯一UUID、名称、备注",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "T1-complete-export-check.json",
+        "android/20261020T063706.209447Z/full-t1-export.gpx",
+        "android/20261020T063513.988102Z/marker-remark-saved.png"
+      ],
+      "gap": "实际编辑补入公开备注后新GPX独立XML核对：2trkseg/4point、time/seq namespace、track_id及UUID标记name/desc/点2坐标；首次漏输入空备注导出保留。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R04-04",
+      "contract": "R04",
+      "criterion": "取消不新增，旋转保草稿，锁屏/后台不自动提交",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "positive-lock-recovery-check.json",
+        "T4-draft-background-check.json"
+      ],
+      "gap": "取消无新增、真实旋转保草稿、后台和真实休眠/唤醒均未自动提交；锁屏后saved marker仍仅1条，另有独立未提交draft。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R04-05",
+      "contract": "R04",
+      "criterion": "停止后活动详情显示标记与所属点",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "android/20261020T063219.769585Z/markers-existing.png"
+      ],
+      "gap": "实际T1设备动作、人工图像审核及独立公开回放GPX比对；原导出备注为空（执行器未输入），不据此通过备注/草稿/生命周期等其他条款。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R05-01",
+      "contract": "R05",
+      "criterion": "每个已处理事件与当前段/统计在完成反馈前持久化",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "PERSISTENCE-ORDER-REVIEW.md",
+        "T2-before-restart-state-check.json",
+        "T2-finished-state-check.json",
+        "positive-lock-recovery-check.json"
+      ],
+      "gap": "原源码事务提交先于成功反馈的调用顺序已审阅，并有真实强停冷取证核对事件/段/统计持久化；范围为公开回放及进程终止。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R05-02",
+      "contract": "R05",
+      "criterion": "进程终止重启时未完成活动恢复为paused，保留轨迹、标记和已处理seq，用户主动继续后开新段",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "positive-lock-recovery-check.json",
+        "T2-recovery-state-check.json",
+        "T2-resend-state-recheck.json",
+        "T2-finished-state-check.json"
+      ],
+      "gap": "非空已存标记/轨迹/processed及独立草稿冷恢复全字段严格比较；仅暂停状态及合法恢复audit变化，主动继续后两段完整。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R05-03",
+      "contract": "R05",
+      "criterion": "不得自动开始录制",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "T2-resend-state-recheck.json",
+        "android/20261020T071637.794330Z/report.json",
+        "android/20261020T071637.794330Z/recording.mkv"
+      ],
+      "gap": "真实恢复后重投seq2仅追加DUPLICATE审计；游标、统计、几何、processed及标记全字段不变，具体录屏/报告替代旧目录索引。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R05-04",
+      "contract": "R05",
+      "criterion": "finished活动重启仍finished，重命名不改变track_id",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "T4-rename-state-check.json",
+        "sqlite-t4-after-rename-and-gestures/decoded/state.json"
+      ],
+      "gap": "真实finished冷重启及重命名；独立全字段对比仅title变化，track_id及全部其他数据不变。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R06-01",
+      "contract": "R06",
+      "criterion": "支持GPX1.1真实文件导入导出、轨迹标记及活动列表",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "T3-import-state-check.json",
+        "T1-complete-export-check.json",
+        "android/20261020T064301.601374Z/t3-seed-first-import.png",
+        "android/20261020T064459.487471Z/t3-seed-duplicate.png",
+        "android/20261020T064834.828233Z/t3-conflict-rejected.png",
+        "test-variants/manifest.json",
+        "sqlite-seed-duplicate/decoded/state.json",
+        "sqlite-after-conflict/decoded/state.json"
+      ],
+      "gap": "实际SAF导出、首次seed导入、重复no-op与同ID坐标冲突拒绝；独立GPX解析对齐两轨身份/标题/有序点/时间/seq/标记，冲突前后完整冷SQLite解码逐字段相同。XML规范化变体范围另列R07-05，未据此通过。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R06-02",
+      "contract": "R06",
+      "criterion": "保留轨迹身份标记，避免重复导入",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "T3-import-state-check.json",
+        "T1-complete-export-check.json",
+        "android/20261020T064301.601374Z/t3-seed-first-import.png",
+        "android/20261020T064459.487471Z/t3-seed-duplicate.png",
+        "android/20261020T064834.828233Z/t3-conflict-rejected.png",
+        "test-variants/manifest.json",
+        "sqlite-seed-duplicate/decoded/state.json",
+        "sqlite-after-conflict/decoded/state.json"
+      ],
+      "gap": "实际SAF导出、首次seed导入、重复no-op与同ID坐标冲突拒绝；独立GPX解析对齐两轨身份/标题/有序点/时间/seq/标记，冲突前后完整冷SQLite解码逐字段相同。XML规范化变体范围另列R07-05，未据此通过。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R06-03",
+      "contract": "R06",
+      "criterion": "选定仓库HEAD已迁往Codeberg，本题使用固定GitHub快照仅作设计出处，不要求跟随更新",
+      "status": "NOT_TESTED",
+      "required_for_acceptance": false,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [],
+      "gap": "保留原文：评分范围/来源说明不是独立App行为门槛。",
+      "original_required_for_acceptance": true,
+      "item_kind": "provenance_note"
+    },
+    {
+      "id": "R07-01",
+      "contract": "R07",
+      "criterion": "本题GPX采用每录制段一个trkseg，点含lat/lon/time，标记用wpt含name/desc，extensions中使用namespace urn:mobile-coding:opentracks-v1的track_id/point_seq",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "T1-complete-export-check.json",
+        "android/20261020T063706.209447Z/full-t1-export.gpx",
+        "android/20261020T063513.988102Z/marker-remark-saved.png"
+      ],
+      "gap": "实际编辑补入公开备注后新GPX独立XML核对：2trkseg/4point、time/seq namespace、track_id及UUID标记name/desc/点2坐标；首次漏输入空备注导出保留。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R07-02",
+      "contract": "R07",
+      "criterion": "相同track_id+相同规范化内容重复导入no-op",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "T3-import-state-check.json",
+        "T1-complete-export-check.json",
+        "android/20261020T064301.601374Z/t3-seed-first-import.png",
+        "android/20261020T064459.487471Z/t3-seed-duplicate.png",
+        "android/20261020T064834.828233Z/t3-conflict-rejected.png",
+        "test-variants/manifest.json",
+        "sqlite-seed-duplicate/decoded/state.json",
+        "sqlite-after-conflict/decoded/state.json"
+      ],
+      "gap": "实际SAF导出、首次seed导入、重复no-op与同ID坐标冲突拒绝；独立GPX解析对齐两轨身份/标题/有序点/时间/seq/标记，冲突前后完整冷SQLite解码逐字段相同。XML规范化变体范围另列R07-05，未据此通过。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R07-03",
+      "contract": "R07",
+      "criterion": "相同ID不同内容整轨拒绝",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "T3-import-state-check.json",
+        "T1-complete-export-check.json",
+        "android/20261020T064301.601374Z/t3-seed-first-import.png",
+        "android/20261020T064459.487471Z/t3-seed-duplicate.png",
+        "android/20261020T064834.828233Z/t3-conflict-rejected.png",
+        "test-variants/manifest.json",
+        "sqlite-seed-duplicate/decoded/state.json",
+        "sqlite-after-conflict/decoded/state.json"
+      ],
+      "gap": "实际SAF导出、首次seed导入、重复no-op与同ID坐标冲突拒绝；独立GPX解析对齐两轨身份/标题/有序点/时间/seq/标记，冲突前后完整冷SQLite解码逐字段相同。XML规范化变体范围另列R07-05，未据此通过。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R07-04",
+      "contract": "R07",
+      "criterion": "格式错误/取消不改历史",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "T3-malformed-state-check.json",
+        "T3-picker-cancel-state-check.json",
+        "android/20261020T065153.040000Z/t3-malformed-rejected.png",
+        "android/20261020T065355.397029Z/t3-import-picker-cancelled.png",
+        "android/20261020T065355.397029Z/t3-export-picker-cancelled.png"
+      ],
+      "gap": "格式错误实际反馈后完整tracks与基线相等，pending import保留供恢复；取消pending及真实SAF导入/导出选择器后完整冷SQLite解码与基线相等，pending=null。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R07-05",
+      "contract": "R07",
+      "criterion": "规范化比较忽略XML空白和显示名称以外的属性顺序，但轨迹点序列、seq、时间、标记与标题均参与比较",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "test-variants/normalization-variants-manifest.json",
+        "T3-normalization-state-check.json",
+        "T3-all-content-state-check.json",
+        "android/20261020T065845.057920Z/t3-equivalent-no-op.png",
+        "android/20261020T065845.057920Z/t3-title-conflict.png",
+        "android/20261020T065845.057920Z/t3-marker-conflict.png",
+        "android/20261020T070411.557373Z/t3-seq-conflict.png",
+        "android/20261020T070411.557373Z/t3-time-conflict.png",
+        "android/20261020T070411.557373Z/t3-ordered-path-conflict.png"
+      ],
+      "gap": "真实SAF六变体：XML前缀/空白/属性次序等价no-op；仅title/marker备注/seq/time/路径坐标顺序改变均明确same-ID conflict（非格式拒绝）。路径变体保留递增seq/time，交换坐标在点序列的位置。两批后完整冷SQLite状态均与基线逐字段及SHA相等。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R08-01",
+      "contract": "R08",
+      "criterion": "导出通过系统另存为，取消不删除内部活动",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "T3-picker-cancel-state-check.json",
+        "android/20261020T065355.397029Z/t3-export-picker-cancelled.png",
+        "android/20261020T063706.209447Z/full-t1-export.gpx"
+      ],
+      "gap": "真实系统另存为导出已拉取GPX；另一次真实导出选择器BACK取消，冷SQLite所有活动与基线完全相同。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R08-02",
+      "contract": "R08",
+      "criterion": "独立XML解析必须得到实际点和段，不能只输出统计文字",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "T1-export-check.json",
+        "android/20261020T034646.956766Z/t1-export.gpx",
+        "android/20261020T033538.055103Z/t1-paused.png",
+        "android/20261020T033715.089552Z/paused-point3-ignored.png",
+        "android/20261020T034228.073357Z/t1-finished-screen.png"
+      ],
+      "gap": "实际T1设备动作、人工图像审核及独立公开回放GPX比对；原导出备注为空（执行器未输入），不据此通过备注/草稿/生命周期等其他条款。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R08-03",
+      "contract": "R08",
+      "criterion": "旋转/主题/1.3字体保持录制状态，折线图可平移缩放但不要求特定地图底图",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "T4-chart-pixel-check.json",
+        "android/20261020T091108.308269Z/t4-dark-font13-still-recording.xml",
+        "android/20261020T070757.972530Z/t2-landscape-recording.png"
+      ],
+      "gap": "真实旋转及深色/1.3字体保持Recording；图表放大560→656像素、平移改变位置、Fit恢复原图表像素；新鲜语义树暴露状态/距离/分段/当前位置。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "R08-04",
+      "contract": "R08",
+      "criterion": "当前位置/总距离/段数/状态须可访问",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/instruction.md",
+      "evidence": [
+        "T4-chart-pixel-check.json",
+        "android/20261020T091108.308269Z/t4-dark-font13-still-recording.xml",
+        "android/20261020T070757.972530Z/t2-landscape-recording.png"
+      ],
+      "gap": "真实旋转及深色/1.3字体保持Recording；图表放大560→656像素、平移改变位置、Fit恢复原图表像素；新鲜语义树暴露状态/距离/分段/当前位置。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T1-02",
+      "contract": "T1",
+      "criterion": "初态：空历史，公开回放输入。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/operation_taskbook.md",
+      "evidence": [
+        "android/20261019T092227.216762Z/T1-initial.png",
+        "android/20261019T092801.462834Z/T1-point2.png"
+      ],
+      "gap": "实际T1设备动作、人工图像审核及独立公开回放GPX比对；原导出备注为空（执行器未输入），不据此通过备注/草稿/生命周期等其他条款。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T1-04",
+      "contract": "T1",
+      "criterion": "动作：开始→点1/2→添加Water break→暂停→点3→继续→点4/5→重复5→坏精度6→停止。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/operation_taskbook.md",
+      "evidence": [
+        "T1-export-check.json",
+        "android/20261020T034646.956766Z/t1-export.gpx",
+        "android/20261020T033538.055103Z/t1-paused.png",
+        "android/20261020T033715.089552Z/paused-point3-ignored.png",
+        "android/20261020T034228.073357Z/t1-finished-screen.png"
+      ],
+      "gap": "实际T1设备动作、人工图像审核及独立公开回放GPX比对；原导出备注为空（执行器未输入），不据此通过备注/草稿/生命周期等其他条款。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T1-06",
+      "contract": "T1",
+      "criterion": "中间态：paused时点3无效；重复5与精度50点6不入库。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/operation_taskbook.md",
+      "evidence": [
+        "T1-export-check.json",
+        "android/20261020T034646.956766Z/t1-export.gpx",
+        "android/20261020T033538.055103Z/t1-paused.png",
+        "android/20261020T033715.089552Z/paused-point3-ignored.png",
+        "android/20261020T034228.073357Z/t1-finished-screen.png"
+      ],
+      "gap": "实际T1设备动作、人工图像审核及独立公开回放GPX比对；原导出备注为空（执行器未输入），不据此通过备注/草稿/生命周期等其他条款。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T1-08",
+      "contract": "T1",
+      "criterion": "终态：2段4点、222.39m/20秒、标记绑定点2、finished。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/operation_taskbook.md",
+      "evidence": [
+        "T1-export-check.json",
+        "android/20261020T034646.956766Z/t1-export.gpx",
+        "android/20261020T033538.055103Z/t1-paused.png",
+        "android/20261020T033715.089552Z/paused-point3-ignored.png",
+        "android/20261020T034228.073357Z/t1-finished-screen.png"
+      ],
+      "gap": "实际T1设备动作、人工图像审核及独立公开回放GPX比对；原导出备注为空（执行器未输入），不据此通过备注/草稿/生命周期等其他条款。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T1-10",
+      "contract": "T1",
+      "criterion": "复位：删除仅测试活动，重新加载回放。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T094454.442991Z/report.json",
+        "android/20261020T094454.442991Z/t4-reset-empty-history.xml",
+        "sqlite-positive-before-recovery/decoded/state.json"
+      ],
+      "gap": "独立测试间清本App测试数据并重新加载公开回放；实际删除回到空history后新回放接受seq1/2。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T1-12",
+      "contract": "T1",
+      "criterion": "视觉及其他证据：S01/S02/S03；状态/统计语义树、折线/标记截图及事件记录。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/operation_taskbook.md",
+      "evidence": [
+        "T1-complete-export-check.json",
+        "android/20261020T063513.988102Z/marker-remark-saved.png",
+        "android/20261020T034228.073357Z/t1-finished-screen.png",
+        "android/20261020T063706.209447Z/full-t1-export.gpx"
+      ],
+      "gap": "实际T1统计/图表/标记名称备注和真实GPX，独立解析验证点2标记、两段有序点及公共数值。",
+      "item_kind": "evidence_requirement"
+    },
+    {
+      "id": "T2-02",
+      "contract": "T2",
+      "criterion": "初态：开始并接受点1/2。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T070757.972530Z/t2-clean-empty-history.png",
+        "android/20261020T070757.972530Z/t2-two-points-recording.png",
+        "android/20261020T070757.972530Z/t2-two-points-recording.xml"
+      ],
+      "gap": "实际独立清本App历史后开始并依次接受seq1/2，recording/cursor3/1segment2points/111.19m10s。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T2-04",
+      "contract": "T2",
+      "criterion": "动作：旋转→终止进程→启动→检查paused→重投seq2→主动继续→点4/5→停止。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/operation_taskbook.md",
+      "evidence": [
+        "T2-CONTINUATION.md",
+        "T2-recovery-state-check.json",
+        "T2-resend-state-recheck.json",
+        "T2-finished-state-check.json"
+      ],
+      "gap": "真实旋转/进程终止/恢复暂停/重投/主动继续/完成公开回放；按事先UI流程说明消费pending pause与point3，无跳过公开游标。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T2-06",
+      "contract": "T2",
+      "criterion": "中间态：重启不会自动记录；seq2不重复，下一点开始新段。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/operation_taskbook.md",
+      "evidence": [
+        "T2-recovery-state-check.json",
+        "T2-resend-state-recheck.json",
+        "T2-finished-state-check.json"
+      ],
+      "gap": "恢复为PAUSED，重投seq2不增加点或推进cursor；主动继续后seq4/5独立成段。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T2-08",
+      "contract": "T2",
+      "criterion": "终态：统计与T1接受点一致，无跨暂停跳线。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/operation_taskbook.md",
+      "evidence": [
+        "T2-finished-state-check.json",
+        "sqlite-t2-finished/decoded/state.json",
+        "android/20261020T080754.724189Z/t2-route-after-cold-restart.png"
+      ],
+      "gap": "独立实际SQLite解码比公开fixture：两段[1,2]/[4,5]、222.389853m/20s；人工检查冷重启后两条断开路径。先前撕裂图保留不计视觉通过。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T2-10",
+      "contract": "T2",
+      "criterion": "复位：清测试数据重放。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T094454.442991Z/report.json",
+        "android/20261020T094454.442991Z/t4-reset-empty-history.xml",
+        "sqlite-positive-before-recovery/decoded/state.json"
+      ],
+      "gap": "独立测试间清本App测试数据并重新加载公开回放；实际删除回到空history后新回放接受seq1/2。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T2-12",
+      "contract": "T2",
+      "criterion": "视觉及其他证据：S02/S04；重启前后录屏、段列表及原始seq输出。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T070757.972530Z/recording.mkv",
+        "android/20261020T071637.794330Z/recording.mkv",
+        "android/20261020T080247.525922Z/t2-finished-segments.xml",
+        "T2-finished-state-check.json",
+        "T2-CONTINUATION.md"
+      ],
+      "gap": "原速重启前后录屏、实际分段列表、有序原始seq及独立几何比对均留存。",
+      "item_kind": "evidence_requirement"
+    },
+    {
+      "id": "T3-02",
+      "contract": "T3",
+      "criterion": "初态：完成T1并有seed.gpx。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/operation_taskbook.md",
+      "evidence": [
+        "T3-import-state-check.json",
+        "T1-complete-export-check.json",
+        "android/20261020T064301.601374Z/t3-seed-first-import.png",
+        "android/20261020T064459.487471Z/t3-seed-duplicate.png",
+        "android/20261020T064834.828233Z/t3-conflict-rejected.png",
+        "test-variants/manifest.json",
+        "sqlite-seed-duplicate/decoded/state.json",
+        "sqlite-after-conflict/decoded/state.json"
+      ],
+      "gap": "实际SAF导出、首次seed导入、重复no-op与同ID坐标冲突拒绝；独立GPX解析对齐两轨身份/标题/有序点/时间/seq/标记，冲突前后完整冷SQLite解码逐字段相同。XML规范化变体范围另列R07-05，未据此通过。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T3-04",
+      "contract": "T3",
+      "criterion": "动作：导出活动→独立解析→导入seed两次→修改seed同ID坐标后再导入。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/operation_taskbook.md",
+      "evidence": [
+        "T3-import-state-check.json",
+        "T1-complete-export-check.json",
+        "android/20261020T064301.601374Z/t3-seed-first-import.png",
+        "android/20261020T064459.487471Z/t3-seed-duplicate.png",
+        "android/20261020T064834.828233Z/t3-conflict-rejected.png",
+        "test-variants/manifest.json",
+        "sqlite-seed-duplicate/decoded/state.json",
+        "sqlite-after-conflict/decoded/state.json"
+      ],
+      "gap": "实际SAF导出、首次seed导入、重复no-op与同ID坐标冲突拒绝；独立GPX解析对齐两轨身份/标题/有序点/时间/seq/标记，冲突前后完整冷SQLite解码逐字段相同。XML规范化变体范围另列R07-05，未据此通过。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T3-06",
+      "contract": "T3",
+      "criterion": "中间态：导出含2个trkseg和4点/wpt；seed首次新增。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/operation_taskbook.md",
+      "evidence": [
+        "T3-import-state-check.json",
+        "T1-complete-export-check.json",
+        "android/20261020T064301.601374Z/t3-seed-first-import.png",
+        "android/20261020T064459.487471Z/t3-seed-duplicate.png",
+        "android/20261020T064834.828233Z/t3-conflict-rejected.png",
+        "test-variants/manifest.json",
+        "sqlite-seed-duplicate/decoded/state.json",
+        "sqlite-after-conflict/decoded/state.json"
+      ],
+      "gap": "实际SAF导出、首次seed导入、重复no-op与同ID坐标冲突拒绝；独立GPX解析对齐两轨身份/标题/有序点/时间/seq/标记，冲突前后完整冷SQLite解码逐字段相同。XML规范化变体范围另列R07-05，未据此通过。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T3-08",
+      "contract": "T3",
+      "criterion": "终态：重复no-op，冲突整轨拒绝，原活动和seed均不被覆盖。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/operation_taskbook.md",
+      "evidence": [
+        "T3-import-state-check.json",
+        "T1-complete-export-check.json",
+        "android/20261020T064301.601374Z/t3-seed-first-import.png",
+        "android/20261020T064459.487471Z/t3-seed-duplicate.png",
+        "android/20261020T064834.828233Z/t3-conflict-rejected.png",
+        "test-variants/manifest.json",
+        "sqlite-seed-duplicate/decoded/state.json",
+        "sqlite-after-conflict/decoded/state.json"
+      ],
+      "gap": "实际SAF导出、首次seed导入、重复no-op与同ID坐标冲突拒绝；独立GPX解析对齐两轨身份/标题/有序点/时间/seq/标记，冲突前后完整冷SQLite解码逐字段相同。XML规范化变体范围另列R07-05，未据此通过。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T3-10",
+      "contract": "T3",
+      "criterion": "复位：清除本题导出文件及历史。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/operation_taskbook.md",
+      "evidence": [
+        "test-export-cleanup.json",
+        "final-reset-check.json",
+        "android/20261020T095815.985913Z/positive-cleanup-empty-history.xml"
+      ],
+      "gap": "两份本题导出先匹配保留副本SHA再移除；App实际删除测试活动，冷state空history/SYSTEM，系统字体1.0。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T3-12",
+      "contract": "T3",
+      "criterion": "视觉及其他证据：S04；选择器/冲突页与GPX文件、解析清单及哈希。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T064639.540335Z/t3-conflict-roots.png",
+        "android/20261020T064834.828233Z/t3-conflict-rejected.png",
+        "android/20261020T063706.209447Z/full-t1-export.gpx",
+        "T1-complete-export-check.json",
+        "T3-import-state-check.json",
+        "test-variants/manifest.json"
+      ],
+      "gap": "人工审阅真实系统选择器与冲突列表；实际GPX、独立解析清单、源/变体/数据库状态哈希可追溯。",
+      "item_kind": "evidence_requirement"
+    },
+    {
+      "id": "T4-02",
+      "contract": "T4",
+      "criterion": "初态：活动正在录制且已接受点。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T080919.236685Z/t4-recording-point2.xml",
+        "T4-draft-rotation-cancel-check.json"
+      ],
+      "gap": "独立清本App后实际开始、接受seq1/2；RECORDING、111.19m/10s。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T4-04",
+      "contract": "T4",
+      "criterion": "动作：编辑标记草稿→旋转→取消→暂停→后台→返回→继续→停止→重命名→大字深色查看。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/operation_taskbook.md",
+      "evidence": [
+        "T4-draft-background-check.json",
+        "T4-rename-state-check.json",
+        "T4-chart-pixel-check.json",
+        "T4-RENAME-EXECUTOR-NOTES.md"
+      ],
+      "gap": "已实际完成公开T4顺序；额外草稿后台检查单独注明，原错误选择器未提交数据，首败保留。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T4-06",
+      "contract": "T4",
+      "criterion": "中间态：旋转保草稿，取消无新标记，后台不自动继续。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/operation_taskbook.md",
+      "evidence": [
+        "T4-draft-rotation-cancel-check.json",
+        "android/20261020T081309.629746Z/t4-landscape-marker-draft.png",
+        "android/20261020T090357.335994Z/t4-return-remains-paused.xml",
+        "sqlite-t4-cancel-paused/decoded/state.json"
+      ],
+      "gap": "实际1280x720与720x1280旋转保留名称备注；取消后零marker无draft，暂停后台返回仍PAUSED且统计不变。未据此通过未保存草稿后台/锁屏等额外行为。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T4-08",
+      "contract": "T4",
+      "criterion": "终态：finished标题更新而track_id不变，布局可操作。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/operation_taskbook.md",
+      "evidence": [
+        "T4-rename-state-check.json",
+        "sqlite-t4-after-rename-and-gestures/decoded/state.json"
+      ],
+      "gap": "真实finished冷重启及重命名；独立全字段对比仅title变化，track_id及全部其他数据不变。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T4-10",
+      "contract": "T4",
+      "criterion": "复位：恢复字体主题，删除测试活动。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/operation_taskbook.md",
+      "evidence": [
+        "test-export-cleanup.json",
+        "final-reset-check.json",
+        "android/20261020T095815.985913Z/positive-cleanup-empty-history.xml"
+      ],
+      "gap": "两份本题导出先匹配保留副本SHA再移除；App实际删除测试活动，冷state空history/SYSTEM，系统字体1.0。",
+      "item_kind": "behavior_requirement"
+    },
+    {
+      "id": "T4-12",
+      "contract": "T4",
+      "criterion": "视觉及其他证据：S02/S03/S04；草稿/取消/详情录屏与图表语义状态。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/operation_taskbook.md",
+      "evidence": [
+        "android/20261020T081309.629746Z/recording.mkv",
+        "android/20261020T081309.629746Z/t4-landscape-marker-draft.png",
+        "android/20261020T094023.130833Z/t4-route-fit-visible.png",
+        "T4-draft-background-check.json",
+        "T4-rename-state-check.json"
+      ],
+      "gap": "实际草稿旋转录屏、表单及完成详情/图表截图，语义状态和冷数据库证据；翻转图不计视觉通过。",
+      "item_kind": "evidence_requirement"
+    },
+    {
+      "id": "T4-14",
+      "contract": "T4",
+      "criterion": "异常不得用自动重试覆盖首败。系统选择器取消、旋转、进程终止须真实执行。仅Python/静态文件检查不能记为App验收通过。",
+      "status": "PASS",
+      "required_for_acceptance": true,
+      "source": "tasks/opentracks/operation_taskbook.md",
+      "evidence": [
+        "positive-lock-recovery-check.json",
+        "T4-RENAME-EXECUTOR-NOTES.md",
+        "T3-picker-cancel-state-check.json",
+        "T2-CONTINUATION.md",
+        "T4-draft-background-check.json"
+      ],
+      "gap": "真实DocumentsUI取消、旋转、强停和锁屏有设备证据；执行器选择器首败、oracle过窄首败及异常图全部保留并注明，不计候选修复。",
+      "item_kind": "evidence_requirement"
+    }
+  ],
+  "minimal_remaining": [
+    "回放逐seq含暂停/差精度/重投去重；两段222.39m/20秒；标记绑定与取消；未结束重启paused；GPX真实分段/UUID/冲突拒绝；导出取消及折线操作/适配。"
+  ],
+  "scope": "Published clauses and taskbook only. Existing scoped observations do not automatically pass compound clauses. SPEC_UNCLEAR is a contract gap, not candidate failure. This baseline needs owner mapping of further retained evidence before new device actions.",
+  "classification_audit": {
+    "rule": "All original clauses retained; only explicit GPS exclusion and repository provenance are nonrequired. All taskbook visual/other evidence rows remain required.",
+    "source_sha256": {
+      "tasks/opentracks/instruction.md": "86e53342dc4df9d9eab96ce2d929029216d205fd0fa0ba70a3318fa6edcdf847",
+      "tasks/opentracks/operation_taskbook.md": "19a879cefcbd469fc14571028f95f818b2f388d5690c9efd4d3def8194bff445"
+    }
+  },
+  "required_counts": {
+    "PASS": 63
+  },
+  "required_total": 63
+}

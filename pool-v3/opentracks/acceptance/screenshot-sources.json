@@ -1,0 +1,22 @@
+[
+  {
+    "file": "marker-remark-saved.png",
+    "source": "android/20261020T063513.988102Z/marker-remark-saved.png",
+    "kind": "actual_candidate_device_capture"
+  },
+  {
+    "file": "t2-route-after-cold-restart.png",
+    "source": "android/20261020T080754.724189Z/t2-route-after-cold-restart.png",
+    "kind": "actual_candidate_device_capture"
+  },
+  {
+    "file": "t4-route-fit-visible.png",
+    "source": "android/20261020T094023.130833Z/t4-route-fit-visible.png",
+    "kind": "actual_candidate_device_capture"
+  },
+  {
+    "file": "positive-recovery-launched.png",
+    "source": "android/20261020T095439.158087Z/positive-recovery-launched.png",
+    "kind": "actual_candidate_device_capture"
+  }
+]

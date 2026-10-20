@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "full_task_accepted": false,
+  "scope": "actual sleep/wake, saved marker and unsaved draft survive cold recovery",
+  "transition": {
+    "status": "PASS",
+    "scope": "recover",
+    "full_task_accepted": false,
+    "changed_track_ids": [
+      "30000000-0000-4000-8000-000000000001"
+    ]
+  },
+  "sha256": {
+    "sqlite-positive-before-recovery/decoded/state.json": "ea6cadcc12e19fd1bd6c44772c82594a949a87a227b09763b6a0eae4d6099db4",
+    "sqlite-positive-after-recovery/decoded/state.json": "4530f090b25d74dc9c030be5348abb24aa04fd0a510527ca26e2420857ba2195",
+    "android/20261020T094736.761109Z/report.json": "710b35dc8436d3d35fb7ba94e3b5a321143c76bc28b09156682e074efbd987ed",
+    "android/20261020T095439.158087Z/positive-recovery-launched.xml": "895021d19258d4d6c30ba1564926df218d19bff066692231ba0fd9ff29a9269e",
+    "/inspire/hdd2/project/special-project-1/public/yelv/research/\u5408\u6210\u5de5\u4f5c\u7c7b\u6570\u636e\u548c\u79fb\u52a8coding\u6570\u636e/\u79fb\u52a8coding/\u6269\u5c55\u9898\u5e93_v3/runner_support/verify_opentracks_positive_recovery.py": "c5a36ee3e84435b1ed88a0bcb9389b7c5824bdf3464651b63e3c9020899f9fb6"
+  }
+}

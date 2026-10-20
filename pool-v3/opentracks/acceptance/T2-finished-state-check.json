@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "scope": "Public replay ordered geometry, identity, accepted seq, independent expected distance/duration and finished state where requested",
+  "full_task_accepted": false,
+  "phase": "finished",
+  "segments": [
+    [
+      1,
+      2
+    ],
+    [
+      4,
+      5
+    ]
+  ],
+  "distance_m": 222.38985328911753,
+  "duration_seconds": 20,
+  "cursor": 11,
+  "sha256": {
+    "runs/model-20261019T073327Z-opentracks/sqlite-t2-finished/decoded/state.json": "72b674493fa467d62219dea353c8a8cbeb0efea61650322f2f5f0192ff54c0c0",
+    "tasks/opentracks/input/replay.json": "623d1c887ed6f004f2d754b8814396f42f5aab7cee064cc9d65dc9bc8aefa833",
+    "/inspire/hdd2/project/special-project-1/public/yelv/research/\u5408\u6210\u5de5\u4f5c\u7c7b\u6570\u636e\u548c\u79fb\u52a8coding\u6570\u636e/\u79fb\u52a8coding/\u6269\u5c55\u9898\u5e93_v3/runner_support/verify_opentracks_replay_snapshot.py": "0621131a3b7a87a2cb73b830c5388c835fdc174c869c95b681c718832e9bd487"
+  }
+}

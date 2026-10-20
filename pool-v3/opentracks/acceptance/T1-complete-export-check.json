@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "scope": "T1 exported GPX only; UI/lifecycle graded separately",
+  "full_task_accepted": false,
+  "sha256": "8aff7783920960ba5cca9a14a032204dee472af8a365c1e0e77ba328e3ad0c47",
+  "segments": 2,
+  "sequences": [
+    1,
+    2,
+    4,
+    5
+  ],
+  "distance_m": 222.38985,
+  "duration_seconds": 20.0,
+  "markers": 1,
+  "expected_marker_description": "Public synthetic landmark",
+  "public_marker_description_tested": true
+}
